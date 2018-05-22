@@ -24,6 +24,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             }
         }
     }
+    let levelsManager = LevelsManager()
+    let nodeGenerator = NodeGenerator()
 
     //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -40,101 +42,29 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         addBall()
         addPhonePlane()
         addMissPlane()
+        addTestingPlane()
     }
     
     //MARK: Helper functions
     @objc func addBall() {
-        let ball = getBall()
+        let ball = nodeGenerator.getBall()
         self.sceneView.scene.rootNode.addChildNode(ball)
         let x = rand(-2, 2)
         let y = rand(10, 12)
-        ball.physicsBody?.applyForce(SCNVector3(x: x, y: y, z: 60), asImpulse: true)
+//        ball.physicsBody?.applyForce(SCNVector3(x: x, y: y, z: 60), asImpulse: true)
+        ball.physicsBody?.applyForce(SCNVector3(x: 2, y: 10 , z: 60), asImpulse: true)
         ball.physicsBody?.applyTorque(SCNVector4(rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5)), asImpulse: true)
-    }
-    
-    func getBall() -> SCNNode {
-        let scene = SCNScene(named: "Ball.scn")!
-        let ball = scene.rootNode.childNode(withName: "sphere", recursively: true)!
-        ball.position = SCNVector3(x: 0, y: 1.5, z: -20)
-        ball.physicsBody = getPhysicsBodyForBall()
-        ball.name = "ball"
-        return ball
-    }
-    
-    func getPhysicsBodyForBall() -> SCNPhysicsBody {
-        let ballPhysicsBody = SCNPhysicsBody(
-            type: .dynamic,
-            shape: SCNPhysicsShape(geometry: SCNSphere(radius: 0.35))
-        )
-        ballPhysicsBody.mass = 3
-        ballPhysicsBody.friction = 2
-        ballPhysicsBody.contactTestBitMask = 1
-        ballPhysicsBody.isAffectedByGravity = true
-        return ballPhysicsBody
-    }
-    
-    @objc func addBat() {
-        let bat = getBat()
-        self.sceneView.scene.rootNode.addChildNode(bat)
-        let x = rand(-2, 2)
-        let y = rand(10, 12)
-        bat.physicsBody?.applyForce(SCNVector3(x: x, y: y, z: 60), at: SCNVector3(0, 1, 0.3), asImpulse: true)
-    }
-    
-    
-    func getBat() -> SCNNode {
-        let scene = SCNScene(named: "Baseball_Bat.scn")!
-        let ball = scene.rootNode.childNode(withName: "bat", recursively: true)!
-        ball.position = SCNVector3(x: 0, y: 1.5, z: -20)
-        ball.pivot = SCNMatrix4MakeTranslation(0, 15, 0)
-        ball.physicsBody = getPhysicsBodyForBat()
-        ball.name = "bat"
-        return ball
-    }
-    
-    func getPhysicsBodyForBat() -> SCNPhysicsBody {
-        let ballPhysicsBody = SCNPhysicsBody(
-            type: .dynamic,
-            shape: SCNPhysicsShape(geometry: SCNCylinder(radius: 0.3, height: 7))
-        )
-        ballPhysicsBody.mass = 3
-        ballPhysicsBody.friction = 2
-        ballPhysicsBody.contactTestBitMask = 1
-        ballPhysicsBody.isAffectedByGravity = true
-        return ballPhysicsBody
     }
     
     func addPhonePlane() {
         // plane behind the phone plane which gets hit if phone misses
-        let planeNode = SCNNode()
-        planeNode.geometry = SCNPlane(width: 0.1, height: 0.2)
-        planeNode.position = SCNVector3(0, 0, 0)
-        planeNode.geometry?.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
-        planeNode.name = "phonePlane"
-        let planePhysicsBody = SCNPhysicsBody(
-            type: .kinematic,
-            shape: SCNPhysicsShape(geometry: SCNPlane(width: 0.07, height: 0.143))
-        )
-        planePhysicsBody.contactTestBitMask = 1
-        planePhysicsBody.isAffectedByGravity = false
-        planeNode.physicsBody = planePhysicsBody
+        let planeNode = nodeGenerator.getPhonePlane()
         sceneView.pointOfView?.addChildNode(planeNode)
     }
-    
+
     func addMissPlane() {
         // plane behind the phone plane which gets hit if phone misses
-        let missPlane = SCNNode()
-        missPlane.geometry = SCNPlane(width: 1, height: 1)
-        missPlane.position = SCNVector3(0, 0, 0.5)
-        missPlane.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.5)
-        missPlane.name = "missPlane"
-        let missPlanePhysicsBody = SCNPhysicsBody(
-            type: .kinematic,
-            shape: SCNPhysicsShape(geometry: SCNPlane(width: 10, height: 10))
-        )
-        missPlanePhysicsBody.contactTestBitMask = 1
-        missPlanePhysicsBody.isAffectedByGravity = false
-        missPlane.physicsBody = missPlanePhysicsBody
+        let missPlane = nodeGenerator.getMissPlane()
         sceneView.pointOfView?.addChildNode(missPlane)
     }
     
@@ -145,25 +75,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         // FIX: Prevent planes from colliding with each other
-        if (contact.nodeA.name == "bat" || contact.nodeB.name == "bat") {
-            DispatchQueue.main.async {
-                self.notificationfeedbackGenerator.prepare()
-                self.notificationfeedbackGenerator.notificationOccurred(.error)
-            }
-            
-            if (contact.nodeA.name == "bat") {
-                contact.nodeA.removeFromParentNode()
-            } else if (contact.nodeB.name == "bat") {
-                contact.nodeB.removeFromParentNode()
-            }
-            print("hit bat")
-            return
+        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
+            print(contact.contactPoint)
         }
-        if (contact.nodeA.name != "ball" && contact.nodeB.name != "ball") {
+        if (contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) {
             return
         }
         
-        if (contact.nodeA.name == "phonePlane" || contact.nodeB.name == "phonePlane") {
+        if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
             DispatchQueue.main.async {
                 self.notificationfeedbackGenerator.prepare()
                 self.notificationfeedbackGenerator.notificationOccurred(.success)
@@ -172,21 +91,41 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(caughtSound)
             print("did catch ball")
-        } else if (contact.nodeA.name == "missPlane" || contact.nodeB.name == "missPlane") {
+        } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
             score = 0
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
         }
         
-        if (contact.nodeA.name == "ball") {
+        if (contact.nodeA.name == BallConstants.name) {
             contact.nodeA.removeFromParentNode()
-        } else if (contact.nodeB.name == "ball") {
+        } else if (contact.nodeB.name == BallConstants.name) {
             contact.nodeB.removeFromParentNode()
         }
         
        
     }
+    
+    // Scrap later functions
+    
+    func addTestingPlane() {
+        let testPlane = SCNNode()
+        testPlane.geometry = SCNPlane(width: 10, height: 10)
+        testPlane.position = SCNVector3(0, 0, 0)
+        testPlane.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.5)
+        testPlane.name = "testPlane"
+        let testPlanePhyicsBody = SCNPhysicsBody(
+            type: .kinematic,
+            shape: SCNPhysicsShape(geometry: SCNPlane(width: 10, height: 10))
+        )
+        testPlanePhyicsBody.contactTestBitMask = 1
+        testPlanePhyicsBody.isAffectedByGravity = false
+        testPlane.physicsBody = testPlanePhyicsBody
+        sceneView.scene.rootNode.addChildNode(testPlane)
+        
+    }
+    
 
     
     
