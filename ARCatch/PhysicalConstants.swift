@@ -9,17 +9,21 @@
 import Foundation
 import SceneKit
 
-struct PhysicalConstants {
-    static let desiredXDistance = 0.66
-    static let desiredYDistance = 0.33
+struct DifficultyConstants {
+    static let desiredXDistance = 0.4
+    static let desiredYDistance = 0.2
     static let zDistance = 20.0
+    static let startZForce = 50.0
+    static let scoreChangeInterval = 5
+    static let zForceIncrement = 5.0
+    static let maxZForce = 100.0
 }
 
 struct BallConstants {
     static let mass: CGFloat = 3.0
-    static let physicsRadius: CGFloat = 0.35
-    static let damping: CGFloat = 0.0
-    static let initialPosition = SCNVector3(0, 1.5, -20)
+    static let physicsRadius: CGFloat = 0.3
+    static let damping: CGFloat = 0
+    static let initialPosition = SCNVector3(0, 0, -20)
     static let name = "ball"
 }
 

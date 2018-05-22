@@ -28,7 +28,8 @@ class NodeGenerator {
         ballPhysicsBody.mass = BallConstants.mass
         ballPhysicsBody.damping = BallConstants.damping
         ballPhysicsBody.contactTestBitMask = 1
-        ballPhysicsBody.isAffectedByGravity = true
+        ballPhysicsBody.isAffectedByGravity = false
+        ballPhysicsBody.angularDamping = 0
         return ballPhysicsBody
     }
     

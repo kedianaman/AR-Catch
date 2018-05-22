@@ -34,25 +34,25 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        score = 0
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
-        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
-         timer = Timer.scheduledTimer(timeInterval: 2, target: self, selector: #selector(GameViewController.addBall), userInfo: nil, repeats: true)
+//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
+//         timer = Timer.scheduledTimer(timeInterval: 2.0.squareRoot(), target: self, selector: #selector(GameViewController.addBall), userInfo: nil, repeats: true)
         addBall()
         addPhonePlane()
         addMissPlane()
-        addTestingPlane()
+//        addTestingPlane()
     }
     
     //MARK: Helper functions
     @objc func addBall() {
         let ball = nodeGenerator.getBall()
         self.sceneView.scene.rootNode.addChildNode(ball)
-        let x = rand(-2, 2)
-        let y = rand(10, 12)
-//        ball.physicsBody?.applyForce(SCNVector3(x: x, y: y, z: 60), asImpulse: true)
-        ball.physicsBody?.applyForce(SCNVector3(x: 2, y: 10 , z: 60), asImpulse: true)
+        let force = levelsManager.forceForScore(score: score)
+        ball.physicsBody?.applyForce(force, asImpulse: true)
+//        ball.physicsBody?.applyForce(SCNVector3(x: 1.4, y: 8 , z: 70), asImpulse: true)
         ball.physicsBody?.applyTorque(SCNVector4(rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5)), asImpulse: true)
     }
     
@@ -71,6 +71,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
         return Float(arc4random()) / Float(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
+
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -80,6 +81,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         }
         if (contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) {
             return
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+            self.addBall()
         }
         
         if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
@@ -92,7 +97,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             contact.nodeA.runAction(caughtSound)
             print("did catch ball")
         } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
-            score = 0
+//            score = 0
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
@@ -103,8 +108,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         } else if (contact.nodeB.name == BallConstants.name) {
             contact.nodeB.removeFromParentNode()
         }
-        
-       
     }
     
     // Scrap later functions
@@ -117,7 +120,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         testPlane.name = "testPlane"
         let testPlanePhyicsBody = SCNPhysicsBody(
             type: .kinematic,
-            shape: SCNPhysicsShape(geometry: SCNPlane(width: 10, height: 10))
+            shape: SCNPhysicsShape(geometry: SCNPlane(width: 100, height: 100))
         )
         testPlanePhyicsBody.contactTestBitMask = 1
         testPlanePhyicsBody.isAffectedByGravity = false

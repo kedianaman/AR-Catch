@@ -7,17 +7,39 @@
 //
 
 import Foundation
+import SceneKit
 
 class LevelsManager {
 
-    init() {
-        print(xForceFor(zForce: 60))
+    
+    func forceForScore(score: Int) -> SCNVector3 {
+        let level = score / DifficultyConstants.scoreChangeInterval
+        var zForce = DifficultyConstants.startZForce + (DifficultyConstants.zForceIncrement * Double(level))
+        if (zForce > DifficultyConstants.maxZForce) {
+            zForce = DifficultyConstants.maxZForce
+        }
+        let xForce = xForceFor(zForce: zForce)
+        let yForce = yForceFor(zForce: zForce)
+        print ("level: \(level), zForce: \(zForce)")
+        return SCNVector3(xForce, yForce, zForce)
     }
     
-    func xForceFor(zForce: Double) -> Double {
-        let timeSquared = ((2 * PhysicalConstants.zDistance) / (zForce/Double(BallConstants.mass)))
-        let xForce = (2 * PhysicalConstants.desiredXDistance * Double(BallConstants.mass)) / (timeSquared)
-        return xForce
+    private func xForceFor(zForce: Double) -> Double {
+        let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
+        let xForce = (2 * DifficultyConstants.desiredXDistance * Double(BallConstants.mass)) / (timeSquared)
+        print("xForce: \(xForce)")
+        return Double(rand(Float(xForce), Float(-xForce)))
+    }
+    
+    private func yForceFor(zForce: Double) -> Double {
+        let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
+        let yForce = (2 * DifficultyConstants.desiredYDistance * Double(BallConstants.mass)) / (timeSquared)
+        print("yForce: \(yForce)")
+        return Double(rand(Float(yForce), Float(-yForce)))
+    }
+    
+    func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
+        return Float(arc4random()) / Float(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
 }
 

@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */; };
-		ED28860220B4A1AD00DECEF1 /* PhysicalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860120B4A1AD00DECEF1 /* PhysicalConstants.swift */; };
 		ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860320B4A21600DECEF1 /* NodeGenerator.swift */; };
+		ED28860620B4D02200DECEF1 /* PhysicalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */; };
 		ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */; };
 		ED4DAB7F20B1FA9F003BC5A3 /* caughtball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */; };
 		ED4DAB8120B34062003BC5A3 /* Baseball_Bat.scn in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */; };
@@ -49,8 +49,8 @@
 
 /* Begin PBXFileReference section */
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
-		ED28860120B4A1AD00DECEF1 /* PhysicalConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhysicalConstants.swift; sourceTree = "<group>"; };
 		ED28860320B4A21600DECEF1 /* NodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGenerator.swift; sourceTree = "<group>"; };
+		ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicalConstants.swift; sourceTree = "<group>"; };
 		ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoosh.mp3; sourceTree = "<group>"; };
 		ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = caughtball.mp3; sourceTree = "<group>"; };
 		ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Baseball_Bat.scn; sourceTree = "<group>"; };
@@ -143,7 +143,7 @@
 			children = (
 				ED99602320AE08300058EC18 /* AppDelegate.swift */,
 				ED99602520AE08300058EC18 /* GameViewController.swift */,
-				ED28860120B4A1AD00DECEF1 /* PhysicalConstants.swift */,
+				ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */,
 				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
 				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
 				ED99602720AE08300058EC18 /* Main.storyboard */,
@@ -317,10 +317,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED28860220B4A1AD00DECEF1 /* PhysicalConstants.swift in Sources */,
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
 				ED99602620AE08300058EC18 /* GameViewController.swift in Sources */,
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,
+				ED28860620B4D02200DECEF1 /* PhysicalConstants.swift in Sources */,
 				ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
