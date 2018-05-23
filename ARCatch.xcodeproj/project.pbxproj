@@ -19,6 +19,8 @@
 		ED28861620B546B200DECEF1 /* BombFlame.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28861420B546B200DECEF1 /* BombFlame.scnp */; };
 		ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */ = {isa = PBXBuildFile; fileRef = ED28862420B54AB200DECEF1 /* sparkGas.png */; };
 		ED28862720B54AB200DECEF1 /* Gas.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28862520B54AB200DECEF1 /* Gas.scnp */; };
+		ED28863320B5F3A500DECEF1 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863220B5F3A500DECEF1 /* Explode.scnp */; };
+		ED28863520B5F67300DECEF1 /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863420B5F67300DECEF1 /* Explosion.scnp */; };
 		ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */; };
 		ED4DAB7F20B1FA9F003BC5A3 /* caughtball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */; };
 		ED4DAB8120B34062003BC5A3 /* Baseball_Bat.scn in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */; };
@@ -68,6 +70,8 @@
 		ED28861420B546B200DECEF1 /* BombFlame.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BombFlame.scnp; sourceTree = "<group>"; };
 		ED28862420B54AB200DECEF1 /* sparkGas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sparkGas.png; path = ../sparkGas.png; sourceTree = "<group>"; };
 		ED28862520B54AB200DECEF1 /* Gas.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Gas.scnp; sourceTree = "<group>"; };
+		ED28863220B5F3A500DECEF1 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
+		ED28863420B5F67300DECEF1 /* Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explosion.scnp; sourceTree = "<group>"; };
 		ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoosh.mp3; sourceTree = "<group>"; };
 		ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = caughtball.mp3; sourceTree = "<group>"; };
 		ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Baseball_Bat.scn; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 		ED28861920B54A1800DECEF1 /* Particle Systems */ = {
 			isa = PBXGroup;
 			children = (
+				ED28863220B5F3A500DECEF1 /* Explode.scnp */,
+				ED28863420B5F67300DECEF1 /* Explosion.scnp */,
 				ED28862520B54AB200DECEF1 /* Gas.scnp */,
 				ED28862420B54AB200DECEF1 /* sparkGas.png */,
 				ED28861420B546B200DECEF1 /* BombFlame.scnp */,
@@ -312,6 +318,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED28861220B4EB6E00DECEF1 /* Bomb.scn in Resources */,
+				ED28863520B5F67300DECEF1 /* Explosion.scnp in Resources */,
 				EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */,
 				ED28860E20B4E9DE00DECEF1 /* Rough.png in Resources */,
 				ED99602E20AE08320058EC18 /* LaunchScreen.storyboard in Resources */,
@@ -323,6 +330,7 @@
 				ED28861620B546B200DECEF1 /* BombFlame.scnp in Resources */,
 				ED28861020B4E9DE00DECEF1 /* Metal.png in Resources */,
 				ED99602B20AE08320058EC18 /* Assets.xcassets in Resources */,
+				ED28863320B5F3A500DECEF1 /* Explode.scnp in Resources */,
 				ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */,
 				ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */,
 				ED689F4A20AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg in Resources */,

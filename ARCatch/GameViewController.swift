@@ -38,9 +38,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
-//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
-//         timer = Timer.scheduledTimer(timeInterval: 2.0.squareRoot(), target: self, selector: #selector(GameViewController.addBall), userInfo: nil, repeats: true)
-        addBall()
+        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
+         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
+//        addObject()
         addPhonePlane()
         addMissPlane()
 //        addBomb()
@@ -48,13 +48,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     }
     
     //MARK: Helper functions
-    @objc func addBall() {
-        let ball = nodeGenerator.getBomb()
-        self.sceneView.scene.rootNode.addChildNode(ball)
+    @objc func addObject() {
+        let node = levelsManager.nodeForScore(score: score)
+        self.sceneView.scene.rootNode.addChildNode(node)
         let force = levelsManager.forceForScore(score: score)
-        ball.physicsBody?.applyForce(force, asImpulse: true)
+        node.physicsBody?.applyForce(force, asImpulse: true)
+        let torque = levelsManager.torqueForNode(node: node)
+        node.physicsBody?.applyTorque(torque, asImpulse: true)
 //        ball.physicsBody?.applyForce(SCNVector3(x: 1.4, y: 8 , z: 70), asImpulse: true)
-        ball.physicsBody?.applyTorque(SCNVector4(rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5), rand(0.5, 1.5)), asImpulse: true)
+//        ball.physicsBody?.applyTorque(SCNVector4(rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5)), asImpulse: true)
+//        node.physicsBody?.applyTorque(SCNVector4(rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0)), asImpulse: true)
     }
     
     func addPhonePlane() {
@@ -77,39 +80,59 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         // FIX: Prevent planes from colliding with each other
-        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
-            print(contact.contactPoint)
-        }
-        if (contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) {
+//        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
+//            print(contact.contactPoint)
+//        }
+        
+        // ignore any collisisons other than with ball and bomb
+        if ((contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) && (contact.nodeA.name != BombConstants.name && contact.nodeB.name != BombConstants.name)) {
             return
         }
         
-        
+        // successful collisison with phone
         if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
-            DispatchQueue.main.async {
-                self.notificationfeedbackGenerator.prepare()
-                self.notificationfeedbackGenerator.notificationOccurred(.success)
+            // collision with ball
+            if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
+                DispatchQueue.main.async {
+                    self.notificationfeedbackGenerator.prepare()
+                    self.notificationfeedbackGenerator.notificationOccurred(.success)
+                }
+                score = score + 1
+                let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
+                contact.nodeA.runAction(caughtSound)
+                print("did catch ball")
+            } else {
+                DispatchQueue.main.async {
+                    self.notificationfeedbackGenerator.prepare()
+                    self.notificationfeedbackGenerator.notificationOccurred(.error)
+                }
+                // collision with bomb -> explosion
+                if (contact.nodeA.name == BombConstants.name) {
+                    contact.nodeB.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                } else if (contact.nodeB.name == BombConstants.name) {
+                    contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                }
+                // GAME OVER
+                score = score + 1
             }
-            score = score + 1
-            let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
-            contact.nodeA.runAction(caughtSound)
-            print("did catch ball")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.addBall()
-            }
+            
         } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
 //            score = 0
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-                self.addBall()
-            }
         }
         
         if (contact.nodeA.name == BallConstants.name) {
             contact.nodeA.removeFromParentNode()
         } else if (contact.nodeB.name == BallConstants.name) {
+            contact.nodeB.removeFromParentNode()
+        }
+        
+        
+        if (contact.nodeA.name == BombConstants.name) {
+            contact.nodeA.removeFromParentNode()
+        } else if (contact.nodeB.name == BombConstants.name) {
             contact.nodeB.removeFromParentNode()
         }
     }
@@ -132,10 +155,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         sceneView.scene.rootNode.addChildNode(testPlane)
     }
     
-    func addBomb() {
-        let bomb = nodeGenerator.getBomb()
-        sceneView.scene.rootNode.addChildNode(bomb)
-    }
 
     
     

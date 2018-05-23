@@ -34,6 +34,18 @@ class NodeGenerator {
     }
     
     
+    func getBomb() -> SCNNode {
+        let scene = SCNScene(named: "Bomb.scn")!
+        let bomb = scene.rootNode.childNode(withName: "Bomb", recursively: true)!
+        //        bomb.position = SCNVector3(0, 0, -1)
+        bomb.position = BombConstants.initialPosition
+        bomb.physicsBody = getPhysicsBodyForBall()
+        bomb.name = BombConstants.name
+        bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
+        return bomb
+    }
+    
+    
     func getPhonePlane() -> SCNNode {
         // plane behind the phone plane which gets hit if phone misses
         let planeNode = SCNNode()
@@ -67,17 +79,7 @@ class NodeGenerator {
         missPlane.physicsBody = missPlanePhysicsBody
         return missPlane
     }
-    
-    func getBomb() -> SCNNode {
-        let scene = SCNScene(named: "Bomb.scn")!
-        let bomb = scene.rootNode.childNode(withName: "Bomb", recursively: true)!
-//        bomb.position = SCNVector3(0, 0, -1)
-        bomb.position = BallConstants.initialPosition
-        bomb.physicsBody = getPhysicsBodyForBall()
-        bomb.name = BallConstants.name
-        bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
-        return bomb
-    }
+
     
 //    @objc func addBat() {
 //        let bat = getBat()
