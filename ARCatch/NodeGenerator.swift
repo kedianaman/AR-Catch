@@ -68,6 +68,17 @@ class NodeGenerator {
         return missPlane
     }
     
+    func getBomb() -> SCNNode {
+        let scene = SCNScene(named: "Bomb.scn")!
+        let bomb = scene.rootNode.childNode(withName: "Bomb", recursively: true)!
+//        bomb.position = SCNVector3(0, 0, -1)
+        bomb.position = BallConstants.initialPosition
+        bomb.physicsBody = getPhysicsBodyForBall()
+        bomb.name = BallConstants.name
+        bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
+        return bomb
+    }
+    
 //    @objc func addBat() {
 //        let bat = getBat()
 //        self.sceneView.scene.rootNode.addChildNode(bat)

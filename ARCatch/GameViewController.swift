@@ -43,12 +43,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         addBall()
         addPhonePlane()
         addMissPlane()
+//        addBomb()
 //        addTestingPlane()
     }
     
     //MARK: Helper functions
     @objc func addBall() {
-        let ball = nodeGenerator.getBall()
+        let ball = nodeGenerator.getBomb()
         self.sceneView.scene.rootNode.addChildNode(ball)
         let force = levelsManager.forceForScore(score: score)
         ball.physicsBody?.applyForce(force, asImpulse: true)
@@ -83,9 +84,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             return
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
-            self.addBall()
-        }
         
         if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
             DispatchQueue.main.async {
@@ -96,11 +94,17 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(caughtSound)
             print("did catch ball")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.addBall()
+            }
         } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
 //            score = 0
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                self.addBall()
+            }
         }
         
         if (contact.nodeA.name == BallConstants.name) {
@@ -126,9 +130,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         testPlanePhyicsBody.isAffectedByGravity = false
         testPlane.physicsBody = testPlanePhyicsBody
         sceneView.scene.rootNode.addChildNode(testPlane)
-        
     }
     
+    func addBomb() {
+        let bomb = nodeGenerator.getBomb()
+        sceneView.scene.rootNode.addChildNode(bomb)
+    }
 
     
     
