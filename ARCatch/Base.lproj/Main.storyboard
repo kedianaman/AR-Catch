@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -83,11 +84,77 @@
                     <connections>
                         <outlet property="sceneView" destination="RC0-rm-u4Y" id="vUm-IZ-4A9"/>
                         <outlet property="scoreLabel" destination="gXp-hO-i6q" id="SVk-Jr-FV8"/>
+                        <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="593" y="49"/>
+            <point key="canvasLocation" x="514" y="81"/>
+        </scene>
+        <!--Game Over View Controller-->
+        <scene sceneID="H27-2p-2Mk">
+            <objects>
+                <viewController id="EFR-oC-8jZ" customClass="GameOverViewController" customModule="ARCatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tjv-iP-vz3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nxZ-XQ-pYM">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="OIl-n1-Pnt">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-Rb-dmw">
+                                            <rect key="frame" x="149" y="489" width="77" height="53"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                            <state key="normal" title="Retry">
+                                                <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindToGameWithSegue:" id="BmS-SZ-QAi"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
+                                <rect key="frame" x="85.5" y="148" width="204.5" height="48"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
+                                <rect key="frame" x="158.5" y="313.5" width="58" height="60"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="19P-ZU-v3U" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="8Fp-ef-bvs"/>
+                            <constraint firstItem="19P-ZU-v3U" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="0.5" id="ELc-Gf-fDV"/>
+                            <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
+                            <constraint firstAttribute="trailing" secondItem="nxZ-XQ-pYM" secondAttribute="trailing" id="OKO-ov-BYh"/>
+                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="YDt-z2-Pge"/>
+                            <constraint firstItem="nxZ-XQ-pYM" firstAttribute="top" secondItem="Tjv-iP-vz3" secondAttribute="top" id="iT2-cx-PXQ"/>
+                            <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" id="k5X-qM-uNL"/>
+                            <constraint firstItem="nxZ-XQ-pYM" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="qPN-L9-Sgj"/>
+                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="rvG-mA-aVk"/>
+                            <constraint firstAttribute="bottom" secondItem="nxZ-XQ-pYM" secondAttribute="bottom" id="zdg-Qd-BS8"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Uwh-pb-jjd"/>
+                    </view>
+                    <connections>
+                        <outlet property="scoreLabel" destination="TBI-t7-Ulk" id="K2B-Fl-5Vn"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gkZ-It-BzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="q81-NJ-Si8" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1361" y="81"/>
         </scene>
     </scenes>
 </document>

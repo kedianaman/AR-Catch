@@ -23,7 +23,7 @@ class NodeGenerator {
     private func getPhysicsBodyForBall() -> SCNPhysicsBody {
         let ballPhysicsBody = SCNPhysicsBody(
             type: .dynamic,
-            shape: SCNPhysicsShape(geometry: SCNSphere(radius: BallConstants.physicsRadius))
+            shape: SCNPhysicsShape(geometry: SCNSphere(radius: 0.2))
         )
         ballPhysicsBody.mass = BallConstants.mass
         ballPhysicsBody.damping = BallConstants.damping

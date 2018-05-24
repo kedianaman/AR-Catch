@@ -15,7 +15,15 @@ class LevelsManager {
 
     
     func nodeForScore(score: Int) -> SCNNode {
-        if (score % 5 == 0) {
+        let level = score / DifficultyConstants.scoreChangeInterval
+        var probabilityBomb = Double(level) / 20.0
+        if (probabilityBomb > (1/3.0)) {
+            probabilityBomb = 1/3.0
+        }
+        print(probabilityBomb)
+        // 0 for bomb, 1 for ball
+        let randNum = randomNumber(probabilities: [probabilityBomb, (1 - probabilityBomb)])
+        if (randNum == 0) {
             return nodeGenerator.getBomb()
         } else {
             return nodeGenerator.getBall()
@@ -61,5 +69,23 @@ class LevelsManager {
     private func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
         return Float(arc4random()) / Float(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
+}
+
+func randomNumber(probabilities: [Double]) -> Int {
+    
+    // Sum of all probabilities (so that we don't have to require that the sum is 1.0):
+    let sum = probabilities.reduce(0, +)
+    // Random number in the range 0.0 <= rnd < sum :
+    let rnd = sum * Double(arc4random_uniform(UInt32.max)) / Double(UInt32.max)
+    // Find the first interval of accumulated probabilities into which `rnd` falls:
+    var accum = 0.0
+    for (i, p) in probabilities.enumerated() {
+        accum += p
+        if rnd < accum {
+            return i
+        }
+    }
+    // This point might be reached due to floating point inaccuracies:
+    return (probabilities.count - 1)
 }
 

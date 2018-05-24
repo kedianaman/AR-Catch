@@ -39,11 +39,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
-         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
-//        addObject()
+//         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
+        addObject()
         addPhonePlane()
         addMissPlane()
-//        addBomb()
 //        addTestingPlane()
     }
     
@@ -55,9 +54,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         node.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: node)
         node.physicsBody?.applyTorque(torque, asImpulse: true)
-//        ball.physicsBody?.applyForce(SCNVector3(x: 1.4, y: 8 , z: 70), asImpulse: true)
-//        ball.physicsBody?.applyTorque(SCNVector4(rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5)), asImpulse: true)
-//        node.physicsBody?.applyTorque(SCNVector4(rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0)), asImpulse: true)
     }
     
     func addPhonePlane() {
@@ -101,6 +97,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
                 contact.nodeA.runAction(caughtSound)
                 print("did catch ball")
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    self.addObject()
+                }
             } else {
                 DispatchQueue.main.async {
                     self.notificationfeedbackGenerator.prepare()
@@ -112,8 +111,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 } else if (contact.nodeB.name == BombConstants.name) {
                     contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
                 }
-                // GAME OVER
-                score = score + 1
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
+                }
             }
             
         } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
@@ -121,6 +121,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.addObject()
+            }
         }
         
         if (contact.nodeA.name == BallConstants.name) {
@@ -136,6 +139,25 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             contact.nodeB.removeFromParentNode()
         }
     }
+    
+    //MARK: Segues
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "GameOverSegue") {
+            if let gameOverVC = segue.destination as? GameOverViewController {
+                gameOverVC.score = score
+            }
+        }
+    }
+    
+    @IBAction func unwindToGame(segue:UIStoryboardSegue) {
+        print("reset")
+        score = 0
+        self.addObject()
+        self.sceneView.session.run(configuration, options: .resetTracking)
+        
+    }
+
+
     
     // Scrap later functions
     

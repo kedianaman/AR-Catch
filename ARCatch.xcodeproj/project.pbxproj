@@ -35,6 +35,7 @@
 		ED99602E20AE08320058EC18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED99602C20AE08320058EC18 /* LaunchScreen.storyboard */; };
 		ED99603920AE08320058EC18 /* ARCatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99603820AE08320058EC18 /* ARCatchTests.swift */; };
 		ED99604420AE08320058EC18 /* ARCatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99604320AE08320058EC18 /* ARCatchUITests.swift */; };
+		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
 		EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */; };
 		EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */; };
 		EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE220AFB7B6008FCE67 /* Ball.scn */; };
@@ -93,6 +94,7 @@
 		ED99603F20AE08320058EC18 /* ARCatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED99604320AE08320058EC18 /* ARCatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCatchUITests.swift; sourceTree = "<group>"; };
 		ED99604520AE08320058EC18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
 		EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		EDF5FCE220AFB7B6008FCE67 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 			children = (
 				ED28863620B616E200DECEF1 /* MainMenuViewController.swift */,
 				ED99602520AE08300058EC18 /* GameViewController.swift */,
+				EDCE182520B73B1900FFE779 /* GameOverViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -388,6 +391,7 @@
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
 				ED99602620AE08300058EC18 /* GameViewController.swift in Sources */,
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,
+				EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */,
 				ED28860620B4D02200DECEF1 /* Constants.swift in Sources */,
 				ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */,
 			);
