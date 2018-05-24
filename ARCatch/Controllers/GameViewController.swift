@@ -24,12 +24,24 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             }
         }
     }
+    var numBallMisses = 0 {
+        didSet {
+            DispatchQueue.main.async {
+                var label = ""
+                for _ in 0..<self.numBallMisses {
+                    label = label + " X"
+                }
+                self.ballMissesLabel.text = label
+            }
+        }
+    }
     let levelsManager = LevelsManager()
     let nodeGenerator = NodeGenerator()
 
     //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var ballMissesLabel: UILabel!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
@@ -38,7 +50,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
-        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
+//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
 //         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
         addObject()
         addPhonePlane()
@@ -117,13 +129,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             }
             
         } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
-//            score = 0
             let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
             contact.nodeA.runAction(missSound)
             print("did miss ball")
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                self.addObject()
+            if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
+                numBallMisses = numBallMisses + 1
             }
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+                if (self.numBallMisses == 3) {
+                    self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
+                } else {
+                    self.addObject()
+                }
+            }
+            
         }
         
         if (contact.nodeA.name == BallConstants.name) {
@@ -152,6 +171,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
         print("reset")
         score = 0
+        numBallMisses = 0
         self.addObject()
         self.sceneView.session.run(configuration, options: .resetTracking)
         

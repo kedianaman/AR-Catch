@@ -69,6 +69,22 @@
                                 <color key="shadowColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" X X X " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5R-ex-taM">
+                                <rect key="frame" x="20" y="40" width="88" height="37"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.037429042760000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0j-Mr-41C">
+                                <rect key="frame" x="20" y="40" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                <color key="textColor" red="1" green="0.037429042760000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -77,11 +93,16 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gXp-hO-i6q" secondAttribute="trailing" constant="20" id="OhJ-1I-eFz"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VEg-QP-aoH"/>
                             <constraint firstAttribute="bottom" secondItem="RC0-rm-u4Y" secondAttribute="bottom" id="Zyv-kZ-dEw"/>
+                            <constraint firstItem="G0j-Mr-41C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ca3-Ce-09o"/>
+                            <constraint firstItem="M5R-ex-taM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="isU-aG-qxM"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yd5-yG-jU1"/>
+                            <constraint firstItem="G0j-Mr-41C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="yrs-q4-gHe"/>
+                            <constraint firstItem="M5R-ex-taM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ze9-d7-eSG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="ballMissesLabel" destination="G0j-Mr-41C" id="hvd-s4-sjA"/>
                         <outlet property="sceneView" destination="RC0-rm-u4Y" id="vUm-IZ-4A9"/>
                         <outlet property="scoreLabel" destination="gXp-hO-i6q" id="SVk-Jr-FV8"/>
                         <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>

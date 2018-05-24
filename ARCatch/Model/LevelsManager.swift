@@ -15,10 +15,10 @@ class LevelsManager {
 
     
     func nodeForScore(score: Int) -> SCNNode {
-        let level = score / DifficultyConstants.scoreChangeInterval
+        let level = score / 10
         var probabilityBomb = Double(level) / 20.0
-        if (probabilityBomb > (1/3.0)) {
-            probabilityBomb = 1/3.0
+        if (probabilityBomb > (1/4.0)) {
+            probabilityBomb = 1/4.0
         }
         print(probabilityBomb)
         // 0 for bomb, 1 for ball
