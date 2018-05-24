@@ -39,10 +39,23 @@ class NodeGenerator {
         let bomb = scene.rootNode.childNode(withName: "Bomb", recursively: true)!
         //        bomb.position = SCNVector3(0, 0, -1)
         bomb.position = BombConstants.initialPosition
-        bomb.physicsBody = getPhysicsBodyForBall()
+        bomb.physicsBody = getPhysicsBodyForBomb()
         bomb.name = BombConstants.name
         bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
         return bomb
+    }
+    
+    private func getPhysicsBodyForBomb() -> SCNPhysicsBody {
+        let bombPhysicsBody = SCNPhysicsBody(
+            type: .dynamic,
+            shape: SCNPhysicsShape(geometry: SCNSphere(radius: BombConstants.physicsRadius))
+        )
+        bombPhysicsBody.mass = BombConstants.mass
+        bombPhysicsBody.damping = BombConstants.damping
+        bombPhysicsBody.contactTestBitMask = 1
+        bombPhysicsBody.isAffectedByGravity = false
+        bombPhysicsBody.angularDamping = 0
+        return bombPhysicsBody
     }
     
     

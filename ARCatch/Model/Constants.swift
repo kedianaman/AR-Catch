@@ -32,10 +32,12 @@ struct BallConstants {
 }
 
 struct BombConstants {
-    static let name = "bomb"
-    static let initialPosition = SCNVector3(0, 0, -20)
     static let mass: CGFloat = 3.0
-    static let physicsRadius: CGFloat = 0.3
+    static let physicsRadius: CGFloat = 0.15
+    static let damping: CGFloat = 0
+    static let initialPosition = SCNVector3(0, 0, -20)
+    static let name = "bomb"
+
 
 }
 

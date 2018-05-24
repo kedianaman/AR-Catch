@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fle-lQ-Fbp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,45 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Main Menu View Controller-->
+        <scene sceneID="cQr-UB-hrp">
+            <objects>
+                <viewController id="Fle-lQ-Fbp" customClass="MainMenuViewController" customModule="ARCatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Iqa-Dc-oEj">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMW-xD-43r">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="Iuf-Ry-6Az" appends="YES" id="j41-VJ-m2C"/>
+                                </connections>
+                            </arscnView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="kMW-xD-43r" firstAttribute="top" secondItem="Iqa-Dc-oEj" secondAttribute="top" id="ARt-yF-Zua"/>
+                            <constraint firstAttribute="bottom" secondItem="kMW-xD-43r" secondAttribute="bottom" id="dOd-nv-i0L"/>
+                            <constraint firstAttribute="trailing" secondItem="kMW-xD-43r" secondAttribute="trailing" id="lyt-gu-RjO"/>
+                            <constraint firstItem="kMW-xD-43r" firstAttribute="leading" secondItem="Iqa-Dc-oEj" secondAttribute="leading" id="nY8-rf-mvt"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="LTc-oT-9WM"/>
+                    </view>
+                    <connections>
+                        <outlet property="sceneView" destination="kMW-xD-43r" id="uGM-GR-wTE"/>
+                        <segue destination="BYZ-38-t0r" kind="modal" identifier="menuToGameSegue" modalTransitionStyle="crossDissolve" id="QAb-Lh-jYS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lnS-Uw-HAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tapGestureRecognizer id="Iuf-Ry-6Az">
+                    <connections>
+                        <action selector="didTapOnScreen:" destination="Fle-lQ-Fbp" id="s0C-bU-m4D"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="-446" y="81"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -48,6 +87,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="593" y="49"/>
         </scene>
     </scenes>
 </document>

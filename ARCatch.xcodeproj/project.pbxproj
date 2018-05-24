@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */; };
 		ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860320B4A21600DECEF1 /* NodeGenerator.swift */; };
-		ED28860620B4D02200DECEF1 /* PhysicalConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */; };
+		ED28860620B4D02200DECEF1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860520B4D02200DECEF1 /* Constants.swift */; };
 		ED28860D20B4E9DE00DECEF1 /* Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = ED28860920B4E9DD00DECEF1 /* Normal.png */; };
 		ED28860E20B4E9DE00DECEF1 /* Rough.png in Resources */ = {isa = PBXBuildFile; fileRef = ED28860A20B4E9DD00DECEF1 /* Rough.png */; };
 		ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */ = {isa = PBXBuildFile; fileRef = ED28860B20B4E9DD00DECEF1 /* Albedo.png */; };
@@ -21,6 +21,7 @@
 		ED28862720B54AB200DECEF1 /* Gas.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28862520B54AB200DECEF1 /* Gas.scnp */; };
 		ED28863320B5F3A500DECEF1 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863220B5F3A500DECEF1 /* Explode.scnp */; };
 		ED28863520B5F67300DECEF1 /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863420B5F67300DECEF1 /* Explosion.scnp */; };
+		ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28863620B616E200DECEF1 /* MainMenuViewController.swift */; };
 		ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */; };
 		ED4DAB7F20B1FA9F003BC5A3 /* caughtball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */; };
 		ED4DAB8120B34062003BC5A3 /* Baseball_Bat.scn in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */; };
@@ -60,7 +61,7 @@
 /* Begin PBXFileReference section */
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
 		ED28860320B4A21600DECEF1 /* NodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGenerator.swift; sourceTree = "<group>"; };
-		ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysicalConstants.swift; sourceTree = "<group>"; };
+		ED28860520B4D02200DECEF1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		ED28860920B4E9DD00DECEF1 /* Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Normal.png; sourceTree = "<group>"; };
 		ED28860A20B4E9DD00DECEF1 /* Rough.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Rough.png; sourceTree = "<group>"; };
 		ED28860B20B4E9DD00DECEF1 /* Albedo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Albedo.png; sourceTree = "<group>"; };
@@ -72,6 +73,7 @@
 		ED28862520B54AB200DECEF1 /* Gas.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Gas.scnp; sourceTree = "<group>"; };
 		ED28863220B5F3A500DECEF1 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		ED28863420B5F67300DECEF1 /* Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explosion.scnp; sourceTree = "<group>"; };
+		ED28863620B616E200DECEF1 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
 		ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoosh.mp3; sourceTree = "<group>"; };
 		ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = caughtball.mp3; sourceTree = "<group>"; };
 		ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Baseball_Bat.scn; sourceTree = "<group>"; };
@@ -135,6 +137,25 @@
 			path = "Particle Systems";
 			sourceTree = "<group>";
 		};
+		ED28863820B616F500DECEF1 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				ED28863620B616E200DECEF1 /* MainMenuViewController.swift */,
+				ED99602520AE08300058EC18 /* GameViewController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		ED28863920B6170200DECEF1 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ED28860520B4D02200DECEF1 /* Constants.swift */,
+				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
+				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		ED689F4C20AFE4F6000BBEE9 /* 3d Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -179,10 +200,8 @@
 			isa = PBXGroup;
 			children = (
 				ED99602320AE08300058EC18 /* AppDelegate.swift */,
-				ED99602520AE08300058EC18 /* GameViewController.swift */,
-				ED28860520B4D02200DECEF1 /* PhysicalConstants.swift */,
-				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
-				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
+				ED28863820B616F500DECEF1 /* Controllers */,
+				ED28863920B6170200DECEF1 /* Model */,
 				ED99602720AE08300058EC18 /* Main.storyboard */,
 				ED28861920B54A1800DECEF1 /* Particle Systems */,
 				ED689F4C20AFE4F6000BBEE9 /* 3d Models */,
@@ -365,10 +384,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */,
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
 				ED99602620AE08300058EC18 /* GameViewController.swift in Sources */,
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,
-				ED28860620B4D02200DECEF1 /* PhysicalConstants.swift in Sources */,
+				ED28860620B4D02200DECEF1 /* Constants.swift in Sources */,
 				ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
