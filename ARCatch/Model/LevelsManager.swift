@@ -20,7 +20,6 @@ class LevelsManager {
         if (probabilityBomb > (1/4.0)) {
             probabilityBomb = 1/4.0
         }
-        print(probabilityBomb)
         // 0 for bomb, 1 for ball
         let randNum = randomNumber(probabilities: [probabilityBomb, (1 - probabilityBomb)])
         if (randNum == 0) {
@@ -55,14 +54,12 @@ class LevelsManager {
     private func xForceFor(zForce: Double) -> Double {
         let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
         let xForce = (2 * DifficultyConstants.desiredXDistance * Double(BallConstants.mass)) / (timeSquared)
-        print("xForce: \(xForce)")
         return Double(rand(Float(xForce), Float(-xForce)))
     }
     
     private func yForceFor(zForce: Double) -> Double {
         let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
         let yForce = (2 * DifficultyConstants.desiredYDistance * Double(BallConstants.mass)) / (timeSquared)
-        print("yForce: \(yForce)")
         return Double(rand(Float(yForce), Float(-yForce)))
     }
     

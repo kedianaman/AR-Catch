@@ -20,12 +20,12 @@ struct DifficultyConstants {
     static let startZForce = 30.0
     static let scoreChangeInterval = 5
     static let zForceIncrement = 5.0
-    static let maxZForce = 100.0
+    static let maxZForce = 80.0
 }
 
 struct BallConstants {
     static let mass: CGFloat = 3.0
-    static let physicsRadius: CGFloat = 0.3
+    static let physicsRadius: CGFloat = 0.25
     static let damping: CGFloat = 0
     static let initialPosition = SCNVector3(0, 0, -20)
     static let name = "ball"
@@ -33,7 +33,7 @@ struct BallConstants {
 
 struct BombConstants {
     static let mass: CGFloat = 3.0
-    static let physicsRadius: CGFloat = 0.15
+    static let physicsRadius: CGFloat = 0.2
     static let damping: CGFloat = 0
     static let initialPosition = SCNVector3(0, 0, -20)
     static let name = "bomb"
@@ -48,7 +48,7 @@ struct PhonePlaneConstants {
 }
 
 struct MissPlaneConstants {
-    static let width: CGFloat = 10.0
-    static let height: CGFloat = 10.0
+    static let width: CGFloat = 100.0
+    static let height: CGFloat = 100.0
     static let name = "missPlane"
 }

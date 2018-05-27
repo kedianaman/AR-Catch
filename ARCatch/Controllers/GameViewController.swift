@@ -47,10 +47,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         score = 0
+//        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
-//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes, SCNDebugOptions.showPhysicsFields]
+//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes]
+        self.sceneView.showsStatistics = true 
 //         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
         addObject()
         addPhonePlane()
@@ -96,6 +98,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         if ((contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) && (contact.nodeA.name != BombConstants.name && contact.nodeB.name != BombConstants.name)) {
             return
         }
+        
         
         // successful collisison with phone
         if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
