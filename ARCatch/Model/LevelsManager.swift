@@ -15,13 +15,14 @@ class LevelsManager {
 
     
     func nodeForScore(score: Int) -> SCNNode {
-//        if (score % 2 == 0) {
-//            return nodeGenerator.getBomb()
-//        } else {
-//            return nodeGenerator.getBall()
-//        }
+        if (score % 2 == 0) {
+            return nodeGenerator.getBomb()
+        } else {
+            return nodeGenerator.getBall()
+        }
+        return nodeGenerator.getBomb()
         let level = score / 10
-        var probabilityBomb = Double(level) / 20.0
+        var probabilityBomb = Double(level) / 10.0
         if (probabilityBomb > (1/4.0)) {
             probabilityBomb = 1/4.0
         }

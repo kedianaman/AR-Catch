@@ -8,6 +8,7 @@
 
 import UIKit
 import ARKit
+import AudioToolbox.AudioServices
 
 class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
@@ -15,7 +16,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     //MARK: Properties
     let configuration = ARWorldTrackingConfiguration()
     var notificationfeedbackGenerator = UINotificationFeedbackGenerator()
-    var feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    var impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var timer = Timer()
     var bombOnScreen = false
     var bullets = [SCNNode]()
@@ -58,7 +60,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         self.sceneView.autoenablesDefaultLighting = true
 //        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes]
         self.sceneView.showsStatistics = true 
-//         timer = Timer.scheduledTimer(timeInterval: 2.0, target: self, selector: #selector(GameViewController.addObject), userInfo: nil, repeats: true)
         addObject()
         addPhonePlane()
         addMissPlane()
@@ -67,9 +68,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     
     @IBAction func didTapScreen(_ sender: Any) {
         if (bombOnScreen == true) {
+            selectionFeedbackGenerator.prepare()
+            selectionFeedbackGenerator.selectionChanged()
             let bullet = nodeGenerator.getBullet()
             bullets.append(bullet)
             let (direction, _) = getUserVector()
+            let play = SCNAction.playAudio(SCNAudioSource(fileNamed: "plop.mp3")!, waitForCompletion: true)
+            bullet.runAction(play)
             if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
                 bullet.position = SCNVector3(0, 0, -0.01)
                 phonePlane.addChildNode(bullet)
@@ -108,14 +113,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
         if let frame = self.sceneView.session.currentFrame {
             let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
-            let dir = SCNVector3(-5 * mat.m31, -5 * mat.m32, -5 * mat.m33) // orientation of camera in world space
+            let dir = SCNVector3(-10 * mat.m31, -10 * mat.m32, -10 * mat.m33) // orientation of camera in world space
             let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
-            print("Direction: \(dir)")
-            print("Position: \(pos)")
-            print("\n")
             return (dir, pos)
         }
-        print("ERROR")
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
 
@@ -126,8 +127,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
 //        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
 //            print(contact.contactPoint)
 //        }
-        
-        print("collision between \(contact.nodeA.name) and \(contact.nodeB.name)")
         if (bombOnScreen == true) {
             if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                 if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
@@ -136,7 +135,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     } else if (contact.nodeB.name == BombConstants.name) {
                         contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                     }
-                   
+                    // strong boom vibration
+                    let pop = SystemSoundID(1520)
+                    AudioServicesPlaySystemSound(pop)
                     contact.nodeA.physicsBody = nil
                     contact.nodeB.physicsBody = nil
                     score = score + 1
@@ -155,19 +156,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
             }
         }
         
-        // ignore any collisisons other than with ball and bomb
-        if ((contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) && (contact.nodeA.name != BombConstants.name && contact.nodeB.name != BombConstants.name)) {
-            return
-        }
-        
-        
         // successful collisison with phone
         if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
             // collision with ball
             if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
                 DispatchQueue.main.async {
-                    self.notificationfeedbackGenerator.prepare()
-                    self.notificationfeedbackGenerator.notificationOccurred(.success)
+                    self.impactFeedbackGenerator.prepare()
+                    self.impactFeedbackGenerator.impactOccurred()
                 }
                 score = score + 1
                 let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
@@ -177,10 +172,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     self.addObject()
                 }
             } else {
-                DispatchQueue.main.async {
-                    self.notificationfeedbackGenerator.prepare()
-                    self.notificationfeedbackGenerator.notificationOccurred(.error)
-                }
+                let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+                AudioServicesPlaySystemSound(vibrate)
                 // collision with bomb -> explosion
                 if (contact.nodeA.name == BombConstants.name) {
                     contact.nodeB.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
@@ -243,7 +236,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         numBallMisses = 0
         self.addObject()
         self.sceneView.session.run(configuration, options: .resetTracking)
-        
     }
 
 

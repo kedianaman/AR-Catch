@@ -42,6 +42,18 @@ class NodeGenerator {
         bomb.physicsBody = getPhysicsBodyForBomb()
         bomb.name = BombConstants.name
         bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
+        
+        let audioSource = SCNAudioSource(fileNamed: "whitenoise.wav")!
+        audioSource.volume = 0.001
+        audioSource.isPositional = true
+        audioSource.shouldStream = false
+        audioSource.loops = true
+        audioSource.load()
+        let player = SCNAudioPlayer(source: audioSource)
+        bomb.addAudioPlayer(player)
+        let play = SCNAction.playAudio(audioSource, waitForCompletion: true)
+        bomb.runAction(play)
+        
         return bomb
     }
     
