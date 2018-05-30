@@ -29,6 +29,7 @@ struct BallConstants {
     static let damping: CGFloat = 0
     static let initialPosition = SCNVector3(0, 0, -20)
     static let name = "ball"
+    static let categoryBitMask = 0x1 << 0
 }
 
 struct BombConstants {
@@ -37,18 +38,27 @@ struct BombConstants {
     static let damping: CGFloat = 0
     static let initialPosition = SCNVector3(0, 0, -20)
     static let name = "bomb"
+    static let categoryBitMask = 0x1 << 1
+}
 
-
+struct BulletConstants {
+    static let physicsRadius: CGFloat = 0.025
+    static let name = "bullet"
+    static let categoryBitMask = 0x1 << 2
 }
 
 struct PhonePlaneConstants {
     static let width: CGFloat = 0.07
     static let height: CGFloat = 0.143
     static let name = "phonePlane"
+    static let categoryBitMask = 0x1 << 3
 }
 
 struct MissPlaneConstants {
     static let width: CGFloat = 100.0
     static let height: CGFloat = 100.0
     static let name = "missPlane"
+    static let categoryBitMask = 0x1 << 4
 }
+
+

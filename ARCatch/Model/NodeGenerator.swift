@@ -27,7 +27,8 @@ class NodeGenerator {
         )
         ballPhysicsBody.mass = BallConstants.mass
         ballPhysicsBody.damping = BallConstants.damping
-        ballPhysicsBody.contactTestBitMask = 1
+        ballPhysicsBody.categoryBitMask = BallConstants.categoryBitMask
+        ballPhysicsBody.contactTestBitMask = PhonePlaneConstants.categoryBitMask | MissPlaneConstants.categoryBitMask
         ballPhysicsBody.isAffectedByGravity = false
         ballPhysicsBody.angularDamping = 0
         return ballPhysicsBody
@@ -37,7 +38,6 @@ class NodeGenerator {
     func getBomb() -> SCNNode {
         let scene = SCNScene(named: "Bomb.scn")!
         let bomb = scene.rootNode.childNode(withName: "Bomb", recursively: true)!
-        //        bomb.position = SCNVector3(0, 0, -1)
         bomb.position = BombConstants.initialPosition
         bomb.physicsBody = getPhysicsBodyForBomb()
         bomb.name = BombConstants.name
@@ -52,10 +52,29 @@ class NodeGenerator {
         )
         bombPhysicsBody.mass = BombConstants.mass
         bombPhysicsBody.damping = BombConstants.damping
-        bombPhysicsBody.contactTestBitMask = 1
+        bombPhysicsBody.categoryBitMask = BombConstants.categoryBitMask
+        bombPhysicsBody.contactTestBitMask = PhonePlaneConstants.categoryBitMask | MissPlaneConstants.categoryBitMask | BulletConstants.categoryBitMask
         bombPhysicsBody.isAffectedByGravity = false
         bombPhysicsBody.angularDamping = 0
         return bombPhysicsBody
+    }
+    
+    func getBullet() -> SCNNode {
+        let scene = SCNScene(named: "Bullet.scn")!
+        let bullet = scene.rootNode.childNode(withName: "bullet", recursively: true)!
+        bullet.physicsBody = getPhysicsBodyForBullet()
+        bullet.name = BulletConstants.name
+        return bullet
+    }
+    
+    private func getPhysicsBodyForBullet() -> SCNPhysicsBody {
+        let bulletPhyiscsBody = SCNPhysicsBody(type: .dynamic, shape: SCNPhysicsShape(geometry: SCNSphere(radius: BulletConstants.physicsRadius), options: nil))
+        bulletPhyiscsBody.mass = 1
+        bulletPhyiscsBody.categoryBitMask = BulletConstants.categoryBitMask
+        bulletPhyiscsBody.contactTestBitMask = BombConstants.categoryBitMask
+        bulletPhyiscsBody.isAffectedByGravity = false
+        bulletPhyiscsBody.angularDamping = 0
+        return bulletPhyiscsBody
     }
     
     
@@ -70,7 +89,8 @@ class NodeGenerator {
             type: .kinematic,
             shape: SCNPhysicsShape(geometry: SCNPlane(width: PhonePlaneConstants.width, height: PhonePlaneConstants.height))
         )
-        planePhysicsBody.contactTestBitMask = 1
+        planePhysicsBody.categoryBitMask = PhonePlaneConstants.categoryBitMask
+        planePhysicsBody.contactTestBitMask = BallConstants.categoryBitMask | BombConstants.categoryBitMask
         planePhysicsBody.isAffectedByGravity = false
         planeNode.physicsBody = planePhysicsBody
         return planeNode
@@ -87,42 +107,11 @@ class NodeGenerator {
             type: .kinematic,
             shape: SCNPhysicsShape(geometry: SCNPlane(width: MissPlaneConstants.width, height: MissPlaneConstants.height))
         )
-        missPlanePhysicsBody.contactTestBitMask = 1
+        missPlanePhysicsBody.categoryBitMask = MissPlaneConstants.categoryBitMask
+        missPlanePhysicsBody.contactTestBitMask = BallConstants.categoryBitMask | BombConstants.categoryBitMask
         missPlanePhysicsBody.isAffectedByGravity = false
         missPlane.physicsBody = missPlanePhysicsBody
         return missPlane
     }
-
-    
-//    @objc func addBat() {
-//        let bat = getBat()
-//        self.sceneView.scene.rootNode.addChildNode(bat)
-//        let x = rand(-2, 2)
-//        let y = rand(10, 12)
-//        bat.physicsBody?.applyForce(SCNVector3(x: x, y: y, z: 60), at: SCNVector3(0, 1, 0.3), asImpulse: true)
-//    }
-//
-//
-//    func getBat() -> SCNNode {
-//        let scene = SCNScene(named: "Baseball_Bat.scn")!
-//        let ball = scene.rootNode.childNode(withName: "bat", recursively: true)!
-//        ball.position = SCNVector3(x: 0, y: 1.5, z: -20)
-//        ball.pivot = SCNMatrix4MakeTranslation(0, 15, 0)
-//        ball.physicsBody = getPhysicsBodyForBat()
-//        ball.name = "bat"
-//        return ball
-//    }
-//
-//    func getPhysicsBodyForBat() -> SCNPhysicsBody {
-//        let ballPhysicsBody = SCNPhysicsBody(
-//            type: .dynamic,
-//            shape: SCNPhysicsShape(geometry: SCNCylinder(radius: 0.3, height: 7))
-//        )
-//        ballPhysicsBody.mass = 3
-//        ballPhysicsBody.friction = 2
-//        ballPhysicsBody.contactTestBitMask = 1
-//        ballPhysicsBody.isAffectedByGravity = true
-//        return ballPhysicsBody
-//    }
     
 }

@@ -26,11 +26,11 @@
 		ED28863320B5F3A500DECEF1 /* Explode.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863220B5F3A500DECEF1 /* Explode.scnp */; };
 		ED28863520B5F67300DECEF1 /* Explosion.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28863420B5F67300DECEF1 /* Explosion.scnp */; };
 		ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28863620B616E200DECEF1 /* MainMenuViewController.swift */; };
+		ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */; };
 		ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */; };
 		ED4DAB7F20B1FA9F003BC5A3 /* caughtball.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */; };
 		ED4DAB8120B34062003BC5A3 /* Baseball_Bat.scn in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */; };
 		ED4DAB8D20B34741003BC5A3 /* baseball_bat.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB8C20B34741003BC5A3 /* baseball_bat.jpg */; };
-		ED55BDA720B9DC25008D738C /* tenbal.obj in Resources */ = {isa = PBXBuildFile; fileRef = ED55BDA620B9DC25008D738C /* tenbal.obj */; };
 		ED689F4A20AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg in Resources */ = {isa = PBXBuildFile; fileRef = ED689F4920AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg */; };
 		ED689F4D20AFE71A000BBEE9 /* Football.scn in Resources */ = {isa = PBXBuildFile; fileRef = ED689F4B20AFD3F8000BBEE9 /* Football.scn */; };
 		ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99602320AE08300058EC18 /* AppDelegate.swift */; };
@@ -40,9 +40,11 @@
 		ED99602E20AE08320058EC18 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED99602C20AE08320058EC18 /* LaunchScreen.storyboard */; };
 		ED99603920AE08320058EC18 /* ARCatchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99603820AE08320058EC18 /* ARCatchTests.swift */; };
 		ED99604420AE08320058EC18 /* ARCatchUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99604320AE08320058EC18 /* ARCatchUITests.swift */; };
+		EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */; };
+		EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */; };
+		EDB7F48C20BDC6520048C3FB /* metal_scratches.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */; };
+		EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48620BDC6120048C3FB /* Bullet.scn */; };
 		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
-		EDCE182920B7C6E600FFE779 /* smoke.png in Resources */ = {isa = PBXBuildFile; fileRef = EDCE182720B7C6E600FFE779 /* smoke.png */; };
-		EDCE182A20B7C6E600FFE779 /* Smoke.scnp in Resources */ = {isa = PBXBuildFile; fileRef = EDCE182820B7C6E600FFE779 /* Smoke.scnp */; };
 		EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */; };
 		EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */; };
 		EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE220AFB7B6008FCE67 /* Ball.scn */; };
@@ -86,12 +88,11 @@
 		ED28863220B5F3A500DECEF1 /* Explode.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explode.scnp; sourceTree = "<group>"; };
 		ED28863420B5F67300DECEF1 /* Explosion.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Explosion.scnp; sourceTree = "<group>"; };
 		ED28863620B616E200DECEF1 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
-		ED418B7D20B9DAC400573F0B /* Map__1_Noise.tga */ = {isa = PBXFileReference; lastKnownFileType = file; path = Map__1_Noise.tga; sourceTree = "<group>"; };
+		ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = ExplosionSmall.scnp; sourceTree = "<group>"; };
 		ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoosh.mp3; sourceTree = "<group>"; };
 		ED4DAB7E20B1FA9F003BC5A3 /* caughtball.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = caughtball.mp3; sourceTree = "<group>"; };
 		ED4DAB8020B34062003BC5A3 /* Baseball_Bat.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Baseball_Bat.scn; sourceTree = "<group>"; };
 		ED4DAB8C20B34741003BC5A3 /* baseball_bat.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = baseball_bat.jpg; sourceTree = "<group>"; };
-		ED55BDA620B9DC25008D738C /* tenbal.obj */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = tenbal.obj; sourceTree = "<group>"; };
 		ED689F4920AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = football_diffuse_no_ao.jpg; sourceTree = "<group>"; };
 		ED689F4B20AFD3F8000BBEE9 /* Football.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Football.scn; sourceTree = "<group>"; };
 		ED99602020AE08300058EC18 /* ARCatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARCatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -107,9 +108,11 @@
 		ED99603F20AE08320058EC18 /* ARCatchUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ARCatchUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED99604320AE08320058EC18 /* ARCatchUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCatchUITests.swift; sourceTree = "<group>"; };
 		ED99604520AE08320058EC18 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EDB7F48620BDC6120048C3FB /* Bullet.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Bullet.scn; sourceTree = "<group>"; };
+		EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches_1.jpg; sourceTree = "<group>"; };
+		EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt_texture.jpg; sourceTree = "<group>"; };
+		EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches.jpg; sourceTree = "<group>"; };
 		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
-		EDCE182720B7C6E600FFE779 /* smoke.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smoke.png; sourceTree = "<group>"; };
-		EDCE182820B7C6E600FFE779 /* Smoke.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Smoke.scnp; sourceTree = "<group>"; };
 		EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
 		EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		EDF5FCE220AFB7B6008FCE67 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
@@ -146,6 +149,7 @@
 			children = (
 				ED28863220B5F3A500DECEF1 /* Explode.scnp */,
 				ED28863420B5F67300DECEF1 /* Explosion.scnp */,
+				ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */,
 				ED28862520B54AB200DECEF1 /* Gas.scnp */,
 				ED28862420B54AB200DECEF1 /* sparkGas.png */,
 				ED28861420B546B200DECEF1 /* BombFlame.scnp */,
@@ -168,8 +172,6 @@
 			isa = PBXGroup;
 			children = (
 				ED28860520B4D02200DECEF1 /* Constants.swift */,
-				EDCE182720B7C6E600FFE779 /* smoke.png */,
-				EDCE182820B7C6E600FFE779 /* Smoke.scnp */,
 				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
 				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
 			);
@@ -196,8 +198,10 @@
 				ED2773CB20B8A7560020BCB1 /* NBA BASKETBALL DIFFUSE.tga */,
 				ED2773CC20B8A7560020BCB1 /* NBA BASKETBALL.mtl */,
 				ED2773D120B8A80E0020BCB1 /* Basketball.scn */,
-				ED55BDA620B9DC25008D738C /* tenbal.obj */,
-				ED418B7D20B9DAC400573F0B /* Map__1_Noise.tga */,
+				EDB7F48620BDC6120048C3FB /* Bullet.scn */,
+				EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */,
+				EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */,
+				EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */,
 			);
 			path = "3d Models";
 			sourceTree = "<group>";
@@ -364,30 +368,32 @@
 			files = (
 				ED28861220B4EB6E00DECEF1 /* Bomb.scn in Resources */,
 				ED28863520B5F67300DECEF1 /* Explosion.scnp in Resources */,
+				EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */,
 				EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */,
 				ED28860E20B4E9DE00DECEF1 /* Rough.png in Resources */,
 				ED99602E20AE08320058EC18 /* LaunchScreen.storyboard in Resources */,
 				ED4DAB7F20B1FA9F003BC5A3 /* caughtball.mp3 in Resources */,
 				ED2773CF20B8A7570020BCB1 /* NBA BASKETBALL DIFFUSE.tga in Resources */,
+				EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */,
 				ED689F4D20AFE71A000BBEE9 /* Football.scn in Resources */,
+				ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */,
 				ED28861520B546B200DECEF1 /* spark.png in Resources */,
 				EDF5FCE720AFD02D008FCE67 /* balldiffuse.jpg in Resources */,
 				ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */,
 				ED28861620B546B200DECEF1 /* BombFlame.scnp in Resources */,
 				ED2773D020B8A7570020BCB1 /* NBA BASKETBALL.mtl in Resources */,
 				ED28861020B4E9DE00DECEF1 /* Metal.png in Resources */,
-				EDCE182920B7C6E600FFE779 /* smoke.png in Resources */,
-				EDCE182A20B7C6E600FFE779 /* Smoke.scnp in Resources */,
 				ED99602B20AE08320058EC18 /* Assets.xcassets in Resources */,
 				ED28863320B5F3A500DECEF1 /* Explode.scnp in Resources */,
 				ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */,
 				ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */,
+				EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */,
 				ED689F4A20AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg in Resources */,
 				ED4DAB8D20B34741003BC5A3 /* baseball_bat.jpg in Resources */,
 				EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */,
-				ED55BDA720B9DC25008D738C /* tenbal.obj in Resources */,
 				ED28860D20B4E9DE00DECEF1 /* Normal.png in Resources */,
 				ED2773CE20B8A7570020BCB1 /* NBA BASKETBALL BUMP.tga in Resources */,
+				EDB7F48C20BDC6520048C3FB /* metal_scratches.jpg in Resources */,
 				EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */,
 				ED4DAB8120B34062003BC5A3 /* Baseball_Bat.scn in Resources */,
 				ED28862720B54AB200DECEF1 /* Gas.scnp in Resources */,

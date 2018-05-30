@@ -17,6 +17,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var notificationfeedbackGenerator = UINotificationFeedbackGenerator()
     var feedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var timer = Timer()
+    var bombOnScreen = false
+    var bullets = [SCNNode]()
     var score = 0 {
         didSet {
             DispatchQueue.main.async {
@@ -48,6 +50,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         super.viewDidLoad()
         score = 0
 //        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
+        self.sceneView.isPlaying = true
+        self.sceneView.loops = true 
+        self.sceneView.preferredFramesPerSecond = 60
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
@@ -60,9 +65,23 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
 //        addTestingPlane()
     }
     
+    @IBAction func didTapScreen(_ sender: Any) {
+        if (bombOnScreen == true) {
+            let bullet = nodeGenerator.getBullet()
+            bullets.append(bullet)
+            let (direction, _) = getUserVector()
+            if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
+                bullet.position = SCNVector3(0, 0, -0.01)
+                phonePlane.addChildNode(bullet)
+                bullet.physicsBody?.applyForce(direction, asImpulse: true)
+            }
+        }
+    }
+    
     //MARK: Helper functions
     @objc func addObject() {
         let node = levelsManager.nodeForScore(score: score)
+        bombOnScreen = node.name == BombConstants.name
         self.sceneView.scene.rootNode.addChildNode(node)
         let force = levelsManager.forceForScore(score: score)
         node.physicsBody?.applyForce(force, asImpulse: true)
@@ -85,6 +104,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
         return Float(arc4random()) / Float(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
+    
+    func getUserVector() -> (SCNVector3, SCNVector3) { // (direction, position)
+        if let frame = self.sceneView.session.currentFrame {
+            let mat = SCNMatrix4(frame.camera.transform) // 4x4 transform matrix describing camera in world space
+            let dir = SCNVector3(-5 * mat.m31, -5 * mat.m32, -5 * mat.m33) // orientation of camera in world space
+            let pos = SCNVector3(mat.m41, mat.m42, mat.m43) // location of camera in world space
+            print("Direction: \(dir)")
+            print("Position: \(pos)")
+            print("\n")
+            return (dir, pos)
+        }
+        print("ERROR")
+        return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
+    }
 
     
     //MARK: Physics World Delegate
@@ -93,6 +126,34 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
 //        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
 //            print(contact.contactPoint)
 //        }
+        
+        print("collision between \(contact.nodeA.name) and \(contact.nodeB.name)")
+        if (bombOnScreen == true) {
+            if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
+                if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
+                    if (contact.nodeA.name == BombConstants.name) {
+                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                    } else if (contact.nodeB.name == BombConstants.name) {
+                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                    }
+                   
+                    contact.nodeA.physicsBody = nil
+                    contact.nodeB.physicsBody = nil
+                    score = score + 1
+                    bombOnScreen = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        contact.nodeB.removeFromParentNode()
+                        contact.nodeA.removeFromParentNode()
+                        for bullet in self.bullets {
+                            bullet.removeFromParentNode()
+                        }
+                        self.bullets.removeAll()
+                        self.addObject()
+                    }
+                    return
+                }
+            }
+        }
         
         // ignore any collisisons other than with ball and bomb
         if ((contact.nodeA.name != BallConstants.name && contact.nodeB.name != BallConstants.name) && (contact.nodeA.name != BombConstants.name && contact.nodeB.name != BombConstants.name)) {
@@ -126,6 +187,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 } else if (contact.nodeB.name == BombConstants.name) {
                     contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
                 }
+                bombOnScreen = false
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
                     self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
                 }
@@ -160,6 +222,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         } else if (contact.nodeB.name == BombConstants.name) {
             contact.nodeB.removeFromParentNode()
         }
+        for bullet in bullets {
+            bullet.removeFromParentNode()
+        }
+        bullets.removeAll()
     }
     
     //MARK: Segues
@@ -199,10 +265,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         testPlane.physicsBody = testPlanePhyicsBody
         sceneView.scene.rootNode.addChildNode(testPlane)
     }
-    
-
-    
-    
 
 }
+
 
