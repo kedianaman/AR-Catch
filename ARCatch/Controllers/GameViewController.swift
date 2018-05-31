@@ -132,6 +132,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                 if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
                     if (contact.nodeA.name == BombConstants.name) {
                         contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                        
                     } else if (contact.nodeB.name == BombConstants.name) {
                         contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                     }
@@ -140,8 +141,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
                     AudioServicesPlaySystemSound(pop)
                     contact.nodeA.physicsBody = nil
                     contact.nodeB.physicsBody = nil
+                    contact.nodeA.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                    contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
                     score = score + 1
                     bombOnScreen = false
+                    
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         contact.nodeB.removeFromParentNode()
                         contact.nodeA.removeFromParentNode()

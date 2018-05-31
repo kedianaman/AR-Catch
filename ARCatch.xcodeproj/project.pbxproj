@@ -37,6 +37,7 @@
 		ED779DF620BF549600C9C0C4 /* whitenoise.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED779DF520BF549600C9C0C4 /* whitenoise.wav */; };
 		ED82B25820BF617300A61475 /* plop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED82B25720BF617200A61475 /* plop.mp3 */; };
 		ED82B25B20BF629200A61475 /* Jump.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED82B25A20BF629200A61475 /* Jump.mp3 */; };
+		ED82B25D20BF655700A61475 /* Grenade.wav in Resources */ = {isa = PBXBuildFile; fileRef = ED82B25C20BF655600A61475 /* Grenade.wav */; };
 		ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99602320AE08300058EC18 /* AppDelegate.swift */; };
 		ED99602620AE08300058EC18 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED99602520AE08300058EC18 /* GameViewController.swift */; };
 		ED99602920AE08300058EC18 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED99602720AE08300058EC18 /* Main.storyboard */; };
@@ -103,6 +104,7 @@
 		ED779DF520BF549600C9C0C4 /* whitenoise.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = whitenoise.wav; sourceTree = "<group>"; };
 		ED82B25720BF617200A61475 /* plop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = plop.mp3; sourceTree = "<group>"; };
 		ED82B25A20BF629200A61475 /* Jump.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Jump.mp3; sourceTree = "<group>"; };
+		ED82B25C20BF655600A61475 /* Grenade.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Grenade.wav; sourceTree = "<group>"; };
 		ED99602020AE08300058EC18 /* ARCatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ARCatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED99602320AE08300058EC18 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED99602520AE08300058EC18 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -223,6 +225,7 @@
 				ED779DF520BF549600C9C0C4 /* whitenoise.wav */,
 				ED82B25720BF617200A61475 /* plop.mp3 */,
 				ED82B25A20BF629200A61475 /* Jump.mp3 */,
+				ED82B25C20BF655600A61475 /* Grenade.wav */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -413,6 +416,7 @@
 				ED82B25820BF617300A61475 /* plop.mp3 in Resources */,
 				EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */,
 				ED689F4A20AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg in Resources */,
+				ED82B25D20BF655700A61475 /* Grenade.wav in Resources */,
 				ED4DAB8D20B34741003BC5A3 /* baseball_bat.jpg in Resources */,
 				EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */,
 				ED28860D20B4E9DE00DECEF1 /* Normal.png in Resources */,
