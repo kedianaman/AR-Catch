@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fle-lQ-Fbp">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Fle-lQ-Fbp">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -10,6 +10,11 @@
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="MLB Toronto Blue Jays Wilson.otf">
+            <string>MLBTorontoBlueJaysWilson</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--Main Menu View Controller-->
         <scene sceneID="cQr-UB-hrp">
@@ -89,12 +94,21 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-ZL-zi8">
+                                <rect key="frame" x="117" y="328.5" width="141" height="30"/>
+                                <state key="normal" title="Set Origin and Begin"/>
+                                <connections>
+                                    <action selector="hitStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uGz-0K-6UD"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RC0-rm-u4Y" secondAttribute="trailing" id="G7Q-9I-y4N"/>
                             <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="JJX-XG-F6k"/>
+                            <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KOv-c8-v8S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gXp-hO-i6q" secondAttribute="trailing" constant="20" id="OhJ-1I-eFz"/>
+                            <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="OsS-Il-5gW"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VEg-QP-aoH"/>
                             <constraint firstAttribute="bottom" secondItem="RC0-rm-u4Y" secondAttribute="bottom" id="Zyv-kZ-dEw"/>
                             <constraint firstItem="G0j-Mr-41C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ca3-Ce-09o"/>
@@ -129,15 +143,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
-                                <rect key="frame" x="85.5" y="148" width="204.5" height="48"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="40"/>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fNR-UJ-2N4">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="J6F-7C-V8e">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="dark"/>
+                            </visualEffectView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
+                                <rect key="frame" x="47" y="135.5" width="282.5" height="73"/>
+                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="70"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
-                                <rect key="frame" x="158.5" y="313.5" width="58" height="60"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <rect key="frame" x="138" y="291.5" width="99.5" height="104.5"/>
+                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="100"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -152,14 +174,18 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="19P-ZU-v3U" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="8Fp-ef-bvs"/>
                             <constraint firstItem="19P-ZU-v3U" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="0.5" id="ELc-Gf-fDV"/>
+                            <constraint firstAttribute="trailing" secondItem="fNR-UJ-2N4" secondAttribute="trailing" id="GRV-QC-Zi4"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
+                            <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="Wmm-tY-PBj"/>
+                            <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" id="k5X-qM-uNL"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="o18-Kh-Y2v"/>
+                            <constraint firstAttribute="bottom" secondItem="fNR-UJ-2N4" secondAttribute="bottom" id="xEy-uf-mC1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uwh-pb-jjd"/>
                     </view>

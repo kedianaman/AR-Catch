@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 import AudioToolbox.AudioServices
 
-class GameViewController: UIViewController, SCNPhysicsContactDelegate {
+class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSessionDelegate {
     
     
     //MARK: Properties
@@ -19,7 +19,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     var impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
     var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var timer = Timer()
+    var gameStarted = false
     var bombOnScreen = false
+    var initialBall = SCNNode()
     var bullets = [SCNNode]()
     var score = 0 {
         didSet {
@@ -47,25 +49,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var ballMissesLabel: UILabel!
     
-    //MARK: View Controller Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        score = 0
-//        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
-        self.sceneView.isPlaying = true
-        self.sceneView.loops = true 
-        self.sceneView.preferredFramesPerSecond = 60
-        self.sceneView.scene.physicsWorld.contactDelegate = self
-        self.sceneView.session.run(configuration)
-        self.sceneView.autoenablesDefaultLighting = true
-//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes]
-        self.sceneView.showsStatistics = true 
-        addObject()
-        addPhonePlane()
-        addMissPlane()
-//        addTestingPlane()
+    //MARK: IB Action
+    @IBAction func hitStartButton(_ sender: UIButton) {
+//        self.sceneView.session.run(configuration, options: .resetTracking)
+        sender.removeFromSuperview()
+        gameStarted = true
+        startGameSetUp()
+        
     }
     
+    // shoots bullets when bomb is on screen
     @IBAction func didTapScreen(_ sender: Any) {
         if (bombOnScreen == true) {
             selectionFeedbackGenerator.prepare()
@@ -83,7 +76,49 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         }
     }
     
+    //MARK: View Controller Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        score = 0
+//        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
+        self.sceneView.isPlaying = true
+        self.sceneView.loops = true 
+        self.sceneView.preferredFramesPerSecond = 60
+        self.sceneView.scene.physicsWorld.contactDelegate = self
+        self.sceneView.session.run(configuration)
+        self.sceneView.autoenablesDefaultLighting = true
+        self.sceneView.session.delegate = self
+//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes]
+        self.sceneView.showsStatistics = true 
+//        addObject()
+        initialSetUp()
+        addPhonePlane()
+        addMissPlane()
+//        addTestingPlane()
+    }
+    
     //MARK: Helper functions
+    
+    func initialSetUp() {
+        initialBall = nodeGenerator.getBall()
+        sceneView.scene.rootNode.addChildNode(initialBall)
+        scoreLabel.alpha = 0
+        ballMissesLabel.alpha = 0
+    }
+    
+    func startGameSetUp() {
+        scoreLabel.alpha = 1
+        ballMissesLabel.alpha = 1
+//        sceneView.scene.rootNode.childNodes.first?.removeFromParentNode()
+        let force = levelsManager.forceForScore(score: score)
+        initialBall.physicsBody?.applyForce(force, asImpulse: true)
+        let torque = levelsManager.torqueForNode(node: initialBall)
+        initialBall.physicsBody?.applyTorque(torque, asImpulse: true)
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+//            self.addObject()
+//        }
+    }
+    
     @objc func addObject() {
         let node = levelsManager.nodeForScore(score: score)
         bombOnScreen = node.name == BombConstants.name
@@ -120,6 +155,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
 
+    //MARK: AR Session Delegate
+    func session(_ session: ARSession, didUpdate frame: ARFrame) {
+        if (!gameStarted) {
+            self.sceneView.session.run(configuration, options: .resetTracking)
+        }
+    }
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
@@ -245,7 +286,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate {
 
     
     // Scrap later functions
-    
     func addTestingPlane() {
         let testPlane = SCNNode()
         testPlane.geometry = SCNPlane(width: 10, height: 10)

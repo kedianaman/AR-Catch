@@ -22,7 +22,7 @@ struct DifficultyConstants {
 
     static let scoreChangeInterval = 5
     static let zForceIncrement = 5.0
-    static let maxZForce = 80.0
+    static let maxZForce = 75.0
 }
 
 struct BallConstants {
