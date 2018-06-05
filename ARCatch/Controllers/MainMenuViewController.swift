@@ -9,80 +9,91 @@
 import UIKit
 import SceneKit
 import ARKit
+import GameKit
 
-class MainMenuViewController: UIViewController, ARSessionDelegate {
+class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterControllerDelegate {
     
+    //MARK: Properties
     let configuration = ARWorldTrackingConfiguration()
+    let ball = NodeGenerator().getBall()
+    var gameCenterEnabled = Bool()
     
+    //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
+    @IBOutlet weak var topScoreLabel: UILabel!
     
+    //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         sceneView.session.run(configuration)
         sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
+        authenticateLocalPlayer()
         setUpView()
     }
     
+    //MARK: Helper Functions
     func setUpView() {
-       addTitle()
-        addPlayButton()
-    }
-    
-    func addTitle() {
-        let titleNode = SCNNode()
-        let titleGeometry = SCNText(string: "AR Catch", extrusionDepth: 0.5)
-        titleGeometry.chamferRadius = 0.2
-        titleGeometry.flatness = 0.2
-        titleNode.geometry = titleGeometry
-        titleNode.geometry?.firstMaterial?.specular.contents = UIColor(white: 1.0, alpha: 1.0)
-        titleNode.position = SCNVector3(0, 0.2, -1)
-        titleNode.scale = SCNVector3(0.01, 0.01, 0.01)
-        let (minVec, maxVec) = titleNode.boundingBox
-        titleNode.pivot = SCNMatrix4MakeTranslation((maxVec.x - minVec.x) / 2 + minVec.x, (maxVec.y - minVec.y) / 2 + minVec.y, 0)
-        sceneView.pointOfView?.addChildNode(titleNode)
-    }
-    
-    func addPlayButton() {
-        let playNode = SCNNode()
-        let playGeometry = SCNText(string: "Play Now", extrusionDepth: 1)
-        playGeometry.font = UIFont.systemFont(ofSize: 16, weight: .bold)
-        playGeometry.chamferRadius = 0.2
-        playGeometry.flatness = 0.2
-        playNode.geometry = playGeometry
-        playNode.geometry?.firstMaterial?.specular.contents = UIColor(white: 1.0, alpha: 1.0)
-        playNode.position = SCNVector3(0, -0.2, -1.5)
-        playNode.scale = SCNVector3(0.01, 0.01, 0.01)
-        let (minVec, maxVec) = playNode.boundingBox
-        playNode.pivot = SCNMatrix4MakeTranslation((maxVec.x - minVec.x) / 2 + minVec.x, (maxVec.y - minVec.y) / 2 + minVec.y, 0)
-        playNode.name = "play"
-        sceneView.pointOfView?.addChildNode(playNode)
-    }
-    
-    // MARK: AR Session Delegate
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        let cameraPosition = frame.camera.transform.position()
-//        print(cameraPosition)
-        if let titleNode = sceneView.scene.rootNode.childNodes.first {
-            let moveNode = SCNAction.move(to: SCNVector3(-cameraPosition.x, -cameraPosition.y, -cameraPosition.z), duration: 0.1)
-            moveNode.timingMode = .easeInEaseOut
-            titleNode.runAction(moveNode)
+        ball.position = SCNVector3(0, 0, -1)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 3.0)
+        let rotateForever = SCNAction.repeatForever(rotateBall)
+        ball.runAction(rotateForever)
+        sceneView.pointOfView?.addChildNode(ball)
+        if let topScore = UserDefaults.standard.value(forKey: Identifiers.topScore) as? Int {
+            topScoreLabel.text = "\(topScore)"
+        } else {
+            topScoreLabel.text = "0"
         }
     }
-    @IBAction func didTapOnScreen(_ sender: UITapGestureRecognizer) {
-        if let node = sceneView.hitTest(sender.location(in: sceneView), options: nil).first?.node {
-            if (node.name == "play") {
-                print("hit play node" )
-                performSegue(withIdentifier: "menuToGameSegue", sender: nil)
+    
+    //MARK: IB Actions
+    @IBAction func playButtonPressed(_ sender: Any) {
+        let moveToPosition = SCNAction.move(to: SCNVector3(0,0,-20), duration: 1.5)
+        moveToPosition.timingMode = .easeOut
+        ball.runAction(moveToPosition) {
+            print("completed")
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "MenuToGameSegueIdentifer", sender: nil)
             }
         }
     }
-}
-
-// MARK: Extensions
-
-extension matrix_float4x4 {
-    func position() -> SCNVector3 {
-        return SCNVector3(columns.3.x, columns.3.y, columns.3.z)
+    
+    @IBAction func leaderboardButtonPressed(_ sender: Any) {
+        let gameCenterViewController = GKGameCenterViewController()
+        gameCenterViewController.gameCenterDelegate = self
+        gameCenterViewController.viewState = .leaderboards
+        gameCenterViewController.leaderboardIdentifier = Identifiers.leaderboardID
+        present(gameCenterViewController, animated: true, completion: nil)
     }
+    
+    //MARK: Game Center Delegate
+    func gameCenterViewControllerDidFinish(_ gameCenterViewController: GKGameCenterViewController) {
+        gameCenterViewController.dismiss(animated: true, completion: nil)
+    }
+    
+    // MARK: Game Center
+    func authenticateLocalPlayer() {
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
+        localPlayer.authenticateHandler = {(ViewController, error) -> Void in
+            if((ViewController) != nil) {
+                self.present(ViewController!, animated: true, completion: nil)
+            } else if (localPlayer.isAuthenticated) {
+                self.gameCenterEnabled = true
+                localPlayer.loadDefaultLeaderboardIdentifier(completionHandler: { (leaderboardIdentifer, error) in
+                    if error != nil {
+                        print(error!)
+                    } 
+                })
+            } else {
+                self.gameCenterEnabled = false
+                print("Local player could not be authenticated!")
+                print(error!)
+            }
+        }
+    }
+   
+    
 }
+
+
+

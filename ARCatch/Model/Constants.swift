@@ -9,9 +9,6 @@
 import Foundation
 import SceneKit
 
-enum NodeType {
-    
-}
 
 struct DifficultyConstants {
     static let desiredXDistance = 0.4
@@ -61,6 +58,11 @@ struct MissPlaneConstants {
     static let height: CGFloat = 100.0
     static let name = "missPlane"
     static let categoryBitMask = 0x1 << 4
+}
+
+struct Identifiers {
+    static let topScore = "topScore"
+    static let leaderboardID = "com.score.arcatch"
 }
 
 

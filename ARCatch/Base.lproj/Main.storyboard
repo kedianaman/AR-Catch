@@ -11,6 +11,9 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="FNL_DEMO-KCFonts.ttf">
+            <string>FridayNightLights</string>
+        </array>
         <array key="MLB Toronto Blue Jays Wilson.otf">
             <string>MLBTorontoBlueJaysWilson</string>
         </array>
@@ -27,31 +30,69 @@
                             <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kMW-xD-43r">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="Iuf-Ry-6Az" appends="YES" id="j41-VJ-m2C"/>
-                                </connections>
                             </arscnView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balls And Bombs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-vu-hxm">
+                                <rect key="frame" x="20" y="77.5" width="335" height="121"/>
+                                <fontDescription key="fontDescription" name="FridayNightLights" family="Friday Night Lights" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAS-J9-d7G">
+                                <rect key="frame" x="137" y="291" width="101" height="105.5"/>
+                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="100"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="rny-sZ-JEK">
+                                <rect key="frame" x="20" y="449" width="335" height="133"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6">
+                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="133"/>
+                                        <state key="normal" title="Play"/>
+                                        <connections>
+                                            <action selector="playButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="N6y-1u-bCr"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghr-Xv-Ysu">
+                                        <rect key="frame" x="167.5" y="0.0" width="167.5" height="133"/>
+                                        <state key="normal" title="Leaderboard"/>
+                                        <connections>
+                                            <action selector="leaderboardButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="1ZG-oX-fkF"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="SoW-vu-hxm" firstAttribute="trailing" secondItem="LTc-oT-9WM" secondAttribute="trailing" constant="-20" id="5B2-Im-MzB"/>
                             <constraint firstItem="kMW-xD-43r" firstAttribute="top" secondItem="Iqa-Dc-oEj" secondAttribute="top" id="ARt-yF-Zua"/>
+                            <constraint firstItem="rny-sZ-JEK" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="1.5" id="Au0-dg-orH"/>
+                            <constraint firstItem="LTc-oT-9WM" firstAttribute="leading" secondItem="SoW-vu-hxm" secondAttribute="leading" constant="-20" id="LI4-kw-aOJ"/>
+                            <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="rny-sZ-JEK" secondAttribute="trailing" constant="20" id="Vc0-bV-r9v"/>
+                            <constraint firstItem="zAS-J9-d7G" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="Wwf-Xj-B6s"/>
+                            <constraint firstItem="SoW-vu-hxm" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="0.4" id="Zih-lz-VWy"/>
                             <constraint firstAttribute="bottom" secondItem="kMW-xD-43r" secondAttribute="bottom" id="dOd-nv-i0L"/>
+                            <constraint firstItem="rny-sZ-JEK" firstAttribute="leading" secondItem="LTc-oT-9WM" secondAttribute="leading" constant="20" id="jIQ-t9-nsJ"/>
                             <constraint firstAttribute="trailing" secondItem="kMW-xD-43r" secondAttribute="trailing" id="lyt-gu-RjO"/>
                             <constraint firstItem="kMW-xD-43r" firstAttribute="leading" secondItem="Iqa-Dc-oEj" secondAttribute="leading" id="nY8-rf-mvt"/>
+                            <constraint firstItem="rny-sZ-JEK" firstAttribute="height" secondItem="Iqa-Dc-oEj" secondAttribute="height" multiplier="0.2" id="swf-3U-1Qm"/>
+                            <constraint firstItem="zAS-J9-d7G" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" id="vwM-CY-41O"/>
+                            <constraint firstItem="SoW-vu-hxm" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="wMs-BJ-fIz"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LTc-oT-9WM"/>
                     </view>
                     <connections>
                         <outlet property="sceneView" destination="kMW-xD-43r" id="uGM-GR-wTE"/>
-                        <segue destination="BYZ-38-t0r" kind="modal" identifier="menuToGameSegue" modalTransitionStyle="crossDissolve" id="QAb-Lh-jYS"/>
+                        <outlet property="topScoreLabel" destination="zAS-J9-d7G" id="GYw-bl-pKX"/>
+                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="MenuToGameSegueIdentifer" animates="NO" modalPresentationStyle="overCurrentContext" id="dcO-ZZ-mID"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnS-Uw-HAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <tapGestureRecognizer id="Iuf-Ry-6Az">
-                    <connections>
-                        <action selector="didTapOnScreen:" destination="Fle-lQ-Fbp" id="s0C-bU-m4D"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-446" y="81"/>
         </scene>
@@ -79,12 +120,12 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.20000000000000001" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" X X X " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="M5R-ex-taM">
-                                <rect key="frame" x="20" y="40" width="88" height="37"/>
+                                <rect key="frame" x="20" y="40" width="88" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                <color key="textColor" red="1" green="0.037429042760000003" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="0.0" height="1"/>
+                                <size key="shadowOffset" width="0.0" height="0.0"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G0j-Mr-41C">
                                 <rect key="frame" x="20" y="40" width="0.0" height="0.0"/>
@@ -95,14 +136,15 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-ZL-zi8">
-                                <rect key="frame" x="117" y="328.5" width="141" height="30"/>
+                                <rect key="frame" x="81.5" y="323" width="212" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <state key="normal" title="Set Origin and Begin"/>
                                 <connections>
                                     <action selector="hitStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uGz-0K-6UD"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RC0-rm-u4Y" secondAttribute="trailing" id="G7Q-9I-y4N"/>
                             <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="JJX-XG-F6k"/>
@@ -119,10 +161,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <navigationItem key="navigationItem" id="D5Y-52-6GC"/>
                     <connections>
+                        <outlet property="ballMissesBackgroundLabel" destination="M5R-ex-taM" id="mFT-MP-QuN"/>
                         <outlet property="ballMissesLabel" destination="G0j-Mr-41C" id="hvd-s4-sjA"/>
                         <outlet property="sceneView" destination="RC0-rm-u4Y" id="vUm-IZ-4A9"/>
                         <outlet property="scoreLabel" destination="gXp-hO-i6q" id="SVk-Jr-FV8"/>
+                        <outlet property="startGameButton" destination="zaF-ZL-zi8" id="PTP-10-0ux"/>
                         <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>
                     </connections>
                 </viewController>

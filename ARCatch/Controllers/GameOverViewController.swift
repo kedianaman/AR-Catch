@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import GameKit
 
 class GameOverViewController: UIViewController {
     
@@ -16,14 +17,33 @@ class GameOverViewController: UIViewController {
     //MARK: Properties
     var score: Int!
     
-    
     //MARK: VC Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         scoreLabel.text = "\(score!)"
+        let defaults = UserDefaults.standard
+        if let topScore = defaults.value(forKey: Identifiers.topScore) as? Int {
+            if score > topScore {
+                defaults.set(score, forKey: Identifiers.topScore)
+            }
+            addScoreAndSubmit(topScore: score)
+        } else {
+            defaults.set(score, forKey: Identifiers.topScore)
+            addScoreAndSubmit(topScore: score)
+        }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        self.view.layoutSubviews()
+    //MARK: Helper Functions
+    func addScoreAndSubmit(topScore: Int) {
+        let bestSpeedInt = GKScore(leaderboardIdentifier: Identifiers.leaderboardID)
+        bestSpeedInt.value = Int64(topScore)
+        GKScore.report([bestSpeedInt]) { (error) in
+            if error != nil {
+                print(error!.localizedDescription)
+            } else {
+                print("Best Score submitted to your Leaderboard!")
+            }
+        }
     }
+    
 }

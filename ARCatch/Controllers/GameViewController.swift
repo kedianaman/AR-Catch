@@ -48,14 +48,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var ballMissesLabel: UILabel!
+    @IBOutlet weak var ballMissesBackgroundLabel: UILabel!
+    @IBOutlet weak var startGameButton: UIButton!
     
     //MARK: IB Action
     @IBAction func hitStartButton(_ sender: UIButton) {
-//        self.sceneView.session.run(configuration, options: .resetTracking)
-        sender.removeFromSuperview()
-        gameStarted = true
         startGameSetUp()
-        
     }
     
     // shoots bullets when bomb is on screen
@@ -79,11 +77,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        score = 0
 //        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
         self.sceneView.isPlaying = true
         self.sceneView.loops = true 
-        self.sceneView.preferredFramesPerSecond = 60
+//        self.sceneView.preferredFramesPerSecond = 60
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
@@ -97,26 +94,42 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 //        addTestingPlane()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        sceneView.session.run(configuration, options: .resetTracking)
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        sceneView.session.pause()
+    }
+    
     //MARK: Helper functions
     
     func initialSetUp() {
+        gameStarted = false
         initialBall = nodeGenerator.getBall()
         sceneView.scene.rootNode.addChildNode(initialBall)
         scoreLabel.alpha = 0
         ballMissesLabel.alpha = 0
+        ballMissesBackgroundLabel.alpha = 0
+        startGameButton.alpha = 1
+        startGameButton.isEnabled = true
+        score = 0
+        numBallMisses = 0
     }
     
     func startGameSetUp() {
+        gameStarted = true
         scoreLabel.alpha = 1
         ballMissesLabel.alpha = 1
-//        sceneView.scene.rootNode.childNodes.first?.removeFromParentNode()
+        ballMissesBackgroundLabel.alpha = 0.3
+        startGameButton.alpha = 0
+        startGameButton.isEnabled = false
         let force = levelsManager.forceForScore(score: score)
         initialBall.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: initialBall)
         initialBall.physicsBody?.applyTorque(torque, asImpulse: true)
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-//            self.addObject()
-//        }
     }
     
     @objc func addObject() {
@@ -164,106 +177,110 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        // FIX: Prevent planes from colliding with each other
-//        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
-//            print(contact.contactPoint)
-//        }
-        if (bombOnScreen == true) {
-            if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
-                if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
-                    if (contact.nodeA.name == BombConstants.name) {
-                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
-                        
-                    } else if (contact.nodeB.name == BombConstants.name) {
-                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
-                    }
-                    // strong boom vibration
-                    let pop = SystemSoundID(1520)
-                    AudioServicesPlaySystemSound(pop)
-                    contact.nodeA.physicsBody = nil
-                    contact.nodeB.physicsBody = nil
-                    contact.nodeA.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
-                    contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
-                    score = score + 1
-                    bombOnScreen = false
-                    
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                        contact.nodeB.removeFromParentNode()
-                        contact.nodeA.removeFromParentNode()
-                        for bullet in self.bullets {
-                            bullet.removeFromParentNode()
+        
+        if (gameStarted) {
+            // FIX: Prevent planes from colliding with each other
+            //        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
+            //            print(contact.contactPoint)
+            //        }
+            if (bombOnScreen == true) {
+                if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
+                    if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
+                        if (contact.nodeA.name == BombConstants.name) {
+                            contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                            
+                        } else if (contact.nodeB.name == BombConstants.name) {
+                            contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                         }
-                        self.bullets.removeAll()
+                        // strong boom vibration
+                        let pop = SystemSoundID(1520)
+                        AudioServicesPlaySystemSound(pop)
+                        contact.nodeA.physicsBody = nil
+                        contact.nodeB.physicsBody = nil
+                        contact.nodeA.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                        contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                        score = score + 1
+                        bombOnScreen = false
+                        
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                            contact.nodeB.removeFromParentNode()
+                            contact.nodeA.removeFromParentNode()
+                            for bullet in self.bullets {
+                                bullet.removeFromParentNode()
+                            }
+                            self.bullets.removeAll()
+                            self.addObject()
+                        }
+                        return
+                    }
+                }
+            }
+            
+            // successful collisison with phone
+            if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
+                // collision with ball
+                if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
+                    DispatchQueue.main.async {
+                        self.impactFeedbackGenerator.prepare()
+                        self.impactFeedbackGenerator.impactOccurred()
+                    }
+                    score = score + 1
+                    let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
+                    contact.nodeA.runAction(caughtSound)
+                    print("did catch ball")
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.addObject()
                     }
-                    return
-                }
-            }
-        }
-        
-        // successful collisison with phone
-        if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
-            // collision with ball
-            if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
-                DispatchQueue.main.async {
-                    self.impactFeedbackGenerator.prepare()
-                    self.impactFeedbackGenerator.impactOccurred()
-                }
-                score = score + 1
-                let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
-                contact.nodeA.runAction(caughtSound)
-                print("did catch ball")
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
-                    self.addObject()
-                }
-            } else {
-                let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
-                AudioServicesPlaySystemSound(vibrate)
-                // collision with bomb -> explosion
-                if (contact.nodeA.name == BombConstants.name) {
-                    contact.nodeB.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
-                } else if (contact.nodeB.name == BombConstants.name) {
-                    contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
-                }
-                bombOnScreen = false
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
-                }
-            }
-            
-        } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
-            let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
-            contact.nodeA.runAction(missSound)
-            print("did miss ball")
-            if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
-                numBallMisses = numBallMisses + 1
-            }
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                if (self.numBallMisses == 3) {
-                    self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
                 } else {
-                    self.addObject()
+                    let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
+                    AudioServicesPlaySystemSound(vibrate)
+                    // collision with bomb -> explosion
+                    if (contact.nodeA.name == BombConstants.name) {
+                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                    } else if (contact.nodeB.name == BombConstants.name) {
+                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                    }
+                    bombOnScreen = false
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
+                    }
                 }
+                
+            } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
+                let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
+                contact.nodeA.runAction(missSound)
+                print("did miss ball")
+                if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
+                    numBallMisses = numBallMisses + 1
+                }
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+                    if (self.numBallMisses == 3) {
+                        self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
+                    } else {
+                        self.addObject()
+                    }
+                }
+                
             }
             
+            if (contact.nodeA.name == BallConstants.name) {
+                contact.nodeA.removeFromParentNode()
+            } else if (contact.nodeB.name == BallConstants.name) {
+                contact.nodeB.removeFromParentNode()
+            }
+            
+            
+            if (contact.nodeA.name == BombConstants.name) {
+                contact.nodeA.removeFromParentNode()
+            } else if (contact.nodeB.name == BombConstants.name) {
+                contact.nodeB.removeFromParentNode()
+            }
+            for bullet in bullets {
+                bullet.removeFromParentNode()
+            }
+            bullets.removeAll()
+            
         }
-        
-        if (contact.nodeA.name == BallConstants.name) {
-            contact.nodeA.removeFromParentNode()
-        } else if (contact.nodeB.name == BallConstants.name) {
-            contact.nodeB.removeFromParentNode()
-        }
-        
-        
-        if (contact.nodeA.name == BombConstants.name) {
-            contact.nodeA.removeFromParentNode()
-        } else if (contact.nodeB.name == BombConstants.name) {
-            contact.nodeB.removeFromParentNode()
-        }
-        for bullet in bullets {
-            bullet.removeFromParentNode()
-        }
-        bullets.removeAll()
     }
     
     //MARK: Segues
@@ -276,14 +293,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
-        print("reset")
-        score = 0
-        numBallMisses = 0
-        self.addObject()
-        self.sceneView.session.run(configuration, options: .resetTracking)
+       initialSetUp()
     }
-
-
     
     // Scrap later functions
     func addTestingPlane() {

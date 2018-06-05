@@ -55,6 +55,9 @@
 		EDB7F48C20BDC6520048C3FB /* metal_scratches.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */; };
 		EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48620BDC6120048C3FB /* Bullet.scn */; };
 		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
+		EDE633EA20C6249E002A1FFE /* FNL_DEMO-KCFonts.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */; };
+		EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE633EB20C64B3F002A1FFE /* GCHelper.swift */; };
+		EDE633EF20C64CA9002A1FFE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE633EE20C64CA9002A1FFE /* GameKit.framework */; };
 		EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */; };
 		EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */; };
 		EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE220AFB7B6008FCE67 /* Ball.scn */; };
@@ -135,6 +138,8 @@
 		EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt_texture.jpg; sourceTree = "<group>"; };
 		EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches.jpg; sourceTree = "<group>"; };
 		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		EDE633EB20C64B3F002A1FFE /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
+		EDE633EE20C64CA9002A1FFE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
 		EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		EDF5FCE220AFB7B6008FCE67 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
@@ -146,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDE633EF20C64CA9002A1FFE /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,6 +200,7 @@
 				ED28860520B4D02200DECEF1 /* Constants.swift */,
 				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
 				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
+				EDE633EB20C64B3F002A1FFE /* GCHelper.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -254,6 +261,7 @@
 				ED99603720AE08320058EC18 /* ARCatchTests */,
 				ED99604220AE08320058EC18 /* ARCatchUITests */,
 				ED99602120AE08300058EC18 /* Products */,
+				EDE633ED20C64CA9002A1FFE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -302,6 +310,14 @@
 				ED99604520AE08320058EC18 /* Info.plist */,
 			);
 			path = ARCatchUITests;
+			sourceTree = "<group>";
+		};
+		EDE633ED20C64CA9002A1FFE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EDE633EE20C64CA9002A1FFE /* GameKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -372,6 +388,11 @@
 				TargetAttributes = {
 					ED99601F20AE08300058EC18 = {
 						CreatedOnToolsVersion = 9.3.1;
+						SystemCapabilities = {
+							com.apple.GameCenter.iOS = {
+								enabled = 1;
+							};
+						};
 					};
 					ED99603320AE08320058EC18 = {
 						CreatedOnToolsVersion = 9.3.1;
@@ -413,6 +434,7 @@
 				ED2DCBF020C2006A00FA4A44 /* TennisBall.scn in Resources */,
 				EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */,
 				ED2DCBEF20C1FF4E00FA4A44 /* Seam.jpg in Resources */,
+				EDE633EA20C6249E002A1FFE /* FNL_DEMO-KCFonts.ttf in Resources */,
 				ED2DCBEE20C1FF4E00FA4A44 /* Fur.jpg in Resources */,
 				EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */,
 				ED28860E20B4E9DE00DECEF1 /* Rough.png in Resources */,
@@ -478,6 +500,7 @@
 				ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */,
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
 				ED99602620AE08300058EC18 /* GameViewController.swift in Sources */,
+				EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */,
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,
 				EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */,
 				ED28860620B4D02200DECEF1 /* Constants.swift in Sources */,
