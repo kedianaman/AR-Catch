@@ -48,7 +48,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: IB Actions
     @IBAction func playButtonPressed(_ sender: Any) {
-        let moveToPosition = SCNAction.move(to: SCNVector3(0,0,-20), duration: 1.5)
+        let moveToPosition = SCNAction.move(to: SCNVector3(0,3,0), duration: 2.0)
         moveToPosition.timingMode = .easeOut
         ball.runAction(moveToPosition) {
             print("completed")
@@ -73,6 +73,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     // MARK: Game Center
     func authenticateLocalPlayer() {
+        
         let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
         localPlayer.authenticateHandler = {(ViewController, error) -> Void in
             if((ViewController) != nil) {

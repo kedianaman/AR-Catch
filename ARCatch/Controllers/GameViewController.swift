@@ -94,15 +94,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 //        addTestingPlane()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        sceneView.session.run(configuration, options: .resetTracking)
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        sceneView.session.pause()
-    }
+//    override func viewDidAppear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        sceneView.session.run(sceneView, options: .resetTracking)
+//    }
+//
+//    override func viewDidDisappear(_ animated: Bool) {
+//        super.viewDidDisappear(animated)
+//        sceneView.session.pause()
+//    }
     
     //MARK: Helper functions
     
@@ -285,6 +285,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     //MARK: Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+            if (node.name == "ball" || node.name == "bomb") {
+                node.removeFromParentNode()
+            }
+        }
         if (segue.identifier == "GameOverSegue") {
             if let gameOverVC = segue.destination as? GameOverViewController {
                 gameOverVC.score = score
