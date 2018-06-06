@@ -16,7 +16,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: Properties
     let configuration = ARWorldTrackingConfiguration()
     var notificationfeedbackGenerator = UINotificationFeedbackGenerator()
-    var impactFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    var heavyFeedbackGenerator = UIImpactFeedbackGenerator(style: .heavy)
+    var lightFeedbackGenerator = UIImpactFeedbackGenerator(style: UIImpactFeedbackStyle.light)
+    
     var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var timer = Timer()
     var gameStarted = false
@@ -78,8 +80,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     override func viewDidLoad() {
         super.viewDidLoad()
 //        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
-        self.sceneView.isPlaying = true
-        self.sceneView.loops = true 
+//        self.sceneView.isPlaying = true
+//        self.sceneView.loops = true
 //        self.sceneView.preferredFramesPerSecond = 60
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
@@ -170,9 +172,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 
     //MARK: AR Session Delegate
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        if (!gameStarted) {
-            self.sceneView.session.run(configuration, options: .resetTracking)
-        }
+//        if (!gameStarted) {
+//            self.sceneView.session.run(configuration, options: .resetTracking)
+//        }
     }
     
     //MARK: Physics World Delegate
@@ -221,8 +223,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 // collision with ball
                 if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
                     DispatchQueue.main.async {
-                        self.impactFeedbackGenerator.prepare()
-                        self.impactFeedbackGenerator.impactOccurred()
+                        self.heavyFeedbackGenerator.prepare()
+                        self.heavyFeedbackGenerator.impactOccurred()
                     }
                     score = score + 1
                     let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)

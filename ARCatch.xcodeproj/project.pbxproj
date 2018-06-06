@@ -55,6 +55,9 @@
 		EDB7F48C20BDC6520048C3FB /* metal_scratches.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */; };
 		EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48620BDC6120048C3FB /* Bullet.scn */; };
 		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
+		EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDE347B620C76FA900934D62 /* varsity_regular.ttf */; };
+		EDE347BB20C7962E00934D62 /* baseball.png in Resources */ = {isa = PBXBuildFile; fileRef = EDE347BA20C7962E00934D62 /* baseball.png */; };
+		EDE347BD20C85E7200934D62 /* baseballDiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = EDE347BC20C85E7200934D62 /* baseballDiffuse.png */; };
 		EDE633EA20C6249E002A1FFE /* FNL_DEMO-KCFonts.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */; };
 		EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE633EB20C64B3F002A1FFE /* GCHelper.swift */; };
 		EDE633EF20C64CA9002A1FFE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE633EE20C64CA9002A1FFE /* GameKit.framework */; };
@@ -138,6 +141,9 @@
 		EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt_texture.jpg; sourceTree = "<group>"; };
 		EDB7F48920BDC6520048C3FB /* metal_scratches.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches.jpg; sourceTree = "<group>"; };
 		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
+		EDE347B620C76FA900934D62 /* varsity_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = varsity_regular.ttf; sourceTree = "<group>"; };
+		EDE347BA20C7962E00934D62 /* baseball.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = baseball.png; path = ../../../../../Desktop/baseball.png; sourceTree = "<group>"; };
+		EDE347BC20C85E7200934D62 /* baseballDiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseballDiffuse.png; sourceTree = "<group>"; };
 		EDE633EB20C64B3F002A1FFE /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
 		EDE633EE20C64CA9002A1FFE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Diffuse.png; sourceTree = "<group>"; };
@@ -211,6 +217,8 @@
 				ED689F4B20AFD3F8000BBEE9 /* Football.scn */,
 				ED689F4920AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg */,
 				EDF5FCE220AFB7B6008FCE67 /* Ball.scn */,
+				EDE347BC20C85E7200934D62 /* baseballDiffuse.png */,
+				EDE347BA20C7962E00934D62 /* baseball.png */,
 				EDF5FCE620AFD02D008FCE67 /* balldiffuse.jpg */,
 				EDF5FCE020AFB7B6008FCE67 /* Ball_Diffuse.png */,
 				EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */,
@@ -287,6 +295,7 @@
 				ED82B25920BF617A00A61475 /* Sounds */,
 				ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */,
 				ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */,
+				EDE347B620C76FA900934D62 /* varsity_regular.ttf */,
 				ED99602A20AE08320058EC18 /* Assets.xcassets */,
 				ED99602C20AE08320058EC18 /* LaunchScreen.storyboard */,
 				ED99602F20AE08320058EC18 /* Info.plist */,
@@ -449,6 +458,7 @@
 				ED28861520B546B200DECEF1 /* spark.png in Resources */,
 				EDF5FCE720AFD02D008FCE67 /* balldiffuse.jpg in Resources */,
 				ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */,
+				EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */,
 				ED779DF020BF40F900C9C0C4 /* ping.wav in Resources */,
 				ED2773D020B8A7570020BCB1 /* NBA BASKETBALL.mtl in Resources */,
 				ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */,
@@ -457,12 +467,14 @@
 				ED10F3C120C208480097645D /* cricket.jpg in Resources */,
 				ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */,
 				ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */,
+				EDE347BD20C85E7200934D62 /* baseballDiffuse.png in Resources */,
 				ED82B25820BF617300A61475 /* plop.mp3 in Resources */,
 				EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */,
 				ED689F4A20AFD3D6000BBEE9 /* football_diffuse_no_ao.jpg in Resources */,
 				ED82B25D20BF655700A61475 /* Grenade.wav in Resources */,
 				ED4DAB8D20B34741003BC5A3 /* baseball_bat.jpg in Resources */,
 				EDF5FCE320AFB7B6008FCE67 /* Ball_Diffuse.png in Resources */,
+				EDE347BB20C7962E00934D62 /* baseball.png in Resources */,
 				ED28860D20B4E9DE00DECEF1 /* Normal.png in Resources */,
 				ED2773CE20B8A7570020BCB1 /* NBA BASKETBALL BUMP.tga in Resources */,
 				ED2DCBED20C1FF4E00FA4A44 /* Bump.jpg in Resources */,
@@ -593,7 +605,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -653,7 +664,6 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

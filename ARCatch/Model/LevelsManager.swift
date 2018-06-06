@@ -13,7 +13,6 @@ class LevelsManager {
     
     let nodeGenerator = NodeGenerator()
 
-    
     func nodeForScore(score: Int) -> SCNNode {
 //        if (score % 2 == 0) {
 //            return nodeGenerator.getBomb()

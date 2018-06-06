@@ -35,7 +35,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     //MARK: Helper Functions
     func setUpView() {
         ball.position = SCNVector3(0, 0, -1)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 3.0)
+        let rotateBall = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(2 * Double.pi), duration: 3.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
         ball.runAction(rotateForever)
         sceneView.pointOfView?.addChildNode(ball)

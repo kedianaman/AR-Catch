@@ -11,11 +11,8 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <array key="FNL_DEMO-KCFonts.ttf">
-            <string>FridayNightLights</string>
-        </array>
-        <array key="MLB Toronto Blue Jays Wilson.otf">
-            <string>MLBTorontoBlueJaysWilson</string>
+        <array key="varsity_regular.ttf">
+            <string>Varsity</string>
         </array>
     </customFonts>
     <scenes>
@@ -31,17 +28,17 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <gestureRecognizers/>
                             </arscnView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balls And Bombs" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-vu-hxm">
-                                <rect key="frame" x="20" y="77.5" width="335" height="121"/>
-                                <fontDescription key="fontDescription" name="FridayNightLights" family="Friday Night Lights" pointSize="60"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BALLS &amp; BOMBS" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-vu-hxm">
+                                <rect key="frame" x="20" y="65.5" width="335" height="144.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAS-J9-d7G">
-                                <rect key="frame" x="137" y="291" width="101" height="105.5"/>
-                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="100"/>
+                                <rect key="frame" x="127.5" y="283.5" width="120.5" height="120.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="100"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -69,10 +66,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="SoW-vu-hxm" firstAttribute="trailing" secondItem="LTc-oT-9WM" secondAttribute="trailing" constant="-20" id="5B2-Im-MzB"/>
                             <constraint firstItem="kMW-xD-43r" firstAttribute="top" secondItem="Iqa-Dc-oEj" secondAttribute="top" id="ARt-yF-Zua"/>
                             <constraint firstItem="rny-sZ-JEK" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="1.5" id="Au0-dg-orH"/>
-                            <constraint firstItem="LTc-oT-9WM" firstAttribute="leading" secondItem="SoW-vu-hxm" secondAttribute="leading" constant="-20" id="LI4-kw-aOJ"/>
+                            <constraint firstItem="SoW-vu-hxm" firstAttribute="trailing" secondItem="LTc-oT-9WM" secondAttribute="trailing" constant="-20" id="BLk-zF-crr"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="rny-sZ-JEK" secondAttribute="trailing" constant="20" id="Vc0-bV-r9v"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="Wwf-Xj-B6s"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="0.4" id="Zih-lz-VWy"/>
@@ -83,6 +79,7 @@
                             <constraint firstItem="rny-sZ-JEK" firstAttribute="height" secondItem="Iqa-Dc-oEj" secondAttribute="height" multiplier="0.2" id="swf-3U-1Qm"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" id="vwM-CY-41O"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="wMs-BJ-fIz"/>
+                            <constraint firstItem="LTc-oT-9WM" firstAttribute="leading" secondItem="SoW-vu-hxm" secondAttribute="leading" constant="-20" id="yd1-xL-aWZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LTc-oT-9WM"/>
                     </view>
@@ -112,8 +109,8 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-hO-i6q">
-                                <rect key="frame" x="321.5" y="40" width="33.5" height="37"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="30"/>
+                                <rect key="frame" x="305.5" y="30" width="59.5" height="61"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -147,9 +144,9 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="RC0-rm-u4Y" secondAttribute="trailing" id="G7Q-9I-y4N"/>
-                            <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="JJX-XG-F6k"/>
+                            <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="JJX-XG-F6k"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KOv-c8-v8S"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gXp-hO-i6q" secondAttribute="trailing" constant="20" id="OhJ-1I-eFz"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gXp-hO-i6q" secondAttribute="trailing" constant="10" id="OhJ-1I-eFz"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="OsS-Il-5gW"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VEg-QP-aoH"/>
                             <constraint firstAttribute="bottom" secondItem="RC0-rm-u4Y" secondAttribute="bottom" id="Zyv-kZ-dEw"/>
@@ -196,15 +193,15 @@
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Game Over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
-                                <rect key="frame" x="47" y="135.5" width="282.5" height="73"/>
-                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="70"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="GAME OVER" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
+                                <rect key="frame" x="22" y="136" width="331.5" height="72"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
-                                <rect key="frame" x="138" y="291.5" width="99.5" height="104.5"/>
-                                <fontDescription key="fontDescription" name="MLBTorontoBlueJaysWilson" family="MLB Toronto Blue Jays Wilson" pointSize="100"/>
+                                <rect key="frame" x="127.5" y="284" width="120.5" height="119.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="100"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
