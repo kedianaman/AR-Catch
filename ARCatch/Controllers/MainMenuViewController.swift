@@ -19,26 +19,21 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     var gameCenterEnabled = Bool()
     
     //MARK: IB Outlets
-    @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var topScoreLabel: UILabel!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        sceneView.session.run(configuration)
-        sceneView.autoenablesDefaultLighting = true
-        self.sceneView.session.delegate = self
         authenticateLocalPlayer()
-        setUpView()
     }
     
     //MARK: Helper Functions
     func setUpView() {
         ball.position = SCNVector3(0, 0, -1)
-        let rotateBall = SCNAction.rotateBy(x: 0, y: 0, z: CGFloat(2 * Double.pi), duration: 3.0)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 3.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
         ball.runAction(rotateForever)
-        sceneView.pointOfView?.addChildNode(ball)
+//        sceneView.pointOfView?.addChildNode(ball)
         if let topScore = UserDefaults.standard.value(forKey: Identifiers.topScore) as? Int {
             topScoreLabel.text = "\(topScore)"
         } else {
@@ -48,14 +43,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: IB Actions
     @IBAction func playButtonPressed(_ sender: Any) {
-        let moveToPosition = SCNAction.move(to: SCNVector3(0,3,0), duration: 2.0)
-        moveToPosition.timingMode = .easeOut
-        ball.runAction(moveToPosition) {
-            print("completed")
-            DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "MenuToGameSegueIdentifer", sender: nil)
-            }
-        }
+        performSegue(withIdentifier: "unwindFromMenuSegueID", sender: nil)
     }
     
     @IBAction func leaderboardButtonPressed(_ sender: Any) {
