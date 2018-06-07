@@ -40,8 +40,8 @@
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zAS-J9-d7G">
-                                <rect key="frame" x="0.5" y="384" width="375" height="91"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="64" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="zAS-J9-d7G">
+                                <rect key="frame" x="10" y="384" width="355" height="91"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="75"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -94,13 +94,14 @@
                             <constraint firstItem="O4z-DR-OxM" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="82C-vM-TXy"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="trailing" secondItem="LTc-oT-9WM" secondAttribute="trailing" constant="-20" id="BLk-zF-crr"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="bottom" secondItem="ghr-Xv-Ysu" secondAttribute="bottom" constant="10" id="OHi-rq-PPc"/>
+                            <constraint firstItem="zAS-J9-d7G" firstAttribute="leading" secondItem="LTc-oT-9WM" secondAttribute="leading" constant="10" id="VLJ-gT-LlO"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="Wwf-Xj-B6s"/>
                             <constraint firstItem="ghr-Xv-Ysu" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="elB-D6-iHm"/>
+                            <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="zAS-J9-d7G" secondAttribute="trailing" constant="10" id="gg0-g4-8P1"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="mYl-Sn-3nr" secondAttribute="trailing" id="gxy-DK-V3V"/>
                             <constraint firstItem="mYl-Sn-3nr" firstAttribute="top" secondItem="zAS-J9-d7G" secondAttribute="bottom" id="hqT-fR-7aM"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="1.25" id="vwM-CY-41O"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="wMs-BJ-fIz"/>
-                            <constraint firstItem="zAS-J9-d7G" firstAttribute="width" secondItem="Iqa-Dc-oEj" secondAttribute="width" id="y23-zw-IrA"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="leading" secondItem="SoW-vu-hxm" secondAttribute="leading" constant="-20" id="yd1-xL-aWZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="LTc-oT-9WM"/>
@@ -238,8 +239,8 @@
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
-                                <rect key="frame" x="127.5" y="283.5" width="120.5" height="120.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
+                                <rect key="frame" x="20" y="283.5" width="335" height="120.5"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="100"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -256,6 +257,16 @@
                                     <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindToGameWithSegue:" id="BmS-SZ-QAi"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6H-su-5ug">
+                                <rect key="frame" x="143" y="557.5" width="89" height="53"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
+                                <state key="normal" title="Home">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindToGoToMenuWithSegue:" id="Ab2-Pl-Shv"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -265,7 +276,11 @@
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="Wmm-tY-PBj"/>
+                            <constraint firstItem="F6H-su-5ug" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Xfi-c6-Xva"/>
+                            <constraint firstItem="F6H-su-5ug" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.7" id="Zfc-1N-Uv7"/>
                             <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
+                            <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="TBI-t7-Ulk" secondAttribute="trailing" constant="20" id="eeM-G5-G0w"/>
+                            <constraint firstItem="TBI-t7-Ulk" firstAttribute="leading" secondItem="Uwh-pb-jjd" secondAttribute="leading" constant="20" id="gHO-yY-htI"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" id="k5X-qM-uNL"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="o18-Kh-Y2v"/>
                             <constraint firstAttribute="bottom" secondItem="fNR-UJ-2N4" secondAttribute="bottom" id="xEy-uf-mC1"/>

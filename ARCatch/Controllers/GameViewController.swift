@@ -110,6 +110,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             pregameSetUp()
         }
     }
+    
+    
 
     //MARK: Set Up State Functions
     
@@ -362,6 +364,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             }
         }
     }
+    
+    @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
+        // fix animation 
+        self.presentedViewController?.dismiss(animated: false, completion: nil)
+        menuOnScreen = true
+        menuShowingSetUp()
+    }
+    
+    
+    
     
     // Scrap later functions
     func addTestingPlane() {
