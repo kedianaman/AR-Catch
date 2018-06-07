@@ -76,6 +76,7 @@ class NodeGenerator {
         let bullet = scene.rootNode.childNode(withName: "bullet", recursively: true)!
         bullet.physicsBody = getPhysicsBodyForBullet()
         bullet.name = BulletConstants.name
+        bullet.geometry?.firstMaterial?.shininess = 10
         return bullet
     }
     
@@ -125,5 +126,4 @@ class NodeGenerator {
         missPlane.physicsBody = missPlanePhysicsBody
         return missPlane
     }
-    
 }

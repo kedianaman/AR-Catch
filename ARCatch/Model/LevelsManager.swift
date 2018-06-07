@@ -19,7 +19,7 @@ class LevelsManager {
 //        } else {
 //            return nodeGenerator.getBall()
 //        }
-//        return nodeGenerator.getBomb()
+        return nodeGenerator.getBomb()
         let level = score / 5
         var probabilityBomb = Double(level) / 20.0
         if (probabilityBomb > (1/4.0)) {

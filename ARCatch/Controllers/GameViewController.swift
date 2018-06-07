@@ -52,10 +52,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var ballMissesLabel: UILabel!
     @IBOutlet weak var ballMissesBackgroundLabel: UILabel!
     @IBOutlet weak var startGameButton: UIButton!
+    @IBOutlet weak var resetViewButton: UIButton!
     
     //MARK: IB Action
     @IBAction func hitStartButton(_ sender: UIButton) {
         startGameSetUp()
+    }
+    @IBAction func hitResetOriginButton(_ sender: Any) {
+        let moveUp = SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 0.2)
+        moveUp.timingMode = .easeIn
+        setUpBall.runAction(moveUp) {
+            self.setUpBall.removeFromParentNode()
+            self.sceneView.session.run(self.configuration, options: .resetTracking)
+            self.addInitialBall()
+        }
+        
     }
     
     // shoots bullets when bomb is on screen
@@ -79,16 +90,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-//        self.sceneView.scene.physicsWorld.timeStep = 1/300.0
-//        self.sceneView.isPlaying = true
-//        self.sceneView.loops = true
-//        self.sceneView.preferredFramesPerSecond = 60
         self.sceneView.scene.physicsWorld.contactDelegate = self
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
-//        self.sceneView.debugOptions = [SCNDebugOptions.showPhysicsShapes]
-        self.sceneView.showsStatistics = true 
+        configuration.isAutoFocusEnabled = false
+//        self.sceneView.showsStatistics = true
 //        addObject()
         addPhonePlane()
         addMissPlane()
@@ -104,18 +111,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         }
     }
 
-    //MARK: Helper functions
+    //MARK: Set Up State Functions
     
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
         menuBall = nodeGenerator.getBall()
-        menuBall.position = SCNVector3(0, 0, -1)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 3.0)
+        menuBall.position = SCNVector3(0, 0.15, -1)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
         menuBall.runAction(rotateForever)
         sceneView.pointOfView?.addChildNode(menuBall)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
+        resetViewButton.alpha = 0
+        resetViewButton.isEnabled = false
         scoreLabel.alpha = 0
         ballMissesLabel.alpha = 0
         ballMissesBackgroundLabel.alpha = 0
@@ -124,13 +133,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func pregameSetUp() {
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
+        resetViewButton.alpha = 1
+        resetViewButton.isEnabled = true
         gameStarted = false
-        setUpBall = nodeGenerator.getBall()
-        setUpBall.position = SCNVector3(0, 5, -20)
-        sceneView.scene.rootNode.addChildNode(setUpBall)
-        let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
-        moveBallDown.timingMode = .easeOut
-        setUpBall.runAction(moveBallDown)
+        addInitialBall()
         scoreLabel.alpha = 0
         ballMissesLabel.alpha = 0
         ballMissesBackgroundLabel.alpha = 0
@@ -144,14 +150,18 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         gameStarted = true
         scoreLabel.alpha = 1
         ballMissesLabel.alpha = 1
-        ballMissesBackgroundLabel.alpha = 0.3
+        ballMissesBackgroundLabel.alpha = 0.5
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
+        resetViewButton.alpha = 0
+        resetViewButton.isEnabled = false
         let force = levelsManager.forceForScore(score: score)
         setUpBall.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: setUpBall)
         setUpBall.physicsBody?.applyTorque(torque, asImpulse: true)
     }
+    
+    //MARK: Scene Kit Node Functions
     
     @objc func addObject() {
         let node = levelsManager.nodeForScore(score: score)
@@ -175,6 +185,26 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(missPlane)
     }
     
+    func addInitialBall() {
+        setUpBall = nodeGenerator.getBall()
+        setUpBall.position = SCNVector3(0, 5, -20)
+        sceneView.scene.rootNode.addChildNode(setUpBall)
+        let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
+        moveBallDown.timingMode = .easeOut
+        setUpBall.runAction(moveBallDown)
+    }
+    
+    func removeBullets() {
+        for bullet in bullets {
+            let fadeOut = SCNAction.fadeOut(duration: 0.5)
+            bullet.runAction(fadeOut) {
+                bullet.removeFromParentNode()
+            }
+        }
+        bullets.removeAll()
+    }
+    
+    //MARK: Helper Calculation Functions
     func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
         return Float(arc4random()) / Float(UINT32_MAX) * abs(firstNum - secondNum) + min(firstNum, secondNum)
     }
@@ -200,7 +230,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         if (gameStarted) {
-            // FIX: Prevent planes from colliding with each other
             //        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
             //            print(contact.contactPoint)
             //        }
@@ -222,14 +251,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
                         score = score + 1
                         bombOnScreen = false
-                        
+                        self.removeBullets()
                         DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             contact.nodeB.removeFromParentNode()
                             contact.nodeA.removeFromParentNode()
-                            for bullet in self.bullets {
-                                bullet.removeFromParentNode()
-                            }
-                            self.bullets.removeAll()
                             self.addObject()
                         }
                         return
@@ -296,10 +321,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             } else if (contact.nodeB.name == BombConstants.name) {
                 contact.nodeB.removeFromParentNode()
             }
-            for bullet in bullets {
-                bullet.removeFromParentNode()
-            }
-            bullets.removeAll()
+            self.removeBullets()
         }
     }
     

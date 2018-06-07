@@ -20,25 +20,14 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: IB Outlets
     @IBOutlet weak var topScoreLabel: UILabel!
+    @IBOutlet weak var playNowButton: UIButton!
+    @IBOutlet weak var titleLabel: UILabel!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setUpView()
         authenticateLocalPlayer()
-    }
-    
-    //MARK: Helper Functions
-    func setUpView() {
-        ball.position = SCNVector3(0, 0, -1)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 3.0)
-        let rotateForever = SCNAction.repeatForever(rotateBall)
-        ball.runAction(rotateForever)
-//        sceneView.pointOfView?.addChildNode(ball)
-        if let topScore = UserDefaults.standard.value(forKey: Identifiers.topScore) as? Int {
-            topScoreLabel.text = "\(topScore)"
-        } else {
-            topScoreLabel.text = "0"
-        }
     }
     
     //MARK: IB Actions
@@ -61,7 +50,6 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     // MARK: Game Center
     func authenticateLocalPlayer() {
-        
         let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
         localPlayer.authenticateHandler = {(ViewController, error) -> Void in
             if((ViewController) != nil) {
@@ -79,6 +67,29 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
                 print(error!)
             }
         }
+    }
+    
+    //MARK: Helper Functions
+    func setUpView() {
+        if let topScore = UserDefaults.standard.value(forKey: Identifiers.topScore) as? Int {
+            topScoreLabel.text = "\(topScore)"
+        } else {
+            topScoreLabel.text = "0"
+        }
+        // customize play button
+        //        playNowButton.layer.cornerRadius = 10
+        playNowButton.layer.borderWidth = 2
+        playNowButton.layer.borderColor = UIColor.white.cgColor
+        addShadow(view: playNowButton)
+        addShadow(view: titleLabel)
+    }
+    
+    func addShadow(view: UIView) {
+        view.layer.masksToBounds = false
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 2)
+        view.layer.shadowOpacity = 0.5
+        view.layer.shadowRadius = 2
     }
    
     
