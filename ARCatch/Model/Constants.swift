@@ -14,8 +14,8 @@ struct DifficultyConstants {
     static let desiredXDistance = 0.4
     static let desiredYDistance = 0.2
     static let zDistance = 20.0
+//    static let startZForce = 30.0
     static let startZForce = 30.0
-//    static let startZForce = 70.0
 
     static let scoreChangeInterval = 5
     static let zForceIncrement = 5.0

@@ -180,13 +180,13 @@
                             <constraint firstAttribute="trailing" secondItem="RC0-rm-u4Y" secondAttribute="trailing" id="G7Q-9I-y4N"/>
                             <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="JJX-XG-F6k"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KOv-c8-v8S"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="gXp-hO-i6q" secondAttribute="trailing" constant="10" id="OhJ-1I-eFz"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.6" id="OsS-Il-5gW"/>
                             <constraint firstItem="aw1-Ix-Xi5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.45" id="QIG-15-Hb8"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VEg-QP-aoH"/>
                             <constraint firstAttribute="bottom" secondItem="RC0-rm-u4Y" secondAttribute="bottom" id="Zyv-kZ-dEw"/>
                             <constraint firstItem="G0j-Mr-41C" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ca3-Ce-09o"/>
                             <constraint firstItem="M5R-ex-taM" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="isU-aG-qxM"/>
+                            <constraint firstItem="gXp-hO-i6q" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="177.5" id="o5c-Db-aeQ"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="yd5-yG-jU1"/>
                             <constraint firstItem="G0j-Mr-41C" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="yrs-q4-gHe"/>
                             <constraint firstItem="M5R-ex-taM" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="ze9-d7-eSG"/>
