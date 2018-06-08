@@ -35,11 +35,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var numBallMisses = 0 {
         didSet {
             DispatchQueue.main.async {
-                var label = ""
-                for _ in 0..<self.numBallMisses {
-                    label = label + " X"
+                for i in 0..<self.numBallMisses {
+                    self.crosses[i].alpha = 1
                 }
-                self.ballMissesLabel.text = label
+                for j in self.numBallMisses..<3 {
+                    self.crosses[j].alpha = 0
+                }
             }
         }
     }
@@ -49,10 +50,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
-    @IBOutlet weak var ballMissesLabel: UILabel!
-    @IBOutlet weak var ballMissesBackgroundLabel: UILabel!
     @IBOutlet weak var startGameButton: UIButton!
     @IBOutlet weak var resetViewButton: UIButton!
+    @IBOutlet weak var crossesBackgroundStackView: UIStackView!
+    @IBOutlet var crosses: [UIImageView]!
     
     //MARK: IB Action
     @IBAction func hitStartButton(_ sender: UIButton) {
@@ -128,8 +129,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         resetViewButton.alpha = 0
         resetViewButton.isEnabled = false
         scoreLabel.alpha = 0
-        ballMissesLabel.alpha = 0
-        ballMissesBackgroundLabel.alpha = 0
+        crossesBackgroundStackView.alpha = 0
     }
     
     func pregameSetUp() {
@@ -140,8 +140,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         gameStarted = false
         addInitialBall()
         scoreLabel.alpha = 0
-        ballMissesLabel.alpha = 0
-        ballMissesBackgroundLabel.alpha = 0
+        crossesBackgroundStackView.alpha = 1
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
         score = 0
@@ -151,8 +150,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func startGameSetUp() {
         gameStarted = true
         scoreLabel.alpha = 1
-        ballMissesLabel.alpha = 1
-        ballMissesBackgroundLabel.alpha = 0.5
+        crossesBackgroundStackView.alpha = 1
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
         resetViewButton.alpha = 0
