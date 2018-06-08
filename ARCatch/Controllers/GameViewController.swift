@@ -35,11 +35,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var numBallMisses = 0 {
         didSet {
             DispatchQueue.main.async {
-                for i in 0..<self.numBallMisses {
-                    self.crosses[i].alpha = 1
-                }
-                for j in self.numBallMisses..<3 {
-                    self.crosses[j].alpha = 0
+                if (self.numBallMisses == 0) {
+                    for cross in self.crosses {
+                        cross.alpha = 0
+                    }
+                } else {
+                    self.crosses[self.numBallMisses - 1].alpha = 1
+                    self.crosses[self.numBallMisses - 1].shake()
                 }
             }
         }
@@ -55,7 +57,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var crossesBackgroundStackView: UIStackView!
     @IBOutlet var crosses: [UIImageView]!
     
-    //MARK: IB Action
+    //MARK: IB Actions
     @IBAction func hitStartButton(_ sender: UIButton) {
         startGameSetUp()
     }
@@ -96,7 +98,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-//        self.sceneView.showsStatistics = true
+        self.sceneView.showsStatistics = true
 //        addObject()
         addPhonePlane()
         addMissPlane()
@@ -112,10 +114,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         }
     }
     
-    
-
     //MARK: Set Up State Functions
-    
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
         menuBall = nodeGenerator.getBall()
@@ -130,6 +129,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         resetViewButton.isEnabled = false
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
+        numBallMisses = 0
     }
     
     func pregameSetUp() {
@@ -140,11 +140,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         gameStarted = false
         addInitialBall()
         scoreLabel.alpha = 0
-        crossesBackgroundStackView.alpha = 1
+        crossesBackgroundStackView.alpha = 0
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
         score = 0
         numBallMisses = 0
+        
     }
     
     func startGameSetUp() {
@@ -392,4 +393,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 
 }
 
+// function to shake cross
+extension UIView {
+    func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.duration = 0.4
+        animation.values = [-5.0, 5.0, -4.0, 4.0, -3.0, 3.0, -2, 2.0, 0.0 ]
+        layer.add(animation, forKey: "shake")
+    }
+    
+}
 

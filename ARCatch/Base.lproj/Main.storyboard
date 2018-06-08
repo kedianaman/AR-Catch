@@ -27,9 +27,9 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="balls &amp; bombs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-vu-hxm">
                                 <rect key="frame" x="20" y="40" width="335" height="62"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="textColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-DR-OxM">
@@ -134,8 +134,8 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-hO-i6q">
-                                <rect key="frame" x="177.5" y="30" width="187.5" height="61"/>
-                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
+                                <rect key="frame" x="177.5" y="30" width="187.5" height="73"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -270,25 +270,38 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="game over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
-                                <rect key="frame" x="46.5" y="135.5" width="283" height="73"/>
+                                <rect key="frame" x="46.5" y="66" width="283" height="74"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="2"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-59-uR0">
+                                <rect key="frame" x="136.5" y="238" width="102" height="49"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="40"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="24" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TBI-t7-Ulk">
-                                <rect key="frame" x="20" y="283.5" width="335" height="120.5"/>
-                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="100"/>
+                                <rect key="frame" x="20" y="272" width="335" height="144.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="120"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-Rb-dmw">
-                                <rect key="frame" x="149" y="489" width="77" height="53"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                                <state key="normal" title="Retry">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-Rb-dmw" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="490.5" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="5mL-pM-RBc"/>
+                                    <constraint firstAttribute="height" constant="50" id="AUO-0C-2W9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
+                                <state key="normal" title="play again">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
@@ -309,8 +322,10 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="19P-ZU-v3U" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="8Fp-ef-bvs"/>
-                            <constraint firstItem="19P-ZU-v3U" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="0.5" id="ELc-Gf-fDV"/>
+                            <constraint firstItem="19P-ZU-v3U" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="0.3" id="ELc-Gf-fDV"/>
+                            <constraint firstItem="TBI-t7-Ulk" firstAttribute="top" secondItem="r2F-59-uR0" secondAttribute="bottom" constant="-15" id="EgZ-H6-UEz"/>
                             <constraint firstAttribute="trailing" secondItem="fNR-UJ-2N4" secondAttribute="trailing" id="GRV-QC-Zi4"/>
+                            <constraint firstItem="r2F-59-uR0" firstAttribute="centerX" secondItem="TBI-t7-Ulk" secondAttribute="centerX" id="JhC-z1-qto"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="Wmm-tY-PBj"/>

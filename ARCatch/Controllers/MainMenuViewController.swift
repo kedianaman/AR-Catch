@@ -76,21 +76,9 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
         } else {
             topScoreLabel.text = "0"
         }
-        // customize play button
-        //        playNowButton.layer.cornerRadius = 10
-        playNowButton.layer.borderWidth = 2
-        playNowButton.layer.borderColor = UIColor.white.cgColor
-        addShadow(view: playNowButton)
-        addShadow(view: titleLabel)
     }
     
-    func addShadow(view: UIView) {
-        view.layer.masksToBounds = false
-        view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOffset = CGSize(width: 0, height: 2)
-        view.layer.shadowOpacity = 0.5
-        view.layer.shadowRadius = 1
-    }
+
    
     
 }
