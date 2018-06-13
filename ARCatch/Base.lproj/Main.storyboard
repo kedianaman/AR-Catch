@@ -27,9 +27,9 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="balls &amp; bombs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SoW-vu-hxm">
                                 <rect key="frame" x="20" y="40" width="335" height="62"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
-                                <color key="textColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="shadowColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-DR-OxM">
@@ -51,7 +51,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYl-Sn-3nr">
                                 <rect key="frame" x="0.0" y="475" width="375" height="142"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
                                         <rect key="frame" x="87" y="46" width="200" height="50"/>
                                         <color key="backgroundColor" red="0.79607843137254897" green="0.094117647058823528" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -237,9 +237,12 @@
                         <outlet property="sceneView" destination="RC0-rm-u4Y" id="vUm-IZ-4A9"/>
                         <outlet property="scoreLabel" destination="gXp-hO-i6q" id="SVk-Jr-FV8"/>
                         <outlet property="startGameButton" destination="zaF-ZL-zi8" id="PTP-10-0ux"/>
-                        <outletCollection property="crosses" destination="hoc-11-hZZ" collectionClass="NSMutableArray" id="wfc-TH-U61"/>
-                        <outletCollection property="crosses" destination="5hQ-g8-SCL" collectionClass="NSMutableArray" id="HaM-rO-rz5"/>
-                        <outletCollection property="crosses" destination="2Rh-9t-iZW" collectionClass="NSMutableArray" id="9Sb-us-hOh"/>
+                        <outletCollection property="ballMissCrosses" destination="hoc-11-hZZ" collectionClass="NSMutableArray" id="wfc-TH-U61"/>
+                        <outletCollection property="ballMissCrosses" destination="5hQ-g8-SCL" collectionClass="NSMutableArray" id="HaM-rO-rz5"/>
+                        <outletCollection property="ballMissCrosses" destination="2Rh-9t-iZW" collectionClass="NSMutableArray" id="9Sb-us-hOh"/>
+                        <outletCollection property="backgroundCrosses" destination="ekW-R6-CSp" collectionClass="NSMutableArray" id="3Gq-wE-P95"/>
+                        <outletCollection property="backgroundCrosses" destination="R9B-S7-2mS" collectionClass="NSMutableArray" id="Mml-GZ-XBc"/>
+                        <outletCollection property="backgroundCrosses" destination="7eV-bf-HPX" collectionClass="NSMutableArray" id="w8D-em-WJH"/>
                         <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>
                         <segue destination="Fle-lQ-Fbp" kind="presentation" identifier="gameToMenuSegueID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Y46-uF-A6R"/>
                     </connections>

@@ -54,8 +54,8 @@ struct PhonePlaneConstants {
 }
 
 struct MissPlaneConstants {
-    static let width: CGFloat = 100.0
-    static let height: CGFloat = 100.0
+    static let width: CGFloat = 10.0
+    static let height: CGFloat = 10.0
     static let name = "missPlane"
     static let categoryBitMask = 0x1 << 4
 }

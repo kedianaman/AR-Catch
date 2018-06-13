@@ -78,9 +78,6 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
         }
     }
     
-
-   
-    
 }
 
 

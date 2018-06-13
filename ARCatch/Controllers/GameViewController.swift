@@ -36,12 +36,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         didSet {
             DispatchQueue.main.async {
                 if (self.numBallMisses == 0) {
-                    for cross in self.crosses {
+                    for cross in self.ballMissCrosses {
                         cross.alpha = 0
                     }
                 } else {
-                    self.crosses[self.numBallMisses - 1].alpha = 1
-                    self.crosses[self.numBallMisses - 1].shake()
+                    self.ballMissCrosses[self.numBallMisses - 1].alpha = 1
+                    self.ballMissCrosses[self.numBallMisses - 1].shake()
                 }
             }
         }
@@ -55,7 +55,34 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var startGameButton: UIButton!
     @IBOutlet weak var resetViewButton: UIButton!
     @IBOutlet weak var crossesBackgroundStackView: UIStackView!
-    @IBOutlet var crosses: [UIImageView]!
+    @IBOutlet var ballMissCrosses: [UIImageView]!
+    @IBOutlet var backgroundCrosses: [UIImageView]!
+    
+    //MARK: View Controller Life Cycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.sceneView.scene.physicsWorld.contactDelegate = self
+//        configuration.isLightEstimationEnabled = true
+        self.sceneView.session.run(configuration)
+        self.sceneView.autoenablesDefaultLighting = true
+        self.sceneView.session.delegate = self
+        configuration.isAutoFocusEnabled = false
+        self.sceneView.showsStatistics = true
+        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        //        addObject()
+        addPhonePlane()
+        addMissPlane()
+        //        addTestingPlane()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if (menuOnScreen == true) {
+            menuShowingSetUp()
+        } else {
+            pregameSetUp()
+        }
+    }
     
     //MARK: IB Actions
     @IBAction func hitStartButton(_ sender: UIButton) {
@@ -66,7 +93,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         moveUp.timingMode = .easeIn
         setUpBall.runAction(moveUp) {
             self.setUpBall.removeFromParentNode()
-            self.sceneView.session.run(self.configuration, options: .resetTracking)
+            // https://blogs.unity3d.com/2018/02/16/developing-for-arkit-1-5-update-using-unity-arkit-plugin/
+//            self.sceneView.session.run(self.configuration, options: .resetTracking)
+//            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
+            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
             self.addInitialBall()
         }
         
@@ -87,30 +117,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 phonePlane.addChildNode(bullet)
                 bullet.physicsBody?.applyForce(direction, asImpulse: true)
             }
-        }
-    }
-    
-    //MARK: View Controller Life Cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.sceneView.scene.physicsWorld.contactDelegate = self
-        self.sceneView.session.run(configuration)
-        self.sceneView.autoenablesDefaultLighting = true
-        self.sceneView.session.delegate = self
-        configuration.isAutoFocusEnabled = false
-        self.sceneView.showsStatistics = true
-//        addObject()
-        addPhonePlane()
-        addMissPlane()
-//        addTestingPlane()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        if (menuOnScreen == true) {
-            menuShowingSetUp()
-        } else {
-            pregameSetUp()
         }
     }
     
@@ -145,13 +151,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         startGameButton.isEnabled = true
         score = 0
         numBallMisses = 0
-        
+        menuOnScreen = false
     }
     
     func startGameSetUp() {
         gameStarted = true
         scoreLabel.alpha = 1
         crossesBackgroundStackView.alpha = 1
+        animateStartGameUI(begin: true)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
         resetViewButton.alpha = 0
@@ -160,6 +167,27 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         setUpBall.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: setUpBall)
         setUpBall.physicsBody?.applyTorque(torque, asImpulse: true)
+        UIApplication.shared.isIdleTimerDisabled = true
+    }
+    
+    func animateStartGameUI(begin: Bool) {
+        if (begin == true) {
+            for backgroundCross in backgroundCrosses {
+                backgroundCross.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+            }
+            var duration = 0.4
+            for backgroundCross in backgroundCrosses {
+                UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                    backgroundCross.transform = CGAffineTransform.identity
+                }, completion: nil)
+                duration = duration + 0.2
+            }
+            scoreLabel.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                self.scoreLabel.transform = CGAffineTransform.identity
+            }, completion: nil)
+        }
+        
     }
     
     //MARK: Scene Kit Node Functions
@@ -222,9 +250,31 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 
     //MARK: AR Session Delegate
     func session(_ session: ARSession, didUpdate frame: ARFrame) {
-//        if (!gameStarted) {
-//            self.sceneView.session.run(configuration, options: .resetTracking)
-//        }
+        
+    }
+    
+    func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
+        
+        switch camera.trackingState {
+            case .limited(let reason):
+                switch reason {
+                case .excessiveMotion:
+                    print( "Limited tracking: excessive motion")
+                case .insufficientFeatures:
+                    print("Limited tracking: insufficient details")
+                case .initializing:
+                    print("....initializing")
+                case .relocalizing:
+                    print( "...relocalizing")
+                }
+            case .notAvailable:
+                print("not available")
+            case .normal:
+                print("normal")
+//                if (gameStarted == false && menuOnScreen == false) {
+//                    addInitialBall()
+//                }
+        }
     }
     
     //MARK: Physics World Delegate
@@ -341,13 +391,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
-        sceneView.session.run(configuration, options: .resetTracking)
+//        sceneView.session.run(configuration, options: .resetTracking)
+//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
+        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
        pregameSetUp()
     }
     
     @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {
         // remove ball
-        sceneView.session.run(configuration, options: .resetTracking)
+//        sceneView.session.run(configuration, options: .resetTracking)
+//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
+        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
+
+
 //        let relativePosition = sceneView.pointOfView?.convertPosition(menuBall.position, to: sceneView.scene.rootNode)
 //        let replaceMenuBall = nodeGenerator.getBall()
 //        let moveReplaceBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 3.0)
