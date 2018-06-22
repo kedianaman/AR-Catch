@@ -22,8 +22,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var menuOnScreen = true
     var gameStarted = false
     var bombOnScreen = false
+    var gameBall = SCNNode()
     var setUpBall = SCNNode()
-    var menuBall = SCNNode()
     var bullets = [SCNNode]()
     var score = 0 {
         didSet {
@@ -57,6 +57,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var crossesBackgroundStackView: UIStackView!
     @IBOutlet var ballMissCrosses: [UIImageView]!
     @IBOutlet var backgroundCrosses: [UIImageView]!
+    @IBOutlet weak var yForceStepper: UIStepper!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
@@ -68,11 +69,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
         self.sceneView.showsStatistics = true
-        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+//        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
         addMissPlane()
-        //        addTestingPlane()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -88,17 +88,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBAction func hitStartButton(_ sender: UIButton) {
         startGameSetUp()
     }
+    @IBAction func addBall(_ sender: Any) {
+        self.addObject()
+    }
     @IBAction func hitResetOriginButton(_ sender: Any) {
-        let moveUp = SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 0.2)
-        moveUp.timingMode = .easeIn
-        setUpBall.runAction(moveUp) {
-            self.setUpBall.removeFromParentNode()
-            // https://blogs.unity3d.com/2018/02/16/developing-for-arkit-1-5-update-using-unity-arkit-plugin/
-//            self.sceneView.session.run(self.configuration, options: .resetTracking)
-//            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
-            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-            self.addInitialBall()
-        }
+//        let moveUp = SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 0.2)
+//        moveUp.timingMode = .easeIn
+//        gameBall.runAction(moveUp) {
+//            self.gameBall.removeFromParentNode()
+//            // https://blogs.unity3d.com/2018/02/16/developing-for-arkit-1-5-update-using-unity-arkit-plugin/
+////            self.sceneView.session.run(self.configuration, options: .resetTracking)
+////            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
+//            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
+//            self.addGameBall()
+//        }
         
     }
     
@@ -123,12 +126,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: Set Up State Functions
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
-        menuBall = nodeGenerator.getBall()
-        menuBall.position = SCNVector3(0, 0.15, -1)
+        setUpBall = nodeGenerator.getBall()
+        setUpBall.position = SCNVector3(0, 0.15, -20)
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
-        menuBall.runAction(rotateForever)
-        sceneView.pointOfView?.addChildNode(menuBall)
+        let moveBall = SCNAction.moveBy(x: 0, y: 0, z: 19, duration: 2.0)
+        moveBall.timingMode = .easeIn
+        setUpBall.runAction(SCNAction.group([rotateForever, moveBall]))
+        sceneView.pointOfView?.addChildNode(setUpBall)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
         resetViewButton.alpha = 0
@@ -144,7 +149,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         resetViewButton.alpha = 1
         resetViewButton.isEnabled = true
         gameStarted = false
-        addInitialBall()
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
         startGameButton.alpha = 1
@@ -152,9 +156,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         score = 0
         numBallMisses = 0
         menuOnScreen = false
+        if (setUpBall.parent == nil) {
+            addSetUpBall()
+        }
     }
     
     func startGameSetUp() {
+        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
+//        addTestingPlane()
         gameStarted = true
         scoreLabel.alpha = 1
         crossesBackgroundStackView.alpha = 1
@@ -163,10 +172,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         startGameButton.isEnabled = false
         resetViewButton.alpha = 0
         resetViewButton.isEnabled = false
+        setUpBall.removeFromParentNode()
+        addGameBall()
         let force = levelsManager.forceForScore(score: score)
-        setUpBall.physicsBody?.applyForce(force, asImpulse: true)
-        let torque = levelsManager.torqueForNode(node: setUpBall)
-        setUpBall.physicsBody?.applyTorque(torque, asImpulse: true)
+        gameBall.physicsBody?.applyForce(force, asImpulse: true)
+        let torque = levelsManager.torqueForNode(node: gameBall)
+        gameBall.physicsBody?.applyTorque(torque, asImpulse: true)
+        // change menu ball from camera node to root node
+//        menuBall.physicsBody?.applyForce(force, asImpulse: true)
+//        menuBall.physicsBody?.applyTorque(torque, asImpulse: true)
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
@@ -214,13 +228,22 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(missPlane)
     }
     
-    func addInitialBall() {
+    func addGameBall() {
+        gameBall = nodeGenerator.getBall()
+//        setUpBall.position = SCNVector3(0, 5, -20)
+        sceneView.scene.rootNode.addChildNode(gameBall)
+//        let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
+//        moveBallDown.timingMode = .easeOut
+//        setUpBall.runAction(moveBallDown)
+    }
+    
+    func addSetUpBall() {
         setUpBall = nodeGenerator.getBall()
         setUpBall.position = SCNVector3(0, 5, -20)
-        sceneView.scene.rootNode.addChildNode(setUpBall)
         let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
         moveBallDown.timingMode = .easeOut
         setUpBall.runAction(moveBallDown)
+        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     func removeBullets() {
@@ -281,9 +304,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         if (gameStarted) {
-            //        if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
-            //            print(contact.contactPoint)
-            //        }
+//                    if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
+//                        print(contact.contactPoint)
+////                        self.addObject()
+//                        return
+//                    }
             if (bombOnScreen == true) {
                 if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                     if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
@@ -386,34 +411,33 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         if (segue.identifier == "GameOverSegue") {
             if let gameOverVC = segue.destination as? GameOverViewController {
                 gameOverVC.score = score
+//                self.addSetUpBall()
             }
         }
     }
     
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
-//        sceneView.session.run(configuration, options: .resetTracking)
-//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
-        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-       pregameSetUp()
+        menuOnScreen = true
+//        self.menuShowingSetUp()
+//
+//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
+//        let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
+//        moveBall.timingMode = .easeInEaseOut
+//        setUpBall.runAction(moveBall) {
+//            DispatchQueue.main.async {
+//                self.pregameSetUp()
+//            }
+//        }
+        DispatchQueue.main.async {
+            self.pregameSetUp()
+        }
     }
     
     @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {
-        // remove ball
-//        sceneView.session.run(configuration, options: .resetTracking)
-//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
         self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-
-
-//        let relativePosition = sceneView.pointOfView?.convertPosition(menuBall.position, to: sceneView.scene.rootNode)
-//        let replaceMenuBall = nodeGenerator.getBall()
-//        let moveReplaceBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 3.0)
-//        self.menuBall.removeFromParentNode()
-//        sceneView.scene.rootNode.addChildNode(replaceMenuBall)
-//        replaceMenuBall.runAction(moveReplaceBall, completionHandler: nil)
-        
-        let moveBall = SCNAction.moveBy(x: 0, y: 2, z: 0, duration: 0.5)
-        menuBall.runAction(moveBall) {
-            self.menuBall.removeFromParentNode()
+        let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
+        moveBall.timingMode = .easeInEaseOut
+        setUpBall.runAction(moveBall) {
             DispatchQueue.main.async {
                 self.pregameSetUp()
             }
@@ -422,14 +446,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
         // fix animation 
-        self.presentedViewController?.dismiss(animated: false, completion: nil)
+//        self.presentedViewController?.dismiss(animated: false, completion: nil)
         menuOnScreen = true
-        menuShowingSetUp()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.menuShowingSetUp()
+        }
     }
-    
-    
-    
-    
+
     // Scrap later functions
     func addTestingPlane() {
         let testPlane = SCNNode()
@@ -441,7 +464,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             type: .kinematic,
             shape: SCNPhysicsShape(geometry: SCNPlane(width: 100, height: 100))
         )
-        testPlanePhyicsBody.contactTestBitMask = 1
+        testPlanePhyicsBody.categoryBitMask = 0x1 << 5
+        testPlanePhyicsBody.contactTestBitMask = BallConstants.categoryBitMask
         testPlanePhyicsBody.isAffectedByGravity = false
         testPlane.physicsBody = testPlanePhyicsBody
         sceneView.scene.rootNode.addChildNode(testPlane)

@@ -22,6 +22,30 @@ struct DifficultyConstants {
     static let maxZForce = 75.0
 }
 
+struct YForceConstants {
+    static let max30 = 29.71
+    static let max35 = 25.59
+    static let max40 = 22.45
+    static let max45 =  20.05
+    static let max50 = 18.15
+    static let max55 = 16.72
+    static let max60 = 15.74
+    static let max65 = 14.38
+    static let max70 = 13.45
+    static let max75 = 12.76
+    
+    static let min30 = 29.09
+    static let min35 = 24.88
+    static let min40 = 21.65
+    static let min45 = 19.15
+    static let min50 = 17.14
+    static let min55 = 15.62
+    static let min60 = 14.56
+    static let min65 = 13.07
+    static let min70 = 12.03
+    static let min75 = 11.26
+}
+
 struct BallConstants {
     static let mass: CGFloat = 3.0
     static let physicsRadius: CGFloat = 0.25
@@ -64,5 +88,6 @@ struct Identifiers {
     static let topScore = "topScore"
     static let leaderboardID = "com.score.arcatch"
 }
+
 
 

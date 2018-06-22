@@ -63,9 +63,47 @@ class LevelsManager {
     }
     
     private func yForceFor(zForce: Double) -> Double {
-        let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
-        let yForce = (2 * DifficultyConstants.desiredYDistance * Double(BallConstants.mass)) / (timeSquared)
-        return Double(rand(Float(yForce), Float(-yForce)))
+//        let timeSquared = ((2 * DifficultyConstants.zDistance) / (zForce/Double(BallConstants.mass)))
+//        let yForce = (2 * DifficultyConstants.desiredYDistance * Double(BallConstants.mass)) / (timeSquared)
+//        return Double(rand(Float(yForce), Float(-yForce)))
+        var maxY = Double()
+        var minY = Double()
+        if (zForce == 30.0) {
+            maxY = YForceConstants.max30
+            minY = YForceConstants.min30
+        } else if (zForce == 35.0) {
+            maxY = YForceConstants.max35
+            minY = YForceConstants.min35
+        } else if (zForce == 40.0) {
+            maxY = YForceConstants.max40
+            minY = YForceConstants.min40
+        } else if (zForce == 45.0) {
+            maxY = YForceConstants.max45
+            minY = YForceConstants.min45
+        } else if (zForce == 50.0) {
+            maxY = YForceConstants.max50
+            minY = YForceConstants.min50
+        } else if (zForce == 55.0) {
+            maxY = YForceConstants.max55
+            minY = YForceConstants.min55
+        } else if (zForce == 60.0) {
+            maxY = YForceConstants.max60
+            minY = YForceConstants.min60
+        } else if (zForce == 65.0) {
+            maxY = YForceConstants.max65
+            minY = YForceConstants.min65
+        } else if (zForce == 70.0) {
+            maxY = YForceConstants.max70
+            minY = YForceConstants.min70
+        } else if (zForce == 75.0) {
+            maxY = YForceConstants.max70
+            minY = YForceConstants.min70
+        } else {
+            minY = 0
+            maxY = 0
+        }
+        return Double(rand(Float(maxY), Float(minY)))
+
     }
     
     private func rand(_ firstNum: Float, _ secondNum: Float) -> Float {
