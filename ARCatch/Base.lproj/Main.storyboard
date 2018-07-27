@@ -48,33 +48,8 @@
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mYl-Sn-3nr">
-                                <rect key="frame" x="0.0" y="475" width="375" height="142"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
-                                        <rect key="frame" x="87" y="46" width="200" height="50"/>
-                                        <color key="backgroundColor" red="0.79607843137254897" green="0.094117647058823528" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="TBL-6a-kSP"/>
-                                            <constraint firstAttribute="width" constant="200" id="uLX-by-s14"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
-                                        <state key="normal" title="play now">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="playButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="N6y-1u-bCr"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstItem="yMe-Mi-cA6" firstAttribute="centerX" secondItem="mYl-Sn-3nr" secondAttribute="centerX" id="Cn7-c6-qnp"/>
-                                    <constraint firstItem="yMe-Mi-cA6" firstAttribute="centerY" secondItem="mYl-Sn-3nr" secondAttribute="centerY" id="hYj-17-JET"/>
-                                </constraints>
-                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghr-Xv-Ysu">
-                                <rect key="frame" x="167.5" y="617" width="40" height="40"/>
+                                <rect key="frame" x="167" y="617" width="40" height="40"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="IfF-qf-YKN"/>
                                     <constraint firstAttribute="height" constant="40" id="pmw-Am-HSX"/>
@@ -84,22 +59,35 @@
                                     <action selector="leaderboardButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="1ZG-oX-fkF"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
+                                <rect key="frame" x="87" y="524.5" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.79607843137254897" green="0.094117647058823528" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="TBL-6a-kSP"/>
+                                    <constraint firstAttribute="width" constant="200" id="uLX-by-s14"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
+                                <state key="normal" title="play now">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="N6y-1u-bCr"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="top" secondItem="LTc-oT-9WM" secondAttribute="top" constant="20" id="1Zo-vm-K0H"/>
-                            <constraint firstItem="mYl-Sn-3nr" firstAttribute="leading" secondItem="LTc-oT-9WM" secondAttribute="leading" id="30W-vq-xUa"/>
-                            <constraint firstItem="ghr-Xv-Ysu" firstAttribute="top" secondItem="mYl-Sn-3nr" secondAttribute="bottom" id="7M5-Ac-CvW"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="top" secondItem="O4z-DR-OxM" secondAttribute="bottom" constant="-15" id="7Y1-eR-4Ft"/>
                             <constraint firstItem="O4z-DR-OxM" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="82C-vM-TXy"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="trailing" secondItem="LTc-oT-9WM" secondAttribute="trailing" constant="-20" id="BLk-zF-crr"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="bottom" secondItem="ghr-Xv-Ysu" secondAttribute="bottom" constant="10" id="OHi-rq-PPc"/>
+                            <constraint firstItem="yMe-Mi-cA6" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="1.6" id="OUQ-gc-MSD"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="leading" secondItem="LTc-oT-9WM" secondAttribute="leading" constant="10" id="VLJ-gT-LlO"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="Wwf-Xj-B6s"/>
+                            <constraint firstItem="yMe-Mi-cA6" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="axS-td-cmR"/>
                             <constraint firstItem="ghr-Xv-Ysu" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="elB-D6-iHm"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="zAS-J9-d7G" secondAttribute="trailing" constant="10" id="gg0-g4-8P1"/>
-                            <constraint firstItem="LTc-oT-9WM" firstAttribute="trailing" secondItem="mYl-Sn-3nr" secondAttribute="trailing" id="gxy-DK-V3V"/>
-                            <constraint firstItem="mYl-Sn-3nr" firstAttribute="top" secondItem="zAS-J9-d7G" secondAttribute="bottom" id="hqT-fR-7aM"/>
                             <constraint firstItem="zAS-J9-d7G" firstAttribute="centerY" secondItem="LTc-oT-9WM" secondAttribute="centerY" multiplier="1.25" id="vwM-CY-41O"/>
                             <constraint firstItem="SoW-vu-hxm" firstAttribute="centerX" secondItem="LTc-oT-9WM" secondAttribute="centerX" id="wMs-BJ-fIz"/>
                             <constraint firstItem="LTc-oT-9WM" firstAttribute="leading" secondItem="SoW-vu-hxm" secondAttribute="leading" constant="-20" id="yd1-xL-aWZ"/>
@@ -141,10 +129,17 @@
                                 <color key="shadowColor" white="0.0" alpha="0.5" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-ZL-zi8">
-                                <rect key="frame" x="162.5" y="529" width="50" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Start"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-ZL-zi8" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="524.5" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="200" id="NGm-m8-XX2"/>
+                                    <constraint firstAttribute="height" constant="50" id="kvK-KS-hdI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
+                                <state key="normal" title="start game">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <connections>
                                     <action selector="hitStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uGz-0K-6UD"/>
                                 </connections>
@@ -308,7 +303,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-Rb-dmw" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="490.5" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="524.5" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="5mL-pM-RBc"/>
@@ -323,7 +318,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6H-su-5ug">
-                                <rect key="frame" x="143" y="557.5" width="89" height="53"/>
+                                <rect key="frame" x="143" y="584.5" width="89" height="53"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="34"/>
                                 <state key="normal" title="Home">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -336,15 +331,15 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="19P-ZU-v3U" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="8Fp-ef-bvs"/>
+                            <constraint firstItem="F6H-su-5ug" firstAttribute="top" secondItem="w7b-Rb-dmw" secondAttribute="bottom" constant="10" id="AiU-G6-8K1"/>
                             <constraint firstItem="19P-ZU-v3U" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="0.3" id="ELc-Gf-fDV"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="top" secondItem="r2F-59-uR0" secondAttribute="bottom" constant="-15" id="EgZ-H6-UEz"/>
                             <constraint firstAttribute="trailing" secondItem="fNR-UJ-2N4" secondAttribute="trailing" id="GRV-QC-Zi4"/>
                             <constraint firstItem="r2F-59-uR0" firstAttribute="centerX" secondItem="TBI-t7-Ulk" secondAttribute="centerX" id="JhC-z1-qto"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
-                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="Wmm-tY-PBj"/>
+                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.6" id="Wmm-tY-PBj"/>
                             <constraint firstItem="F6H-su-5ug" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Xfi-c6-Xva"/>
-                            <constraint firstItem="F6H-su-5ug" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.7" id="Zfc-1N-Uv7"/>
                             <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
                             <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="TBI-t7-Ulk" secondAttribute="trailing" constant="20" id="eeM-G5-G0w"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="leading" secondItem="Uwh-pb-jjd" secondAttribute="leading" constant="20" id="gHO-yY-htI"/>

@@ -96,7 +96,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 //        if (sceneView.scene.isPaused == true) {
 //            sceneView.scene.isPaused = false
 //        } else {
-//            sceneView.scene.isPaused = true 
+//            sceneView.scene.isPaused = true
 //
 //        }
 
@@ -213,22 +213,23 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(missPlane)
     }
     
-    func addGameBall() {
-        gameBall = nodeGenerator.getBall()
-//        setUpBall.position = SCNVector3(0, 5, -20)
-        sceneView.scene.rootNode.addChildNode(gameBall)
-//        let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
-//        moveBallDown.timingMode = .easeOut
-//        setUpBall.runAction(moveBallDown)
-    }
-    
     func addSetUpBall() {
+        
         setUpBall = nodeGenerator.getBall()
         setUpBall.position = SCNVector3(0, 5, -20)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
+        let rotateForever = SCNAction.repeatForever(rotateBall)
         let moveBallDown = SCNAction.moveBy(x: 0, y: -5, z: 0, duration: 0.5)
         moveBallDown.timingMode = .easeOut
-        setUpBall.runAction(moveBallDown)
+        setUpBall.runAction(SCNAction.group([rotateForever, moveBallDown]))
         sceneView.pointOfView?.addChildNode(setUpBall)
+        
+//
+//        setUpBall = nodeGenerator.getBall()
+//        setUpBall.position = SCNVector3(0, 0, -20)
+//
+//        setUpBall.runAction(moveBallDown)
+//        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     func removeBullets() {
@@ -396,6 +397,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
         menuOnScreen = true
+        DispatchQueue.main.async {
+            self.pregameSetUp()
+        }
 //        self.menuShowingSetUp()
 //
 //        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
@@ -406,20 +410,15 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
 //                self.pregameSetUp()
 //            }
 //        }
-        DispatchQueue.main.async {
-            self.pregameSetUp()
-        }
+       
     }
     
     @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {
-        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
         let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
         moveBall.timingMode = .easeInEaseOut
-        setUpBall.runAction(moveBall) {
-            DispatchQueue.main.async {
-                self.pregameSetUp()
-            }
-        }
+        setUpBall.runAction(moveBall)
+        self.pregameSetUp()
+
     }
     
     @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
