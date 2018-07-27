@@ -149,14 +149,6 @@
                                     <action selector="hitStartButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uGz-0K-6UD"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aw1-Ix-Xi5">
-                                <rect key="frame" x="157.5" y="477.5" width="60" height="41"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
-                                <state key="normal" title="Reset"/>
-                                <connections>
-                                    <action selector="hitResetOriginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Kx4-vO-QOY"/>
-                                </connections>
-                            </button>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="firstBaseline" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ZC9-6S-eVb">
                                 <rect key="frame" x="20" y="40" width="122.5" height="45"/>
                                 <subviews>
@@ -224,14 +216,12 @@
                         <constraints>
                             <constraint firstItem="6Ya-SS-y0j" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="79h-nr-vFZ"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="ahd-cX-7vL" secondAttribute="trailing" constant="141" id="Ae2-o6-NRh"/>
-                            <constraint firstItem="aw1-Ix-Xi5" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="D50-lc-LSe"/>
                             <constraint firstItem="6Ya-SS-y0j" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="DOk-Xm-ulc"/>
                             <constraint firstAttribute="trailing" secondItem="RC0-rm-u4Y" secondAttribute="trailing" id="G7Q-9I-y4N"/>
                             <constraint firstItem="gXp-hO-i6q" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="JJX-XG-F6k"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="KOv-c8-v8S"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="4fV-Ke-o5k" secondAttribute="trailing" constant="58" id="OJV-Gu-pzA"/>
                             <constraint firstItem="zaF-ZL-zi8" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.6" id="OsS-Il-5gW"/>
-                            <constraint firstItem="aw1-Ix-Xi5" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" multiplier="1.45" id="QIG-15-Hb8"/>
                             <constraint firstItem="RC0-rm-u4Y" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="VEg-QP-aoH"/>
                             <constraint firstItem="ahd-cX-7vL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="140" id="XEN-WS-G6o"/>
                             <constraint firstAttribute="bottom" secondItem="RC0-rm-u4Y" secondAttribute="bottom" id="Zyv-kZ-dEw"/>
@@ -254,7 +244,6 @@
                     <navigationItem key="navigationItem" id="D5Y-52-6GC"/>
                     <connections>
                         <outlet property="crossesBackgroundStackView" destination="ZC9-6S-eVb" id="5nq-MI-0IK"/>
-                        <outlet property="resetViewButton" destination="aw1-Ix-Xi5" id="6Bs-sU-Th6"/>
                         <outlet property="sceneView" destination="RC0-rm-u4Y" id="vUm-IZ-4A9"/>
                         <outlet property="scoreLabel" destination="gXp-hO-i6q" id="SVk-Jr-FV8"/>
                         <outlet property="startGameButton" destination="zaF-ZL-zi8" id="PTP-10-0ux"/>

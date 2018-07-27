@@ -29,7 +29,7 @@ class NodeGenerator {
         ballPhysicsBody.damping = BallConstants.damping
         ballPhysicsBody.categoryBitMask = BallConstants.categoryBitMask
         ballPhysicsBody.contactTestBitMask = PhonePlaneConstants.categoryBitMask | MissPlaneConstants.categoryBitMask
-        ballPhysicsBody.isAffectedByGravity = true 
+        ballPhysicsBody.isAffectedByGravity = false
         ballPhysicsBody.angularDamping = 0
         return ballPhysicsBody
     }
@@ -66,7 +66,7 @@ class NodeGenerator {
         bombPhysicsBody.damping = BombConstants.damping
         bombPhysicsBody.categoryBitMask = BombConstants.categoryBitMask
         bombPhysicsBody.contactTestBitMask = PhonePlaneConstants.categoryBitMask | MissPlaneConstants.categoryBitMask | BulletConstants.categoryBitMask
-        bombPhysicsBody.isAffectedByGravity = true
+        bombPhysicsBody.isAffectedByGravity = false 
         bombPhysicsBody.angularDamping = 0
         return bombPhysicsBody
     }

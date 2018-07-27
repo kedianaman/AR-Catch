@@ -53,7 +53,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var startGameButton: UIButton!
-    @IBOutlet weak var resetViewButton: UIButton!
     @IBOutlet weak var crossesBackgroundStackView: UIStackView!
     @IBOutlet var ballMissCrosses: [UIImageView]!
     @IBOutlet var backgroundCrosses: [UIImageView]!
@@ -91,22 +90,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBAction func addBall(_ sender: Any) {
         self.addObject()
     }
-    @IBAction func hitResetOriginButton(_ sender: Any) {
-//        let moveUp = SCNAction.moveBy(x: 0, y: 5, z: 0, duration: 0.2)
-//        moveUp.timingMode = .easeIn
-//        gameBall.runAction(moveUp) {
-//            self.gameBall.removeFromParentNode()
-//            // https://blogs.unity3d.com/2018/02/16/developing-for-arkit-1-5-update-using-unity-arkit-plugin/
-////            self.sceneView.session.run(self.configuration, options: .resetTracking)
-////            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.session.currentFrame?.camera.transform)!)
-//            self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-//            self.addGameBall()
-//        }
-        
-    }
     
     // shoots bullets when bomb is on screen
     @IBAction func didTapScreen(_ sender: Any) {
+//        if (sceneView.scene.isPaused == true) {
+//            sceneView.scene.isPaused = false
+//        } else {
+//            sceneView.scene.isPaused = true 
+//
+//        }
+
         if (bombOnScreen == true) {
             selectionFeedbackGenerator.prepare()
             selectionFeedbackGenerator.selectionChanged()
@@ -136,8 +129,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(setUpBall)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
-        resetViewButton.alpha = 0
-        resetViewButton.isEnabled = false
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
         numBallMisses = 0
@@ -146,8 +137,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func pregameSetUp() {
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
-        resetViewButton.alpha = 1
-        resetViewButton.isEnabled = true
         gameStarted = false
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
@@ -163,24 +152,18 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     func startGameSetUp() {
         self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-//        addTestingPlane()
+        print(setUpBall.worldPosition)
         gameStarted = true
         scoreLabel.alpha = 1
         crossesBackgroundStackView.alpha = 1
         animateStartGameUI(begin: true)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
-        resetViewButton.alpha = 0
-        resetViewButton.isEnabled = false
-        setUpBall.removeFromParentNode()
-        addGameBall()
-        let force = levelsManager.forceForScore(score: score)
-        gameBall.physicsBody?.applyForce(force, asImpulse: true)
-        let torque = levelsManager.torqueForNode(node: gameBall)
-        gameBall.physicsBody?.applyTorque(torque, asImpulse: true)
-        // change menu ball from camera node to root node
-//        menuBall.physicsBody?.applyForce(force, asImpulse: true)
-//        menuBall.physicsBody?.applyTorque(torque, asImpulse: true)
+        setUpBall.physicsBody = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+            self.setUpBall.removeFromParentNode()
+            self.addObject()
+        }
         UIApplication.shared.isIdleTimerDisabled = true
     }
     
@@ -208,12 +191,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @objc func addObject() {
         let node = levelsManager.nodeForScore(score: score)
+        node.physicsBody?.isAffectedByGravity = true
         bombOnScreen = node.name == BombConstants.name
         self.sceneView.scene.rootNode.addChildNode(node)
         let force = levelsManager.forceForScore(score: score)
         node.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: node)
         node.physicsBody?.applyTorque(torque, asImpulse: true)
+        print(node.worldPosition)
     }
     
     func addPhonePlane() {
@@ -272,9 +257,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
 
     //MARK: AR Session Delegate
-    func session(_ session: ARSession, didUpdate frame: ARFrame) {
-        
-    }
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         
@@ -304,11 +286,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         if (gameStarted) {
-//                    if ((contact.nodeA.name == "testPlane" && contact.nodeB.name == BallConstants.name) || (contact.nodeA.name == BallConstants.name && contact.nodeB.name == "testPlane") ) {
-//                        print(contact.contactPoint)
-////                        self.addObject()
-//                        return
-//                    }
+
             if (bombOnScreen == true) {
                 if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                     if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
