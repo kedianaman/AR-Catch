@@ -390,22 +390,44 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="move your phone to catch the incoming baseballs " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kru-El-BfZ">
-                                <rect key="frame" x="10" y="417" width="355" height="59.5"/>
-                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="24"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jYt-3d-Zq1">
+                                <rect key="frame" x="0.0" y="396.5" width="375" height="100"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="move your phone to catch the incoming baseballs " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kru-El-BfZ">
+                                        <rect key="frame" x="10" y="20" width="355" height="59.5"/>
+                                        <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="24"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                        <color key="shadowColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <size key="shadowOffset" width="0.0" height="2"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="DOL-ii-YMh"/>
+                                    <constraint firstItem="Kru-El-BfZ" firstAttribute="centerY" secondItem="jYt-3d-Zq1" secondAttribute="centerY" id="GZs-Xl-vOR"/>
+                                    <constraint firstAttribute="trailing" secondItem="Kru-El-BfZ" secondAttribute="trailing" constant="10" id="WLF-nb-d0z"/>
+                                    <constraint firstItem="Kru-El-BfZ" firstAttribute="centerX" secondItem="jYt-3d-Zq1" secondAttribute="centerX" id="dMW-pI-MW4"/>
+                                    <constraint firstItem="Kru-El-BfZ" firstAttribute="leading" secondItem="jYt-3d-Zq1" secondAttribute="leading" constant="10" id="e3I-FR-uzu"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tap to continue" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UPN-fR-UJJ">
+                                <rect key="frame" x="126" y="539" width="123" height="21.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="17"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <size key="shadowOffset" width="0.0" height="2"/>
+                                <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="0.5" colorSpace="custom" customColorSpace="displayP3"/>
+                                <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <gestureRecognizers/>
                         <constraints>
-                            <constraint firstItem="Kru-El-BfZ" firstAttribute="centerY" secondItem="flk-8e-aFO" secondAttribute="centerY" multiplier="1.3" id="1xc-Xm-zfP"/>
-                            <constraint firstItem="Kru-El-BfZ" firstAttribute="centerX" secondItem="flk-8e-aFO" secondAttribute="centerX" id="9g4-5Y-ecE"/>
-                            <constraint firstItem="Kru-El-BfZ" firstAttribute="leading" secondItem="flk-8e-aFO" secondAttribute="leading" constant="10" id="YFV-uX-7at"/>
-                            <constraint firstItem="Kru-El-BfZ" firstAttribute="trailing" secondItem="flk-8e-aFO" secondAttribute="trailing" constant="-10" id="e6S-eT-MSL"/>
+                            <constraint firstAttribute="trailing" secondItem="jYt-3d-Zq1" secondAttribute="trailing" id="3zK-nF-ajJ"/>
+                            <constraint firstItem="jYt-3d-Zq1" firstAttribute="leading" secondItem="zO2-Bk-T8v" secondAttribute="leading" id="Qsq-gn-aZf"/>
+                            <constraint firstItem="jYt-3d-Zq1" firstAttribute="centerY" secondItem="flk-8e-aFO" secondAttribute="centerY" multiplier="1.3" id="Rjr-PF-QWK"/>
+                            <constraint firstItem="UPN-fR-UJJ" firstAttribute="centerX" secondItem="flk-8e-aFO" secondAttribute="centerX" id="VOw-mr-7sr"/>
+                            <constraint firstItem="UPN-fR-UJJ" firstAttribute="centerY" secondItem="flk-8e-aFO" secondAttribute="centerY" multiplier="1.6" id="og8-ac-JWc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="flk-8e-aFO"/>
                         <connections>
@@ -414,6 +436,7 @@
                     </view>
                     <connections>
                         <outlet property="instructionLabel" destination="Kru-El-BfZ" id="laj-cz-yvl"/>
+                        <outlet property="tapToContinueLabel" destination="UPN-fR-UJJ" id="CwN-gw-ka5"/>
                         <segue destination="i3O-7h-6Vm" kind="unwind" identifier="unwindFromTutorialID" unwindAction="unwindFromTutorialWithSegue:" id="6Kc-x9-ejN"/>
                     </connections>
                 </viewController>
@@ -425,7 +448,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1382" y="27"/>
+            <point key="canvasLocation" x="1381.5999999999999" y="26.53673163418291"/>
         </scene>
     </scenes>
     <resources>

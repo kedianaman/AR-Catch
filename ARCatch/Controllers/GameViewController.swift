@@ -98,18 +98,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     // shoots bullets when bomb is on screen
     @IBAction func didTapScreen(_ sender: Any) {
         if (bombOnScreen == true) {
-            selectionFeedbackGenerator.prepare()
-            selectionFeedbackGenerator.selectionChanged()
-            let bullet = nodeGenerator.getBullet()
-            bullets.append(bullet)
-            let (direction, _) = getUserVector()
-            let play = SCNAction.playAudio(SCNAudioSource(fileNamed: "plop.mp3")!, waitForCompletion: true)
-            bullet.runAction(play)
-            if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
-                bullet.position = SCNVector3(0, 0, -0.01)
-                phonePlane.addChildNode(bullet)
-                bullet.physicsBody?.applyForce(direction, asImpulse: true)
-            }
+            shootBullet()
         }
     }
     
@@ -203,8 +192,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     func showTutorial() {
         tutorialInProgress = true
+        let rotation = setUpBall.rotation
         performSegue(withIdentifier: "gameToTutorialSegueID", sender: nil)
         setUpBall = nodeGenerator.getBall()
+        setUpBall.rotation = rotation
         setUpBall.position = SCNVector3(0, 0.15, -1)
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
@@ -249,6 +240,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
+    func shootBullet() {
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+        let bullet = nodeGenerator.getBullet()
+        bullets.append(bullet)
+        let (direction, _) = getUserVector()
+        let play = SCNAction.playAudio(SCNAudioSource(fileNamed: "plop.mp3")!, waitForCompletion: true)
+        bullet.runAction(play)
+        if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
+            bullet.position = SCNVector3(0, 0, -0.01)
+            phonePlane.addChildNode(bullet)
+            bullet.physicsBody?.applyForce(direction, asImpulse: true)
+        }
+    }
+    
     func removeBullets() {
         for bullet in bullets {
             let fadeOut = SCNAction.fadeOut(duration: 0.5)
@@ -259,17 +265,18 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         bullets.removeAll()
     }
     
-    //MARK: Tutorial VC Delegate 
+    //MARK: Tutorial VC Delegate
+    
     func replaceBallWithBomb() {
-        let moveSetUpBall = SCNAction.moveBy(x: -1, y: 0, z: 0, duration: 1.0)
+        let moveSetUpBall = SCNAction.moveBy(x: 0, y: 0, z: 2, duration: 1.0)
         moveSetUpBall.timingMode = .easeIn
         setUpBall.runAction(moveSetUpBall) {
             self.setUpBall.removeFromParentNode()
         }
         tutorialBomb = nodeGenerator.getBomb()
         self.sceneView.pointOfView?.addChildNode(tutorialBomb)
-        tutorialBomb.position = SCNVector3(1, 0.15, -1)
-        let moveTutorialBomb = SCNAction.moveBy(x: -1, y: 0, z: 0, duration: 1.0)
+        tutorialBomb.position = SCNVector3(0, 1.15, -1)
+        let moveTutorialBomb = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1.0)
         let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBomb)
         tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
@@ -290,13 +297,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             phonePlane.addChildNode(bullet)
             bullet.physicsBody?.applyForce(direction, asImpulse: true)
         }
-        
-//        tutorialBomb.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
-//        let fadeOut = SCNAction.fadeOut(duration: 0.4)
-//        tutorialBomb.runAction(fadeOut) {
-//            self.tutorialBomb.removeAllParticleSystems()
-//            self.tutorialBomb.removeFromParentNode()
-//        }
     }
     
     //MARK: Helper Calculation Functions
@@ -334,9 +334,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             print("not available")
         case .normal:
             print("normal")
-            //                if (gameStarted == false && menuOnScreen == false) {
-            //                    addInitialBall()
-            //                }
         }
     }
     
@@ -344,6 +341,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         if (tutorialInProgress == true) {
+            // contacts made during tutorial
             if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                 if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
                     if (contact.nodeA.name == BombConstants.name) {
@@ -369,6 +367,27 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     return
                 }
             }
+            
+            if (contact.nodeA.name == PhonePlaneConstants.name || contact.nodeB.name == PhonePlaneConstants.name) {
+                // collision with ball
+                if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
+                    DispatchQueue.main.async {
+                        self.heavyFeedbackGenerator.prepare()
+                        self.heavyFeedbackGenerator.impactOccurred()
+                    }
+                    score = score + 1
+                    let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
+                    contact.nodeA.runAction(caughtSound)
+                    if (contact.nodeA.name == BallConstants.name) {
+                        contact.nodeA.removeFromParentNode()
+                    } else if (contact.nodeB.name == BallConstants.name) {
+                        contact.nodeB.removeFromParentNode()
+                    }
+                    return
+                }
+            }
+            
+            
         }
         
         if (gameStarted) {
