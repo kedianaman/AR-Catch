@@ -48,7 +48,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     let levelsManager = LevelsManager()
     let nodeGenerator = NodeGenerator()
-
+    
     //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
     @IBOutlet weak var scoreLabel: UILabel!
@@ -57,18 +57,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet var ballMissCrosses: [UIImageView]!
     @IBOutlet var backgroundCrosses: [UIImageView]!
     @IBOutlet weak var yForceStepper: UIStepper!
+    @IBOutlet weak var headerBannerView: UIView!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         self.sceneView.scene.physicsWorld.contactDelegate = self
-//        configuration.isLightEstimationEnabled = true
+        //        configuration.isLightEstimationEnabled = true
         self.sceneView.session.run(configuration)
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
         self.sceneView.showsStatistics = true
-//        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
+        //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
         addMissPlane()
@@ -93,13 +94,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     // shoots bullets when bomb is on screen
     @IBAction func didTapScreen(_ sender: Any) {
-//        if (sceneView.scene.isPaused == true) {
-//            sceneView.scene.isPaused = false
-//        } else {
-//            sceneView.scene.isPaused = true
-//
-//        }
-
         if (bombOnScreen == true) {
             selectionFeedbackGenerator.prepare()
             selectionFeedbackGenerator.selectionChanged()
@@ -129,14 +123,17 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(setUpBall)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
-        scoreLabel.alpha = 0
-        crossesBackgroundStackView.alpha = 0
+//        scoreLabel.alpha = 0
+//        crossesBackgroundStackView.alpha = 0
+        animateStartGameUI(begin: false)
+        headerBannerView.alpha = 0
         numBallMisses = 0
     }
     
     func pregameSetUp() {
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
+        headerBannerView.alpha = 1
         gameStarted = false
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
@@ -171,20 +168,36 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         if (begin == true) {
             for backgroundCross in backgroundCrosses {
                 backgroundCross.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
-            }
-            var duration = 0.4
-            for backgroundCross in backgroundCrosses {
-                UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                    backgroundCross.transform = CGAffineTransform.identity
-                }, completion: nil)
-                duration = duration + 0.2
+                backgroundCross.alpha = 1
             }
             scoreLabel.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
-            UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
-                self.scoreLabel.transform = CGAffineTransform.identity
+            scoreLabel.alpha = 1
+        }
+       
+        var duration = 0.4
+        for backgroundCross in backgroundCrosses {
+            UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+                if (begin == true) {
+                    backgroundCross.transform = CGAffineTransform.identity
+                } else {
+                    backgroundCross.transform = CGAffineTransform(scaleX: 0.1, y: 0.1)
+                    backgroundCross.alpha = 0
+                }
             }, completion: nil)
+            duration = duration + 0.2
         }
         
+        
+        UIView.animate(withDuration: 0.6, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.9, options: .curveEaseInOut, animations: {
+            self.headerBannerView.alpha = 0
+            if (begin == true) {
+                self.scoreLabel.transform = CGAffineTransform.identity
+            } else {
+                self.scoreLabel.transform = CGAffineTransform(scaleX: 0.01, y: 0.01)
+                self.scoreLabel.alpha = 0
+            }
+            
+        }, completion: nil)
     }
     
     //MARK: Scene Kit Node Functions
@@ -206,7 +219,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         let planeNode = nodeGenerator.getPhonePlane()
         sceneView.pointOfView?.addChildNode(planeNode)
     }
-
+    
     func addMissPlane() {
         // plane behind the phone plane which gets hit if phone misses
         let missPlane = nodeGenerator.getMissPlane()
@@ -224,12 +237,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         setUpBall.runAction(SCNAction.group([rotateForever, moveBallDown]))
         sceneView.pointOfView?.addChildNode(setUpBall)
         
-//
-//        setUpBall = nodeGenerator.getBall()
-//        setUpBall.position = SCNVector3(0, 0, -20)
-//
-//        setUpBall.runAction(moveBallDown)
-//        sceneView.pointOfView?.addChildNode(setUpBall)
+        //
+        //        setUpBall = nodeGenerator.getBall()
+        //        setUpBall.position = SCNVector3(0, 0, -20)
+        //
+        //        setUpBall.runAction(moveBallDown)
+        //        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     func removeBullets() {
@@ -256,30 +269,30 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         }
         return (SCNVector3(0, 0, -1), SCNVector3(0, 0, -0.2))
     }
-
+    
     //MARK: AR Session Delegate
     
     func session(_ session: ARSession, cameraDidChangeTrackingState camera: ARCamera) {
         
         switch camera.trackingState {
-            case .limited(let reason):
-                switch reason {
-                case .excessiveMotion:
-                    print( "Limited tracking: excessive motion")
-                case .insufficientFeatures:
-                    print("Limited tracking: insufficient details")
-                case .initializing:
-                    print("....initializing")
-                case .relocalizing:
-                    print( "...relocalizing")
-                }
-            case .notAvailable:
-                print("not available")
-            case .normal:
-                print("normal")
-//                if (gameStarted == false && menuOnScreen == false) {
-//                    addInitialBall()
-//                }
+        case .limited(let reason):
+            switch reason {
+            case .excessiveMotion:
+                print( "Limited tracking: excessive motion")
+            case .insufficientFeatures:
+                print("Limited tracking: insufficient details")
+            case .initializing:
+                print("....initializing")
+            case .relocalizing:
+                print( "...relocalizing")
+            }
+        case .notAvailable:
+            print("not available")
+        case .normal:
+            print("normal")
+            //                if (gameStarted == false && menuOnScreen == false) {
+            //                    addInitialBall()
+            //                }
         }
     }
     
@@ -287,7 +300,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
         
         if (gameStarted) {
-
+            
             if (bombOnScreen == true) {
                 if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                     if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
@@ -390,7 +403,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         if (segue.identifier == "GameOverSegue") {
             if let gameOverVC = segue.destination as? GameOverViewController {
                 gameOverVC.score = score
-//                self.addSetUpBall()
+                //                self.addSetUpBall()
             }
         }
     }
@@ -400,17 +413,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         DispatchQueue.main.async {
             self.pregameSetUp()
         }
-//        self.menuShowingSetUp()
-//
-//        self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-//        let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
-//        moveBall.timingMode = .easeInEaseOut
-//        setUpBall.runAction(moveBall) {
-//            DispatchQueue.main.async {
-//                self.pregameSetUp()
-//            }
-//        }
-       
     }
     
     @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {
@@ -418,18 +420,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         moveBall.timingMode = .easeInEaseOut
         setUpBall.runAction(moveBall)
         self.pregameSetUp()
-
+        
     }
     
     @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
         // fix animation 
-//        self.presentedViewController?.dismiss(animated: false, completion: nil)
+        //        self.presentedViewController?.dismiss(animated: false, completion: nil)
+        
         menuOnScreen = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.menuShowingSetUp()
         }
     }
-
+    
     // Scrap later functions
     func addTestingPlane() {
         let testPlane = SCNNode()
@@ -447,7 +450,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         testPlane.physicsBody = testPlanePhyicsBody
         sceneView.scene.rootNode.addChildNode(testPlane)
     }
-
+    
 }
 
 // function to shake cross
