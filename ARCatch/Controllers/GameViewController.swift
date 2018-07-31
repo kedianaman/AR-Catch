@@ -20,6 +20,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var timer = Timer()
     var menuOnScreen = true
+    var firstTime = true
     var gameStarted = false
     var bombOnScreen = false
     var gameBall = SCNNode()
@@ -68,7 +69,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-        self.sceneView.showsStatistics = true
+//        self.sceneView.showsStatistics = true
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
@@ -113,9 +114,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: Set Up State Functions
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
-        setUpBall = nodeGenerator.getBall()
+        setUpBall = nodeGenerator.getBomb()
         setUpBall.position = SCNVector3(0, 0.15, -20)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 20000.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
         let moveBall = SCNAction.moveBy(x: 0, y: 0, z: 19, duration: 2.0)
         moveBall.timingMode = .easeIn
@@ -123,8 +124,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         sceneView.pointOfView?.addChildNode(setUpBall)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
-//        scoreLabel.alpha = 0
-//        crossesBackgroundStackView.alpha = 0
         animateStartGameUI(begin: false)
         headerBannerView.alpha = 0
         numBallMisses = 0
@@ -198,6 +197,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             }
             
         }, completion: nil)
+    }
+    
+    func showTutorial() {
+    
     }
     
     //MARK: Scene Kit Node Functions
@@ -410,9 +413,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @IBAction func unwindToGame(segue:UIStoryboardSegue) {
         menuOnScreen = true
-        DispatchQueue.main.async {
-            self.pregameSetUp()
-        }
+        self.pregameSetUp()
     }
     
     @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {

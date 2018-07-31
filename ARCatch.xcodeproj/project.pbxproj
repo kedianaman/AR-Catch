@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */; };
+		ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */; };
 		ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */; };
 		ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860320B4A21600DECEF1 /* NodeGenerator.swift */; };
 		ED28860620B4D02200DECEF1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860520B4D02200DECEF1 /* Constants.swift */; };
@@ -75,6 +76,7 @@
 /* Begin PBXFileReference section */
 		ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MLB Toronto Blue Jays Wilson.otf"; sourceTree = "<group>"; };
 		ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FNL_DEMO-KCFonts.ttf"; sourceTree = "<group>"; };
+		ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BombFire.scnp; sourceTree = "<group>"; };
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
 		ED28860320B4A21600DECEF1 /* NodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGenerator.swift; sourceTree = "<group>"; };
 		ED28860520B4D02200DECEF1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				ED28863420B5F67300DECEF1 /* Explosion.scnp */,
 				ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */,
 				ED28862520B54AB200DECEF1 /* Gas.scnp */,
+				ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */,
 				ED28862420B54AB200DECEF1 /* sparkGas.png */,
 				ED28861320B546B200DECEF1 /* spark.png */,
 			);
@@ -413,6 +416,7 @@
 				EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */,
 				ED689F4D20AFE71A000BBEE9 /* Football.scn in Resources */,
 				ED779DF620BF549600C9C0C4 /* whitenoise.wav in Resources */,
+				ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */,
 				ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */,
 				ED28861520B546B200DECEF1 /* spark.png in Resources */,
 				EDF5FCE720AFD02D008FCE67 /* balldiffuse.jpg in Resources */,
