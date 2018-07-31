@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 import AudioToolbox.AudioServices
 
-class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSessionDelegate {
+class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSessionDelegate, TutorialViewControllerDelegate {
     
     //MARK: Properties
     let configuration = ARWorldTrackingConfiguration()
@@ -25,6 +25,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var bombOnScreen = false
     var gameBall = SCNNode()
     var setUpBall = SCNNode()
+    var tutorialBomb = SCNNode()
     var bullets = [SCNNode]()
     var score = 0 {
         didSet {
@@ -114,12 +115,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     //MARK: Set Up State Functions
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
-        setUpBall = nodeGenerator.getBomb()
+        setUpBall = nodeGenerator.getBall()
         setUpBall.position = SCNVector3(0, 0.15, -20)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 20000.0)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
         let moveBall = SCNAction.moveBy(x: 0, y: 0, z: 19, duration: 2.0)
-        moveBall.timingMode = .easeIn
+        moveBall.timingMode = .easeOut
         setUpBall.runAction(SCNAction.group([rotateForever, moveBall]))
         sceneView.pointOfView?.addChildNode(setUpBall)
         startGameButton.alpha = 0
@@ -200,7 +201,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     func showTutorial() {
-    
+        performSegue(withIdentifier: "gameToTutorialSegueID", sender: nil)
+        setUpBall = nodeGenerator.getBall()
+        setUpBall.position = SCNVector3(0, 0.15, -1)
+        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
+        let rotateForever = SCNAction.repeatForever(rotateBall)
+        setUpBall.runAction(rotateForever)
+        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     //MARK: Scene Kit Node Functions
@@ -230,7 +237,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     func addSetUpBall() {
-        
         setUpBall = nodeGenerator.getBall()
         setUpBall.position = SCNVector3(0, 5, -20)
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
@@ -239,13 +245,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         moveBallDown.timingMode = .easeOut
         setUpBall.runAction(SCNAction.group([rotateForever, moveBallDown]))
         sceneView.pointOfView?.addChildNode(setUpBall)
-        
-        //
-        //        setUpBall = nodeGenerator.getBall()
-        //        setUpBall.position = SCNVector3(0, 0, -20)
-        //
-        //        setUpBall.runAction(moveBallDown)
-        //        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     func removeBullets() {
@@ -256,6 +255,33 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             }
         }
         bullets.removeAll()
+    }
+    
+    //MARK: Tutorial VC Delegate 
+    func replaceBallWithBomb() {
+        let moveSetUpBall = SCNAction.moveBy(x: -1, y: 0, z: 0, duration: 1.0)
+        moveSetUpBall.timingMode = .easeIn
+        setUpBall.runAction(moveSetUpBall) {
+            self.setUpBall.removeFromParentNode()
+        }
+        tutorialBomb = nodeGenerator.getBomb()
+        self.sceneView.pointOfView?.addChildNode(tutorialBomb)
+        tutorialBomb.position = SCNVector3(1, 0.15, -1)
+        let moveTutorialBomb = SCNAction.moveBy(x: -1, y: 0, z: 0, duration: 1.0)
+        let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
+        let rotateForever = SCNAction.repeatForever(rotateBomb)
+        tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
+
+        print("replace ball with bomb")
+    }
+    
+    func removeBomb() {
+        tutorialBomb.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+        let fadeOut = SCNAction.fadeOut(duration: 0.4)
+        tutorialBomb.runAction(fadeOut) {
+            self.tutorialBomb.removeAllParticleSystems()
+            self.tutorialBomb.removeFromParentNode()
+        }
     }
     
     //MARK: Helper Calculation Functions
@@ -406,32 +432,42 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         if (segue.identifier == "GameOverSegue") {
             if let gameOverVC = segue.destination as? GameOverViewController {
                 gameOverVC.score = score
-                //                self.addSetUpBall()
+            }
+        } else if (segue.identifier == "gameToTutorialSegueID") {
+            if let tutorialVC = segue.destination as? TutorialViewController {
+                tutorialVC.delegate = self
             }
         }
     }
     
-    @IBAction func unwindToGame(segue:UIStoryboardSegue) {
+    @IBAction func unwindFromRetry(segue:UIStoryboardSegue) {
         menuOnScreen = true
         self.pregameSetUp()
     }
     
-    @IBAction func unwindFromMenu(segue:UIStoryboardSegue) {
-        let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
-        moveBall.timingMode = .easeInEaseOut
-        setUpBall.runAction(moveBall)
-        self.pregameSetUp()
-        
+    @IBAction func unwindToStartGame(segue:UIStoryboardSegue) {
+        if (firstTime) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+                self.showTutorial()
+            }
+        } else {
+            let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
+            moveBall.timingMode = .easeIn
+            setUpBall.runAction(moveBall)
+            self.pregameSetUp()
+        }
     }
     
     @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
-        // fix animation 
-        //        self.presentedViewController?.dismiss(animated: false, completion: nil)
-        
         menuOnScreen = true
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.menuShowingSetUp()
         }
+    }
+    
+    
+    @IBAction func unwindFromTutorial(segue:UIStoryboardSegue) {
+        self.pregameSetUp()
     }
     
     // Scrap later functions

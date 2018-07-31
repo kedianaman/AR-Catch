@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */; };
 		ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */; };
+		ED1EE4FD2110F517009EFF28 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */; };
 		ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */; };
 		ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860320B4A21600DECEF1 /* NodeGenerator.swift */; };
 		ED28860620B4D02200DECEF1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28860520B4D02200DECEF1 /* Constants.swift */; };
@@ -77,6 +78,7 @@
 		ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MLB Toronto Blue Jays Wilson.otf"; sourceTree = "<group>"; };
 		ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FNL_DEMO-KCFonts.ttf"; sourceTree = "<group>"; };
 		ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BombFire.scnp; sourceTree = "<group>"; };
+		ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
 		ED28860320B4A21600DECEF1 /* NodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeGenerator.swift; sourceTree = "<group>"; };
 		ED28860520B4D02200DECEF1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				ED28863620B616E200DECEF1 /* MainMenuViewController.swift */,
 				ED99602520AE08300058EC18 /* GameViewController.swift */,
 				EDCE182520B73B1900FFE779 /* GameOverViewController.swift */,
+				ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -464,6 +467,7 @@
 			files = (
 				ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */,
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
+				ED1EE4FD2110F517009EFF28 /* TutorialViewController.swift in Sources */,
 				ED99602620AE08300058EC18 /* GameViewController.swift in Sources */,
 				EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */,
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,

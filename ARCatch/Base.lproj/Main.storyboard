@@ -98,39 +98,13 @@
                         <outlet property="playNowButton" destination="yMe-Mi-cA6" id="kRt-nc-YKD"/>
                         <outlet property="titleLabel" destination="SoW-vu-hxm" id="cHb-lT-NeU"/>
                         <outlet property="topScoreLabel" destination="zAS-J9-d7G" id="GYw-bl-pKX"/>
-                        <segue destination="PmP-K4-NHN" kind="unwind" identifier="unwindFromMenuSegueID" unwindAction="unwindFromMenuWithSegue:" id="60E-dM-xcr"/>
+                        <segue destination="PmP-K4-NHN" kind="unwind" identifier="unwindToStartGameSegueID" unwindAction="unwindToStartGameWithSegue:" id="60E-dM-xcr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lnS-Uw-HAx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="PmP-K4-NHN" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-446" y="81"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="gjq-To-HeF">
-            <objects>
-                <viewController id="x7J-z2-n5M" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ggl-bB-4Hl">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <arscnView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cQZ-Vd-wRE">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </arscnView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstAttribute="bottom" secondItem="cQZ-Vd-wRE" secondAttribute="bottom" id="Imx-2x-PMr"/>
-                            <constraint firstAttribute="trailing" secondItem="cQZ-Vd-wRE" secondAttribute="trailing" id="LKh-uy-cmL"/>
-                            <constraint firstAttribute="top" secondItem="cQZ-Vd-wRE" secondAttribute="top" id="ncL-6l-b3Q"/>
-                            <constraint firstItem="cQZ-Vd-wRE" firstAttribute="leading" secondItem="ggl-bB-4Hl" secondAttribute="leading" id="ncp-DY-yXO"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="hQF-2E-gxc"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="vhn-ff-iLY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="507" y="-709"/>
+            <point key="canvasLocation" x="513" y="-716"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -300,6 +274,7 @@
                         <outletCollection property="backgroundCrosses" destination="7eV-bf-HPX" collectionClass="NSMutableArray" id="w8D-em-WJH"/>
                         <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>
                         <segue destination="Fle-lQ-Fbp" kind="presentation" identifier="gameToMenuSegueID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Y46-uF-A6R"/>
+                        <segue destination="Lcg-BK-1wK" kind="presentation" identifier="gameToTutorialSegueID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="wrW-h8-vik"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -309,7 +284,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="514" y="81"/>
+            <point key="canvasLocation" x="513" y="27"/>
         </scene>
         <!--Game Over View Controller-->
         <scene sceneID="H27-2p-2Mk">
@@ -363,7 +338,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindToGameWithSegue:" id="BmS-SZ-QAi"/>
+                                    <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindFromRetryWithSegue:" id="BmS-SZ-QAi"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6H-su-5ug">
@@ -405,7 +380,52 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkZ-It-BzP" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="q81-NJ-Si8" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1361" y="81"/>
+            <point key="canvasLocation" x="513" y="804"/>
+        </scene>
+        <!--Tutorial View Controller-->
+        <scene sceneID="ff4-T7-bOG">
+            <objects>
+                <viewController id="Lcg-BK-1wK" customClass="TutorialViewController" customModule="ARCatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="zO2-Bk-T8v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="move your phone to catch the incoming baseballs " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kru-El-BfZ">
+                                <rect key="frame" x="10" y="417" width="355" height="59.5"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="24"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" white="0.0" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <size key="shadowOffset" width="0.0" height="2"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <gestureRecognizers/>
+                        <constraints>
+                            <constraint firstItem="Kru-El-BfZ" firstAttribute="centerY" secondItem="flk-8e-aFO" secondAttribute="centerY" multiplier="1.3" id="1xc-Xm-zfP"/>
+                            <constraint firstItem="Kru-El-BfZ" firstAttribute="centerX" secondItem="flk-8e-aFO" secondAttribute="centerX" id="9g4-5Y-ecE"/>
+                            <constraint firstItem="Kru-El-BfZ" firstAttribute="leading" secondItem="flk-8e-aFO" secondAttribute="leading" constant="10" id="YFV-uX-7at"/>
+                            <constraint firstItem="Kru-El-BfZ" firstAttribute="trailing" secondItem="flk-8e-aFO" secondAttribute="trailing" constant="-10" id="e6S-eT-MSL"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="flk-8e-aFO"/>
+                        <connections>
+                            <outletCollection property="gestureRecognizers" destination="KCq-qA-MFa" appends="YES" id="99P-PX-4mG"/>
+                        </connections>
+                    </view>
+                    <connections>
+                        <outlet property="instructionLabel" destination="Kru-El-BfZ" id="laj-cz-yvl"/>
+                        <segue destination="i3O-7h-6Vm" kind="unwind" identifier="unwindFromTutorialID" unwindAction="unwindFromTutorialWithSegue:" id="6Kc-x9-ejN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="src-xq-KHk" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="i3O-7h-6Vm" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="KCq-qA-MFa">
+                    <connections>
+                        <action selector="didTapScreen:" destination="Lcg-BK-1wK" id="aJu-a4-PLp"/>
+                    </connections>
+                </tapGestureRecognizer>
+            </objects>
+            <point key="canvasLocation" x="1382" y="27"/>
         </scene>
     </scenes>
     <resources>

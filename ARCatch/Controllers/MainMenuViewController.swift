@@ -14,8 +14,6 @@ import GameKit
 class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterControllerDelegate {
     
     //MARK: Properties
-    let configuration = ARWorldTrackingConfiguration()
-    let ball = NodeGenerator().getBall()
     var gameCenterEnabled = Bool()
     
     //MARK: IB Outlets
@@ -32,7 +30,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: IB Actions
     @IBAction func playButtonPressed(_ sender: Any) {
-        performSegue(withIdentifier: "unwindFromMenuSegueID", sender: nil)
+        performSegue(withIdentifier: "unwindToStartGameSegueID", sender: nil)
     }
     
     @IBAction func leaderboardButtonPressed(_ sender: Any) {
