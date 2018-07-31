@@ -23,6 +23,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var firstTime = true
     var gameStarted = false
     var bombOnScreen = false
+    var tutorialInProgress = Bool()
     var gameBall = SCNNode()
     var setUpBall = SCNNode()
     var tutorialBomb = SCNNode()
@@ -201,6 +202,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     func showTutorial() {
+        tutorialInProgress = true
         performSegue(withIdentifier: "gameToTutorialSegueID", sender: nil)
         setUpBall = nodeGenerator.getBall()
         setUpBall.position = SCNVector3(0, 0.15, -1)
@@ -276,12 +278,25 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     func removeBomb() {
-        tutorialBomb.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
-        let fadeOut = SCNAction.fadeOut(duration: 0.4)
-        tutorialBomb.runAction(fadeOut) {
-            self.tutorialBomb.removeAllParticleSystems()
-            self.tutorialBomb.removeFromParentNode()
+        selectionFeedbackGenerator.prepare()
+        selectionFeedbackGenerator.selectionChanged()
+        let bullet = nodeGenerator.getBullet()
+        bullets.append(bullet)
+        let (direction, _) = getUserVector()
+        let play = SCNAction.playAudio(SCNAudioSource(fileNamed: "plop.mp3")!, waitForCompletion: true)
+        bullet.runAction(play)
+        if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
+            bullet.position = SCNVector3(0, 0, -0.01)
+            phonePlane.addChildNode(bullet)
+            bullet.physicsBody?.applyForce(direction, asImpulse: true)
         }
+        
+//        tutorialBomb.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+//        let fadeOut = SCNAction.fadeOut(duration: 0.4)
+//        tutorialBomb.runAction(fadeOut) {
+//            self.tutorialBomb.removeAllParticleSystems()
+//            self.tutorialBomb.removeFromParentNode()
+//        }
     }
     
     //MARK: Helper Calculation Functions
@@ -327,6 +342,34 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
+        
+        if (tutorialInProgress == true) {
+            if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
+                if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
+                    if (contact.nodeA.name == BombConstants.name) {
+                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                        
+                    } else if (contact.nodeB.name == BombConstants.name) {
+                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                    }
+                    // strong boom vibration
+                    let pop = SystemSoundID(1520)
+                    AudioServicesPlaySystemSound(pop)
+                    contact.nodeA.physicsBody = nil
+                    contact.nodeB.physicsBody = nil
+                    contact.nodeA.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                    contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                    bombOnScreen = false
+                    self.removeBullets()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        contact.nodeB.removeFromParentNode()
+                        contact.nodeA.removeFromParentNode()
+                    }
+                    tutorialInProgress = false
+                    return
+                }
+            }
+        }
         
         if (gameStarted) {
             
