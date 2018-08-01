@@ -14,12 +14,12 @@ class LevelsManager {
     let nodeGenerator = NodeGenerator()
 
     func nodeForScore(score: Int) -> SCNNode {
-//        if (score % 2 == 0) {
-//            return nodeGenerator.getBomb()
-//        } else {
-//            return nodeGenerator.getBall()
-//        }
-//        return nodeGenerator.getBomb()
+        if (score % 2 == 0) {
+            return nodeGenerator.getBomb()
+        } else {
+            return nodeGenerator.getBall()
+        }
+        return nodeGenerator.getBomb()
         let level = score / 5
         var probabilityBomb = Double(level) / 20.0
         if (probabilityBomb > (1/4.0)) {
@@ -52,7 +52,6 @@ class LevelsManager {
         }
         let xForce = xForceFor(zForce: zForce)
         let yForce = yForceFor(zForce: zForce)
-        print ("level: \(level), zForce: \(zForce)")
         return SCNVector3(xForce, yForce, zForce)
     }
     

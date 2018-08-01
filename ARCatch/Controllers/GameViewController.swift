@@ -51,6 +51,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     let levelsManager = LevelsManager()
     let nodeGenerator = NodeGenerator()
+    let soundManager = SoundManager()
     
     //MARK: IB Outlets
     @IBOutlet weak var sceneView: ARSCNView!
@@ -343,7 +344,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
-        
         if (tutorialInProgress == true) {
             // contacts made during tutorial
             if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
@@ -380,7 +380,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         self.heavyFeedbackGenerator.impactOccurred()
                     }
                     score = score + 1
-                    let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
+                    let caughtSound = SCNAction.playAudio(soundManager.caughtBallSound(), waitForCompletion: true)
                     contact.nodeA.runAction(caughtSound)
                     if (contact.nodeA.name == BallConstants.name) {
                         contact.nodeA.removeFromParentNode()
@@ -433,7 +433,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         self.heavyFeedbackGenerator.impactOccurred()
                     }
                     score = score + 1
-                    let caughtSound = SCNAction.playAudio(SCNAudioSource(named: "caughtball.mp3")!, waitForCompletion: true)
+                    let caughtSound = SCNAction.playAudio(soundManager.caughtBallSound(), waitForCompletion: true)
                     contact.nodeA.runAction(caughtSound)
                     print("did catch ball")
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -456,18 +456,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 }
                 
             } else if (contact.nodeA.name == MissPlaneConstants.name || contact.nodeB.name == MissPlaneConstants.name) {
-                let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
-                contact.nodeA.runAction(missSound)
-                print("did miss ball")
                 if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
                     numBallMisses = numBallMisses + 1
+                    let missSound = SCNAction.playAudio(SCNAudioSource(named: "Whoosh.mp3")!, waitForCompletion: true)
+                    contact.nodeA.runAction(missSound)
+                    print("did miss ball")
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
-                    if (self.numBallMisses == 3) {
-                        self.gameStarted = false
-                        self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
-                    } else {
-                        self.addObject()
+                if (contact.nodeA.name != "NA" && contact.nodeB.name != "NA") {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
+                        if (self.numBallMisses == 3) {
+                            self.gameStarted = false
+                            self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
+                        } else {
+                            self.addObject()
+                        }
                     }
                 }
                 
@@ -479,12 +481,24 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 contact.nodeB.removeFromParentNode()
             }
             
-            
             if (contact.nodeA.name == BombConstants.name) {
-                contact.nodeA.removeFromParentNode()
+                contact.nodeA.name = "NA"
             } else if (contact.nodeB.name == BombConstants.name) {
-                contact.nodeB.removeFromParentNode()
+                contact.nodeB.name = "NA"
             }
+            
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+                if (contact.nodeA.name == BombConstants.name) {
+                    contact.nodeA.removeFromParentNode()
+                } else if (contact.nodeB.name == BombConstants.name) {
+                    contact.nodeB.removeFromParentNode()
+                }
+            }
+//            if (contact.nodeA.name == BombConstants.name) {
+//                contact.nodeA.removeFromParentNode()
+//            } else if (contact.nodeB.name == BombConstants.name) {
+//                contact.nodeB.removeFromParentNode()
+//            }
             self.removeBullets()
         }
     }

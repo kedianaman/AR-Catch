@@ -43,8 +43,8 @@ class NodeGenerator {
         bomb.name = BombConstants.name
         bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
         
-        let audioSource = SCNAudioSource(fileNamed: "whitenoise.wav")!
-        audioSource.volume = 0.001
+        let audioSource = SCNAudioSource(fileNamed: "litfuse.m4a")!
+        audioSource.volume = 0.05
         audioSource.isPositional = true
         audioSource.shouldStream = false
         audioSource.loops = true
