@@ -450,6 +450,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     }
                     bombOnScreen = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                        self.gameStarted = false
                         self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
                     }
                 }
@@ -463,6 +464,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 }
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.2){
                     if (self.numBallMisses == 3) {
+                        self.gameStarted = false
                         self.performSegue(withIdentifier: "GameOverSegue", sender: nil)
                     } else {
                         self.addObject()
@@ -507,6 +509,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @IBAction func unwindFromRetry(segue:UIStoryboardSegue) {
         menuOnScreen = true
+        gameStarted = false
         self.pregameSetUp()
     }
     
@@ -525,6 +528,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     @IBAction func unwindToGoToMenu(segue:UIStoryboardSegue) {
         menuOnScreen = true
+        gameStarted = false 
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.menuShowingSetUp()
         }
