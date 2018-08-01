@@ -87,6 +87,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         }
     }
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     //MARK: IB Actions
     @IBAction func hitStartButton(_ sender: UIButton) {
         startGameSetUp()

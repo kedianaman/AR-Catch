@@ -33,7 +33,7 @@
                                 <color key="shadowColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-DR-OxM">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="best" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O4z-DR-OxM">
                                 <rect key="frame" x="157.5" y="379" width="60.5" height="37"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -74,7 +74,7 @@
                                             <constraint firstAttribute="width" secondItem="NeY-ZF-g3M" secondAttribute="height" multiplier="1:1" id="17t-zz-3Ej"/>
                                             <constraint firstAttribute="width" constant="40" id="ddk-Ll-G2S"/>
                                         </constraints>
-                                        <state key="normal" image="Volume Off"/>
+                                        <state key="normal" image="Volume On"/>
                                         <connections>
                                             <action selector="volumeButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="0MS-AM-T55"/>
                                         </connections>
@@ -360,7 +360,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="w7b-Rb-dmw" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
-                                <rect key="frame" x="87.5" y="524.5" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="490.5" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="5mL-pM-RBc"/>
@@ -398,7 +398,7 @@
                             <constraint firstItem="r2F-59-uR0" firstAttribute="centerX" secondItem="TBI-t7-Ulk" secondAttribute="centerX" id="JhC-z1-qto"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Kdd-Dh-oPN"/>
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
-                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.6" id="Wmm-tY-PBj"/>
+                            <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.5" id="Wmm-tY-PBj"/>
                             <constraint firstItem="F6H-su-5ug" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Xfi-c6-Xva"/>
                             <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
                             <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="TBI-t7-Ulk" secondAttribute="trailing" constant="20" id="eeM-G5-G0w"/>
@@ -493,6 +493,6 @@
         <image name="Heart" width="106" height="101"/>
         <image name="Home" width="108" height="108"/>
         <image name="Leaderboard" width="93" height="82"/>
-        <image name="Volume Off" width="109" height="100"/>
+        <image name="Volume On" width="108" height="100"/>
     </resources>
 </document>
