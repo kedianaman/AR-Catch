@@ -33,15 +33,6 @@ class GameOverViewController: UIViewController {
         }
     }
     
-    //MARK: IB Action
-    @IBAction func shareButtonPressed(_ sender: Any) {
-        if let myWebsite = NSURL(string: "https://itunes.apple.com/us/app/trojansense/id1361503226?mt=8") {
-            let shareText = "I scored \(score!) in Balls & Bombs! Play it too at: "
-            let activityVC = UIActivityViewController(activityItems: [shareText, myWebsite], applicationActivities: [])
-            self.present(activityVC, animated: true, completion: nil)
-        }
-    }
-    
     //MARK: Helper Functions
     func addScoreAndSubmit(topScore: Int) {
         let bestSpeedInt = GKScore(leaderboardIdentifier: Identifiers.leaderboardID)
