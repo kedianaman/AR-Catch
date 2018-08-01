@@ -332,6 +332,16 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="J6F-7C-V8e">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="A3J-Ia-BtS">
+                                            <rect key="frame" x="156.5" y="426" width="61" height="41"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                            <state key="normal" title="Share"/>
+                                            <connections>
+                                                <action selector="shareButtonPressed:" destination="EFR-oC-8jZ" eventType="touchUpInside" id="qpi-0Q-VBu"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
                                 </view>
                                 <blurEffect style="dark"/>
                             </visualEffectView>
@@ -397,11 +407,13 @@
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.6" id="Wmm-tY-PBj"/>
                             <constraint firstItem="F6H-su-5ug" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Xfi-c6-Xva"/>
+                            <constraint firstItem="A3J-Ia-BtS" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="aqA-QQ-WNq"/>
                             <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
                             <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="TBI-t7-Ulk" secondAttribute="trailing" constant="20" id="eeM-G5-G0w"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="leading" secondItem="Uwh-pb-jjd" secondAttribute="leading" constant="20" id="gHO-yY-htI"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" id="k5X-qM-uNL"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="o18-Kh-Y2v"/>
+                            <constraint firstItem="A3J-Ia-BtS" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.3" id="t8d-LM-W4A"/>
                             <constraint firstAttribute="bottom" secondItem="fNR-UJ-2N4" secondAttribute="bottom" id="xEy-uf-mC1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uwh-pb-jjd"/>
@@ -487,8 +499,8 @@
     <resources>
         <image name="Cross" width="90" height="92"/>
         <image name="Cross Not Selected" width="90" height="92"/>
-        <image name="Heart" width="100" height="100"/>
+        <image name="Heart" width="106" height="101"/>
         <image name="Leaderboard" width="93" height="82"/>
-        <image name="Volume Off" width="100" height="100"/>
+        <image name="Volume Off" width="109" height="100"/>
     </resources>
 </document>

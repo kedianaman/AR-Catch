@@ -391,7 +391,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         }
         
         if (gameStarted) {
-            
             if (bombOnScreen == true) {
                 if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                     if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
