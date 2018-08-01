@@ -441,9 +441,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     AudioServicesPlaySystemSound(vibrate)
                     // collision with bomb -> explosion
                     if (contact.nodeA.name == BombConstants.name) {
-                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                        contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                     } else if (contact.nodeB.name == BombConstants.name) {
-                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "Explosion.scnp", inDirectory: nil)!)
+                        contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                     }
                     bombOnScreen = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {

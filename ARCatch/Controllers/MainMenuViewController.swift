@@ -10,27 +10,45 @@ import UIKit
 import SceneKit
 import ARKit
 import GameKit
+import StoreKit
 
 class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterControllerDelegate {
     
     //MARK: Properties
     var gameCenterEnabled = Bool()
+    var volumeEnabled = true
     
     //MARK: IB Outlets
     @IBOutlet weak var topScoreLabel: UILabel!
     @IBOutlet weak var playNowButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     
+    
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setUpView()
         authenticateLocalPlayer()
+        
     }
     
     //MARK: IB Actions
     @IBAction func playButtonPressed(_ sender: Any) {
         performSegue(withIdentifier: "unwindToStartGameSegueID", sender: nil)
+    }
+    
+    @IBAction func heartButtonPressed(_ sender: Any) {
+        SKStoreReviewController.requestReview()
+    }
+  
+    @IBAction func volumeButtonPressed(_ sender: UIButton) {
+        if (volumeEnabled == true) {
+            sender.setImage(#imageLiteral(resourceName: "Volume Off"), for: .normal)
+            volumeEnabled = false
+        } else {
+            sender.setImage(#imageLiteral(resourceName: "Volume On"), for: .normal)
+            volumeEnabled = true
+        }
     }
     
     @IBAction func leaderboardButtonPressed(_ sender: Any) {

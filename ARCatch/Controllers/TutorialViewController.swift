@@ -26,8 +26,12 @@ class TutorialViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         instructionLabel.text = instructionTexts[0]
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         UIView.animate(withDuration: 1.0, delay: 0.0, options: [.repeat, .autoreverse], animations: {
-            self.tapToContinueLabel.alpha = 0.5
+            self.tapToContinueLabel.alpha = 0
         }, completion: nil)
     }
     
@@ -42,8 +46,7 @@ class TutorialViewController: UIViewController {
             delegate?.replaceBallWithBomb()
         } else if (stepNumber == 2) {
             delegate?.removeBomb()
-            performSegue(withIdentifier: "unwindFromTutorialID", sender: nil)
-        }
+            performSegue(withIdentifier: "unwindFromTutorialID", sender: nil)        }
         
     }
     
