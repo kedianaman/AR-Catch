@@ -131,6 +131,7 @@
                         <outlet property="playNowButton" destination="yMe-Mi-cA6" id="kRt-nc-YKD"/>
                         <outlet property="titleLabel" destination="SoW-vu-hxm" id="cHb-lT-NeU"/>
                         <outlet property="topScoreLabel" destination="zAS-J9-d7G" id="GYw-bl-pKX"/>
+                        <outlet property="volumeButton" destination="NeY-ZF-g3M" id="SJD-JY-PKd"/>
                         <segue destination="PmP-K4-NHN" kind="unwind" identifier="unwindToStartGameSegueID" unwindAction="unwindToStartGameWithSegue:" id="60E-dM-xcr"/>
                     </connections>
                 </viewController>

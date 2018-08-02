@@ -16,17 +16,30 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: Properties
     var gameCenterEnabled = Bool()
-    var volumeEnabled = true
+    var soundManager = SoundManager()
+    var volumeEnabled: Bool! {
+        didSet {
+            if (volumeEnabled == true) {
+                soundManager.volumeOn = true
+                volumeButton.setImage(#imageLiteral(resourceName: "Volume On"), for: .normal)
+            } else {
+                soundManager.volumeOn = false
+                volumeButton.setImage(#imageLiteral(resourceName: "Volume Off"), for: .normal)
+            }
+        }
+    }
     
     //MARK: IB Outlets
     @IBOutlet weak var topScoreLabel: UILabel!
     @IBOutlet weak var playNowButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var volumeButton: UIButton!
     
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        volumeEnabled = soundManager.volumeOn
         setUpView()
         authenticateLocalPlayer()
         
@@ -43,10 +56,8 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
   
     @IBAction func volumeButtonPressed(_ sender: UIButton) {
         if (volumeEnabled == true) {
-            sender.setImage(#imageLiteral(resourceName: "Volume Off"), for: .normal)
             volumeEnabled = false
         } else {
-            sender.setImage(#imageLiteral(resourceName: "Volume On"), for: .normal)
             volumeEnabled = true
         }
     }

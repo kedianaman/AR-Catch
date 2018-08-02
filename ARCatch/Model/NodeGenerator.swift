@@ -43,16 +43,17 @@ class NodeGenerator {
         bomb.name = BombConstants.name
         bomb.addParticleSystem(SCNParticleSystem(named: "Gas.scnp", inDirectory: nil)!)
         
-        let audioSource = SCNAudioSource(fileNamed: "litfuse.m4a")!
-        audioSource.volume = 0.05
-        audioSource.isPositional = true
-        audioSource.shouldStream = false
-        audioSource.loops = true
-        audioSource.load()
-        let player = SCNAudioPlayer(source: audioSource)
-        bomb.addAudioPlayer(player)
-        let play = SCNAction.playAudio(audioSource, waitForCompletion: true)
-        bomb.runAction(play)
+        if let audioSource = SoundManager().litFuseAudioPlayer {
+            audioSource.volume = 0.05
+            audioSource.isPositional = true
+            audioSource.shouldStream = false
+            audioSource.loops = true
+            audioSource.load()
+            let player = SCNAudioPlayer(source: audioSource)
+            bomb.addAudioPlayer(player)
+            let play = SCNAction.playAudio(audioSource, waitForCompletion: true)
+            bomb.runAction(play)
+        }
         
         return bomb
     }

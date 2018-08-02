@@ -45,7 +45,6 @@
 		EDB3ABD12112702B00B0FACC /* baseball_catch-6.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABC621126F5900B0FACC /* baseball_catch-6.m4a */; };
 		EDB3ABD22112702B00B0FACC /* baseball_catch-7.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABC821126F5900B0FACC /* baseball_catch-7.m4a */; };
 		EDB3ABD42112774500B0FACC /* litfuse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABD32112765200B0FACC /* litfuse.m4a */; };
-		EDB3ABDA2112790800B0FACC /* litfuseShort.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABD9211278F900B0FACC /* litfuseShort.m4a */; };
 		EDB3ABDC211280F500B0FACC /* blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABDB211280F400B0FACC /* blop.mp3 */; };
 		EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */; };
 		EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */; };
@@ -57,6 +56,7 @@
 		EDE633EA20C6249E002A1FFE /* FNL_DEMO-KCFonts.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */; };
 		EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE633EB20C64B3F002A1FFE /* GCHelper.swift */; };
 		EDE633EF20C64CA9002A1FFE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE633EE20C64CA9002A1FFE /* GameKit.framework */; };
+		EDE9444721128680002191AD /* Pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDE9444621128680002191AD /* Pop.mp3 */; };
 		EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */; };
 		EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE220AFB7B6008FCE67 /* Ball.scn */; };
 /* End PBXBuildFile section */
@@ -81,6 +81,7 @@
 /* Begin PBXFileReference section */
 		ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "MLB Toronto Blue Jays Wilson.otf"; sourceTree = "<group>"; };
 		ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FNL_DEMO-KCFonts.ttf"; sourceTree = "<group>"; };
+		ED12F50421138F340001893D /* quickExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = quickExplode.m4a; sourceTree = "<group>"; };
 		ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BombFire.scnp; sourceTree = "<group>"; };
 		ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
@@ -124,7 +125,6 @@
 		EDB3ABCA21126F5900B0FACC /* baseball_catch-5.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "baseball_catch-5.m4a"; sourceTree = "<group>"; };
 		EDB3ABCB21126FC700B0FACC /* baseball_catch-1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "baseball_catch-1.m4a"; sourceTree = "<group>"; };
 		EDB3ABD32112765200B0FACC /* litfuse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = litfuse.m4a; sourceTree = "<group>"; };
-		EDB3ABD9211278F900B0FACC /* litfuseShort.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = litfuseShort.m4a; sourceTree = "<group>"; };
 		EDB3ABDB211280F400B0FACC /* blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blop.mp3; sourceTree = "<group>"; };
 		EDB7F48620BDC6120048C3FB /* Bullet.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Bullet.scn; sourceTree = "<group>"; };
 		EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches_1.jpg; sourceTree = "<group>"; };
@@ -135,6 +135,7 @@
 		EDE347BC20C85E7200934D62 /* baseballDiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseballDiffuse.png; sourceTree = "<group>"; };
 		EDE633EB20C64B3F002A1FFE /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
 		EDE633EE20C64CA9002A1FFE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		EDE9444621128680002191AD /* Pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pop.mp3; sourceTree = "<group>"; };
 		EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		EDF5FCE220AFB7B6008FCE67 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -224,12 +225,12 @@
 			isa = PBXGroup;
 			children = (
 				EDB3ABD32112765200B0FACC /* litfuse.m4a */,
-				EDB3ABD9211278F900B0FACC /* litfuseShort.m4a */,
 				ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */,
 				ED779DF520BF549600C9C0C4 /* whitenoise.wav */,
 				ED82B25720BF617200A61475 /* plop.mp3 */,
 				EDB3ABDB211280F400B0FACC /* blop.mp3 */,
 				ED82B25A20BF629200A61475 /* Jump.mp3 */,
+				ED12F50421138F340001893D /* quickExplode.m4a */,
 				ED82B25C20BF655600A61475 /* Grenade.wav */,
 				EDB3ABCB21126FC700B0FACC /* baseball_catch-1.m4a */,
 				EDB3ABC521126F5900B0FACC /* baseball_catch-2.m4a */,
@@ -238,6 +239,7 @@
 				EDB3ABCA21126F5900B0FACC /* baseball_catch-5.m4a */,
 				EDB3ABC621126F5900B0FACC /* baseball_catch-6.m4a */,
 				EDB3ABC821126F5900B0FACC /* baseball_catch-7.m4a */,
+				EDE9444621128680002191AD /* Pop.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -439,13 +441,13 @@
 				ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */,
 				EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */,
 				ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */,
+				EDE9444721128680002191AD /* Pop.mp3 in Resources */,
 				ED28861020B4E9DE00DECEF1 /* Metal.png in Resources */,
 				EDB3ABD22112702B00B0FACC /* baseball_catch-7.m4a in Resources */,
 				ED99602B20AE08320058EC18 /* Assets.xcassets in Resources */,
 				ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */,
 				ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */,
 				EDE347BD20C85E7200934D62 /* baseballDiffuse.png in Resources */,
-				EDB3ABDA2112790800B0FACC /* litfuseShort.m4a in Resources */,
 				EDB3ABCD2112702700B0FACC /* baseball_catch-2.m4a in Resources */,
 				EDB3ABCF2112702B00B0FACC /* baseball_catch-4.m4a in Resources */,
 				ED82B25820BF617300A61475 /* plop.mp3 in Resources */,

@@ -71,7 +71,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-//        self.sceneView.showsStatistics = true
+        self.sceneView.showsStatistics = true
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
@@ -253,8 +253,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         let bullet = nodeGenerator.getBullet()
         bullets.append(bullet)
         let (direction, _) = getUserVector()
-        let play = SCNAction.playAudio(soundManager.plopSound, waitForCompletion: true)
-        bullet.runAction(play)
+        if let plopSound = soundManager.plopSound {
+            let play = SCNAction.playAudio(plopSound, waitForCompletion: true)
+            bullet.runAction(play)
+        }
         if let phonePlane = self.sceneView.pointOfView?.childNodes.first {
             bullet.position = SCNVector3(0, 0, -0.01)
             phonePlane.addChildNode(bullet)
@@ -349,8 +351,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         self.heavyFeedbackGenerator.impactOccurred()
                     }
                     score = score + 1
-                    let caughtSound = SCNAction.playAudio(soundManager.caughtBallSound(), waitForCompletion: true)
-                    contact.nodeA.runAction(caughtSound)
+                    if let caughtBallSound = soundManager.caughtBallSound() {
+                        let caughtSound = SCNAction.playAudio(caughtBallSound, waitForCompletion: true)
+                        contact.nodeA.runAction(caughtSound)
+                    }
                     if (contact.nodeA.name == BallConstants.name) {
                         contact.nodeA.removeFromParentNode()
                     } else if (contact.nodeB.name == BallConstants.name) {
@@ -362,11 +366,22 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             // b) Part 2 of tutorial when bullet hits bomb
             if (contact.nodeA.name == "bullet" || contact.nodeB.name == "bullet") {
                 if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
+                    let bombSound = soundManager.bombPop
                     if (contact.nodeA.name == BombConstants.name) {
+                        contact.nodeA.removeAllParticleSystems()
+                        if let bombSound = bombSound {
+                            let burstSound = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                            contact.nodeA.runAction(burstSound)
+                        }
                         contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                         
                     } else if (contact.nodeB.name == BombConstants.name) {
+                        contact.nodeB.removeAllParticleSystems()
                         contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                        if let bombSound = bombSound {
+                            let burstSound = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                            contact.nodeA.runAction(burstSound)
+                        }
                     }
                     // strong boom vibration
                     let pop = SystemSoundID(1520)
@@ -377,7 +392,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     contact.nodeB.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
                     bombOnScreen = false
                     self.removeBullets()
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                         contact.nodeB.removeFromParentNode()
                         contact.nodeA.removeFromParentNode()
                     }
@@ -388,6 +403,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             
         }
         
+        let bombSound = soundManager.bombPop
         // 2. Collisions after game has started
         if (gameStarted) {
             // a) check for bullet and bomb collision if bomb is on screen
@@ -396,10 +412,21 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     // create explosion effect for collision
                     if (contact.nodeA.name == BombConstants.name || contact.nodeB.name == BombConstants.name) {
                         if (contact.nodeA.name == BombConstants.name) {
+                            contact.nodeA.removeAllParticleSystems()
                             contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                            if let bombSound = bombSound {
+                                let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                                contact.nodeA.runAction(burstSoundAction)
+                            }
                             
                         } else if (contact.nodeB.name == BombConstants.name) {
+                            contact.nodeB.removeAllParticleSystems()
                             contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                            if let bombSound = bombSound {
+                                let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                                contact.nodeB.runAction(burstSoundAction)
+                            }
+    
                         }
                         // strong boom vibration
                         let pop = SystemSoundID(1520)
@@ -412,9 +439,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         bombOnScreen = false
                         // remove bullets and nodes
                         self.removeBullets()
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                        // remove after 0.6 so full explode sound is played
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
                             contact.nodeB.removeFromParentNode()
                             contact.nodeA.removeFromParentNode()
+                        }
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                             self.addObject()
                         }
                         return
@@ -431,8 +461,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                         self.heavyFeedbackGenerator.impactOccurred()
                     }
                     score = score + 1
-                    let caughtSound = SCNAction.playAudio(soundManager.caughtBallSound(), waitForCompletion: true)
-                    contact.nodeA.runAction(caughtSound)
+                    if let caughtBallSound = soundManager.caughtBallSound() {
+                        let caughtSoundAction = SCNAction.playAudio(caughtBallSound, waitForCompletion: true)
+                        contact.nodeA.runAction(caughtSoundAction)
+                    }
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
                         self.addObject()
                     }
@@ -442,8 +474,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     AudioServicesPlaySystemSound(vibrate)
                     if (contact.nodeA.name == BombConstants.name) {
                         contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                        if let bombSound = bombSound {
+                            let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                            contact.nodeB.runAction(burstSoundAction)
+                        }
                     } else if (contact.nodeB.name == BombConstants.name) {
                         contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
+                        if let bombSound = bombSound {
+                            let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)
+                            contact.nodeA.runAction(burstSoundAction)
+                        }
                     }
                     bombOnScreen = false
                     DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
@@ -456,8 +496,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 // Colission with ball
                 if (contact.nodeA.name == BallConstants.name || contact.nodeB.name == BallConstants.name) {
                     numBallMisses = numBallMisses + 1
-                    let missSound = SCNAction.playAudio(soundManager.missSound, waitForCompletion: true)
-                    contact.nodeA.runAction(missSound)
+                    if let missSound = soundManager.missSound {
+                        let missSoundAction = SCNAction.playAudio(missSound, waitForCompletion: true)
+                        contact.nodeA.runAction(missSoundAction)
+                    }
+                
                 }
                 // ignore node with "NA", this is old bomb which is going to be removed
                 if (contact.nodeA.name != "NA" && contact.nodeB.name != "NA") {
@@ -479,15 +522,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             }
             
             // if bomb, remove after delay so positional audio can be heard
+            var bomb: SCNNode?
             if (contact.nodeA.name == BombConstants.name) {
-                contact.nodeA.name = "NA"
+                bomb = contact.nodeA
+            }
+            if (contact.nodeB.name == BombConstants.name) {
+                bomb = contact.nodeB
+            }
+            if let bomb = bomb {
+                bomb.removeAllParticleSystems()
+                bomb.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
+                bomb.name = "NA"
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    contact.nodeA.removeFromParentNode()
-                }
-            } else if (contact.nodeB.name == BombConstants.name) {
-                contact.nodeB.name = "NA"
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
-                    contact.nodeB.removeFromParentNode()
+                    bomb.removeFromParentNode()
                 }
             }
             self.removeBullets()

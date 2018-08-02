@@ -11,22 +11,60 @@ import SceneKit
 
 class SoundManager {
     
-    func caughtBallSound() ->  SCNAudioSource {
-        let randomNumber = (arc4random() % 7) + 1
-        let soundName = "baseball_catch-\(randomNumber).m4a"
-        print(soundName)
-        return SCNAudioSource(named: soundName)!
+    var volumeOn: Bool {
+        set {
+            UserDefaults.standard.set(newValue, forKey: "volumeOnKey")
+        }
+        get {
+            if let volumeOn = UserDefaults.standard.value(forKey: "volumeOnKey") as? Bool {
+                return volumeOn
+            } else {
+                return true
+            }
+        }
     }
     
-    var plopSound: SCNAudioSource {
-        return SCNAudioSource(named: "plop.mp3")!
+    func caughtBallSound() ->  SCNAudioSource? {
+        if (volumeOn) {
+            let randomNumber = (arc4random() % 7) + 1
+            let soundName = "baseball_catch-\(randomNumber).m4a"
+            print(soundName)
+            return SCNAudioSource(named: soundName)!
+        } else {
+            return nil
+        }
     }
     
-    var missSound: SCNAudioSource {
-        return SCNAudioSource(named: "Whoosh.mp3")!
-
+    var plopSound: SCNAudioSource? {
+        if (volumeOn) {
+            return SCNAudioSource(named: "plop.mp3")!
+        } else {
+            return nil
+        }
     }
     
+    var missSound: SCNAudioSource? {
+        if (volumeOn) {
+            return SCNAudioSource(named: "Whoosh.mp3")!
+        } else {
+            return nil
+        }
+    }
     
+    var bombPop: SCNAudioSource? {
+        if (volumeOn) {
+            return SCNAudioSource(named: "Grenade.wav")!
+        } else {
+            return nil
+        }
+    }
+    
+    var litFuseAudioPlayer: SCNAudioSource? {
+        if (volumeOn) {
+            return SCNAudioSource(fileNamed: "litfuse.m4a")!
+        } else {
+            return nil 
+        }
+    }
     
 }
