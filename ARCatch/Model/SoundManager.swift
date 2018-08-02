@@ -17,4 +17,16 @@ class SoundManager {
         print(soundName)
         return SCNAudioSource(named: soundName)!
     }
+    
+    var plopSound: SCNAudioSource {
+        return SCNAudioSource(named: "plop.mp3")!
+    }
+    
+    var missSound: SCNAudioSource {
+        return SCNAudioSource(named: "Whoosh.mp3")!
+
+    }
+    
+    
+    
 }

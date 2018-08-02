@@ -46,6 +46,7 @@
 		EDB3ABD22112702B00B0FACC /* baseball_catch-7.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABC821126F5900B0FACC /* baseball_catch-7.m4a */; };
 		EDB3ABD42112774500B0FACC /* litfuse.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABD32112765200B0FACC /* litfuse.m4a */; };
 		EDB3ABDA2112790800B0FACC /* litfuseShort.m4a in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABD9211278F900B0FACC /* litfuseShort.m4a */; };
+		EDB3ABDC211280F500B0FACC /* blop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDB3ABDB211280F400B0FACC /* blop.mp3 */; };
 		EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */; };
 		EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */; };
 		EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48620BDC6120048C3FB /* Bullet.scn */; };
@@ -124,6 +125,7 @@
 		EDB3ABCB21126FC700B0FACC /* baseball_catch-1.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = "baseball_catch-1.m4a"; sourceTree = "<group>"; };
 		EDB3ABD32112765200B0FACC /* litfuse.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = litfuse.m4a; sourceTree = "<group>"; };
 		EDB3ABD9211278F900B0FACC /* litfuseShort.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = litfuseShort.m4a; sourceTree = "<group>"; };
+		EDB3ABDB211280F400B0FACC /* blop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = blop.mp3; sourceTree = "<group>"; };
 		EDB7F48620BDC6120048C3FB /* Bullet.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Bullet.scn; sourceTree = "<group>"; };
 		EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches_1.jpg; sourceTree = "<group>"; };
 		EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt_texture.jpg; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */,
 				ED779DF520BF549600C9C0C4 /* whitenoise.wav */,
 				ED82B25720BF617200A61475 /* plop.mp3 */,
+				EDB3ABDB211280F400B0FACC /* blop.mp3 */,
 				ED82B25A20BF629200A61475 /* Jump.mp3 */,
 				ED82B25C20BF655600A61475 /* Grenade.wav */,
 				EDB3ABCB21126FC700B0FACC /* baseball_catch-1.m4a */,
@@ -427,6 +430,7 @@
 				ED82B25B20BF629200A61475 /* Jump.mp3 in Resources */,
 				EDB3ABD02112702B00B0FACC /* baseball_catch-5.m4a in Resources */,
 				EDB3ABCC2112702400B0FACC /* baseball_catch-1.m4a in Resources */,
+				EDB3ABDC211280F500B0FACC /* blop.mp3 in Resources */,
 				EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */,
 				ED779DF620BF549600C9C0C4 /* whitenoise.wav in Resources */,
 				ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */,
