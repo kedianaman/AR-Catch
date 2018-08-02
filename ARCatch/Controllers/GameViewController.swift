@@ -198,15 +198,22 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     }
     
     func showTutorial() {
+        // show tutorial view controller and move ball accordingly
         tutorialInProgress = true
         let rotation = setUpBall.rotation
+        let position = setUpBall.position
         performSegue(withIdentifier: "gameToTutorialSegueID", sender: nil)
         setUpBall = nodeGenerator.getBall()
         setUpBall.rotation = rotation
-        setUpBall.position = SCNVector3(0, 0.15, -1)
+        setUpBall.position = position
+        // set timing of this depending on position
+        let timeRatio = -(position.z + 1) / 19.0
+        let duration = 2.0 * timeRatio
+        print(duration)
+        let moveToPosition = SCNAction.move(to: SCNVector3(0, 0.15, -1), duration: TimeInterval(duration))
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
-        setUpBall.runAction(rotateForever)
+        setUpBall.runAction(SCNAction.group([rotateForever, moveToPosition]))
         sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
@@ -473,12 +480,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     let vibrate = SystemSoundID(kSystemSoundID_Vibrate)
                     AudioServicesPlaySystemSound(vibrate)
                     if (contact.nodeA.name == BombConstants.name) {
+                        contact.nodeA.removeFromParentNode()
                         contact.nodeB.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                         if let bombSound = bombSound {
                             let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)
                             contact.nodeB.runAction(burstSoundAction)
                         }
                     } else if (contact.nodeB.name == BombConstants.name) {
+                        contact.nodeB.removeFromParentNode()
                         contact.nodeA.addParticleSystem(SCNParticleSystem(named: "ExplosionSmall.scnp", inDirectory: nil)!)
                         if let bombSound = bombSound {
                             let burstSoundAction = SCNAction.playAudio(bombSound, waitForCompletion: true)

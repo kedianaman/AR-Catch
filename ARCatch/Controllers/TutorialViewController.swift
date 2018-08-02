@@ -46,7 +46,8 @@ class TutorialViewController: UIViewController {
             delegate?.replaceBallWithBomb()
         } else if (stepNumber == 2) {
             delegate?.removeBomb()
-            performSegue(withIdentifier: "unwindFromTutorialID", sender: nil)        }
+            performSegue(withIdentifier: "unwindFromTutorialID", sender: nil)
+        }
         
     }
     
