@@ -577,7 +577,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     // unwind segue from main menu to begin game
     @IBAction func unwindToStartGame(segue:UIStoryboardSegue) {
-        if (firstTime) {
+        if (!TutorialCompletion().completedTutorial) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showTutorial()
             }

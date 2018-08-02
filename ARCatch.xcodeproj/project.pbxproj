@@ -49,6 +49,7 @@
 		EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */; };
 		EDB7F48B20BDC6520048C3FB /* dirt_texture.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */; };
 		EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDB7F48620BDC6120048C3FB /* Bullet.scn */; };
+		EDBE288D2113B5AB00EA2B66 /* First Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE288C2113B5AB00EA2B66 /* First Launch.swift */; };
 		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
 		EDD68C50210BCEA200AFF746 /* metal_scratches.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDD68C4F210BCEA100AFF746 /* metal_scratches.jpg */; };
 		EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDE347B620C76FA900934D62 /* varsity_regular.ttf */; };
@@ -129,6 +130,7 @@
 		EDB7F48620BDC6120048C3FB /* Bullet.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Bullet.scn; sourceTree = "<group>"; };
 		EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches_1.jpg; sourceTree = "<group>"; };
 		EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = dirt_texture.jpg; sourceTree = "<group>"; };
+		EDBE288C2113B5AB00EA2B66 /* First Launch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "First Launch.swift"; sourceTree = "<group>"; };
 		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		EDD68C4F210BCEA100AFF746 /* metal_scratches.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches.jpg; sourceTree = "<group>"; };
 		EDE347B620C76FA900934D62 /* varsity_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = varsity_regular.ttf; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
 				ED6989AF2112500A003A0B6D /* SoundManager.swift */,
 				EDE633EB20C64B3F002A1FFE /* GCHelper.swift */,
+				EDBE288C2113B5AB00EA2B66 /* First Launch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -482,6 +485,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EDBE288D2113B5AB00EA2B66 /* First Launch.swift in Sources */,
 				ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */,
 				ED28860420B4A21600DECEF1 /* NodeGenerator.swift in Sources */,
 				ED1EE4FD2110F517009EFF28 /* TutorialViewController.swift in Sources */,
