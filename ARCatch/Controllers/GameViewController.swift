@@ -19,8 +19,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     var selectionFeedbackGenerator = UISelectionFeedbackGenerator()
     var timer = Timer()
+    var initialLaunch = true
     var menuOnScreen = true
-    var firstTime = true
     var gameStarted = false
     var bombOnScreen = false
     var tutorialInProgress = Bool()
@@ -60,8 +60,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     @IBOutlet weak var crossesBackgroundStackView: UIStackView!
     @IBOutlet var ballMissCrosses: [UIImageView]!
     @IBOutlet var backgroundCrosses: [UIImageView]!
-    @IBOutlet weak var yForceStepper: UIStepper!
     @IBOutlet weak var headerBannerView: UIView!
+    @IBOutlet weak var loadingView: UIView!
     
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
@@ -71,20 +71,19 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-        self.sceneView.showsStatistics = true
+//        self.sceneView.showsStatistics = true
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
         addMissPlane()
+        loadingView.alpha = 1
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if (menuOnScreen == true) {
-            menuShowingSetUp()
-        } else {
-            pregameSetUp()
-        }
+//        if (menuOnScreen == true) {
+//            menuShowingSetUp()
+//        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -208,7 +207,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         setUpBall.position = position
         // set timing of this depending on position
         let timeRatio = -(position.z + 1) / 19.0
-        let duration = 2.0 * timeRatio
+        var duration = 2.0 * timeRatio
+        if (duration < 0.01) {
+            duration = 0.0
+        }
         print(duration)
         let moveToPosition = SCNAction.move(to: SCNVector3(0, 0.15, -1), duration: TimeInterval(duration))
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
@@ -328,20 +330,48 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         switch camera.trackingState {
         case .limited(let reason):
             switch reason {
-            case .excessiveMotion:
-                print( "Limited tracking: excessive motion")
-            case .insufficientFeatures:
-                print("Limited tracking: insufficient details")
             case .initializing:
                 print("....initializing")
-            case .relocalizing:
-                print( "...relocalizing")
+            default:
+                if (initialLaunch) {
+                    loadingView.alpha = 0
+                    menuShowingSetUp()
+                    initialLaunch = false
+                }
             }
         case .notAvailable:
             print("not available")
         case .normal:
+            if (initialLaunch) {
+                loadingView.alpha = 0
+                menuShowingSetUp()
+                initialLaunch = false
+            }
             print("normal")
         }
+        
+//        switch camera.trackingState {
+//        case .limited(let reason):
+//            switch reason {
+//            case .excessiveMotion:
+//                print( "Limited tracking: excessive motion")
+//            case .insufficientFeatures:
+//                print("Limited tracking: insufficient details")
+//            case .initializing:
+//                print("....initializing")
+//            case .relocalizing:
+//                print( "...relocalizing")
+//            }
+//        case .notAvailable:
+//            print("not available")
+//        case .normal:
+//            if (initialLaunch) {
+//                loadingView.alpha = 0
+//                menuShowingSetUp()
+//                initialLaunch = false
+//            }
+//            print("normal")
+//        }
     }
     
     //MARK: Physics World Delegate
@@ -539,6 +569,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 bomb = contact.nodeB
             }
             if let bomb = bomb {
+                score = score + 1
                 bomb.removeAllParticleSystems()
                 bomb.geometry?.firstMaterial?.diffuse.contents = UIColor.clear
                 bomb.name = "NA"
@@ -577,16 +608,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     // unwind segue from main menu to begin game
     @IBAction func unwindToStartGame(segue:UIStoryboardSegue) {
-        if (!TutorialCompletion().completedTutorial) {
+//        if (!TutorialCompletion().completedTutorial) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showTutorial()
             }
-        } else {
-            let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
-            moveBall.timingMode = .easeIn
-            setUpBall.runAction(moveBall)
-            self.pregameSetUp()
-        }
+//        } else {
+//            let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
+//            moveBall.timingMode = .easeIn
+//            setUpBall.runAction(moveBall)
+//            self.pregameSetUp()
+//        }
     }
     
     // unwind segue from game over screen to go to menu 

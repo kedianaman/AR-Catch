@@ -19,18 +19,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group" translatesAutoresizingMaskIntoConstraints="NO" id="lHa-gA-G06">
-                                <rect key="frame" x="87" y="251.5" width="200" height="184"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7F2-Oh-PaJ">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group" translatesAutoresizingMaskIntoConstraints="NO" id="lHa-gA-G06">
+                                        <rect key="frame" x="87" y="241" width="200" height="184"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="lHa-gA-G06" secondAttribute="height" multiplier="314:289" id="YPI-Fg-d4m"/>
+                                            <constraint firstAttribute="width" constant="200" id="hPY-EL-c5Z"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="lHa-gA-G06" secondAttribute="height" multiplier="314:289" id="YPI-Fg-d4m"/>
-                                    <constraint firstAttribute="width" constant="200" id="hPY-EL-c5Z"/>
+                                    <constraint firstItem="lHa-gA-G06" firstAttribute="centerY" secondItem="7F2-Oh-PaJ" secondAttribute="centerY" id="UeB-U2-KaG"/>
+                                    <constraint firstItem="lHa-gA-G06" firstAttribute="centerX" secondItem="7F2-Oh-PaJ" secondAttribute="centerX" id="dTD-39-TUM"/>
                                 </constraints>
-                            </imageView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="lHa-gA-G06" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="5vn-ze-W3U"/>
-                            <constraint firstItem="lHa-gA-G06" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="ofq-Gb-7ve"/>
+                            <constraint firstAttribute="trailing" secondItem="7F2-Oh-PaJ" secondAttribute="trailing" id="42u-Or-I1L"/>
+                            <constraint firstAttribute="bottom" secondItem="7F2-Oh-PaJ" secondAttribute="bottom" id="VdU-7H-Phv"/>
+                            <constraint firstItem="7F2-Oh-PaJ" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="bGv-Cj-DNC"/>
+                            <constraint firstItem="7F2-Oh-PaJ" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="tSA-ZA-usg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -41,6 +53,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Group" width="314" height="289"/>
+        <image name="Group" width="312" height="288"/>
     </resources>
 </document>
