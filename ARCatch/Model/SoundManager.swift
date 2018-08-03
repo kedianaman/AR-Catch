@@ -8,8 +8,20 @@
 
 import Foundation
 import SceneKit
+import AVFoundation
 
 class SoundManager {
+    
+   var tapSoundPlayer = AVAudioPlayer()
+
+    init() {
+        let path = Bundle.main.path(forResource: "tap.mp3", ofType:nil)!
+        let url = URL(fileURLWithPath: path)
+        tapSoundPlayer = try! AVAudioPlayer(contentsOf: url)
+        tapSoundPlayer.volume = 0.1
+        tapSoundPlayer.prepareToPlay()
+
+    }
     
     var volumeOn: Bool {
         set {
@@ -21,6 +33,13 @@ class SoundManager {
             } else {
                 return true
             }
+        }
+    }
+    
+    func buttonTapped() {
+        if (volumeOn) {
+            tapSoundPlayer.play()
+            
         }
     }
     

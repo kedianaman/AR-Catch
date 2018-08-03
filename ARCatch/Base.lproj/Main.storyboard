@@ -466,6 +466,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="EFR-oC-8jZ" eventType="touchUpInside" id="W4b-5W-3hT"/>
                                     <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindFromRetryWithSegue:" id="BmS-SZ-QAi"/>
                                 </connections>
                             </button>
@@ -479,6 +480,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
+                                    <action selector="buttonPressed:" destination="EFR-oC-8jZ" eventType="touchUpInside" id="HGm-JG-gMA"/>
                                     <segue destination="q81-NJ-Si8" kind="unwind" unwindAction="unwindToGoToMenuWithSegue:" id="Ab2-Pl-Shv"/>
                                 </connections>
                             </button>

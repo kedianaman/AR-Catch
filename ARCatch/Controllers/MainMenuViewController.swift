@@ -47,14 +47,17 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     //MARK: IB Actions
     @IBAction func playButtonPressed(_ sender: Any) {
+        soundManager.buttonTapped()
         performSegue(withIdentifier: "unwindToStartGameSegueID", sender: nil)
     }
     
     @IBAction func heartButtonPressed(_ sender: Any) {
+        soundManager.buttonTapped()
         SKStoreReviewController.requestReview()
     }
   
     @IBAction func volumeButtonPressed(_ sender: UIButton) {
+        soundManager.buttonTapped()
         if (volumeEnabled == true) {
             volumeEnabled = false
         } else {
@@ -63,6 +66,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     }
     
     @IBAction func leaderboardButtonPressed(_ sender: Any) {
+        soundManager.buttonTapped()
         let gameCenterViewController = GKGameCenterViewController()
         gameCenterViewController.gameCenterDelegate = self
         gameCenterViewController.viewState = .leaderboards

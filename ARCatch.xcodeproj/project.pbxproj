@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */ = {isa = PBXBuildFile; fileRef = ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */; };
 		ED16AF6B2114D30E00336F98 /* NoCameraAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED16AF6A2114D30E00336F98 /* NoCameraAccessViewController.swift */; };
+		ED16AF6D2114DB1700336F98 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED16AF6C2114DB1700336F98 /* tap.mp3 */; };
 		ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */; };
 		ED1EE4FD2110F517009EFF28 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */; };
 		ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */; };
@@ -85,6 +86,7 @@
 		ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "FNL_DEMO-KCFonts.ttf"; sourceTree = "<group>"; };
 		ED12F50421138F340001893D /* quickExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = quickExplode.m4a; sourceTree = "<group>"; };
 		ED16AF6A2114D30E00336F98 /* NoCameraAccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCameraAccessViewController.swift; sourceTree = "<group>"; };
+		ED16AF6C2114DB1700336F98 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap.mp3; sourceTree = "<group>"; };
 		ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = BombFire.scnp; sourceTree = "<group>"; };
 		ED1EE4FC2110F517009EFF28 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsManager.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				EDB3ABC621126F5900B0FACC /* baseball_catch-6.m4a */,
 				EDB3ABC821126F5900B0FACC /* baseball_catch-7.m4a */,
 				EDE9444621128680002191AD /* Pop.mp3 */,
+				ED16AF6C2114DB1700336F98 /* tap.mp3 */,
 			);
 			path = Sounds;
 			sourceTree = "<group>";
@@ -447,6 +450,7 @@
 				ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */,
 				EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */,
 				ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */,
+				ED16AF6D2114DB1700336F98 /* tap.mp3 in Resources */,
 				EDE9444721128680002191AD /* Pop.mp3 in Resources */,
 				ED28861020B4E9DE00DECEF1 /* Metal.png in Resources */,
 				EDB3ABD22112702B00B0FACC /* baseball_catch-7.m4a in Resources */,

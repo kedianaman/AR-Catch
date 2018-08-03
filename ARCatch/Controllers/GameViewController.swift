@@ -85,6 +85,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     //MARK: IB Actions
     @IBAction func hitStartButton(_ sender: UIButton) {
+        soundManager.buttonTapped()
         startGameSetUp()
     }
     @IBAction func addBall(_ sender: Any) {

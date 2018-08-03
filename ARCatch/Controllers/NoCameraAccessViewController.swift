@@ -10,12 +10,12 @@ import UIKit
 
 class NoCameraAccessViewController: UIViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
+
     @IBAction func settingsClicked(_ sender: Any) {
+        SoundManager().buttonTapped()  
         guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
             return
         }

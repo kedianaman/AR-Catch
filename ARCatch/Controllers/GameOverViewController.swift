@@ -16,6 +16,7 @@ class GameOverViewController: UIViewController {
     
     //MARK: Properties
     var score: Int!
+    let soundManager = SoundManager()
     
     //MARK: VC Life Cycle
     override func viewDidLoad() {
@@ -45,5 +46,10 @@ class GameOverViewController: UIViewController {
             }
         }
     }
+    
+    @IBAction func buttonPressed(_ sender: Any) {
+        soundManager.buttonTapped()
+    }
+    
     
 }
