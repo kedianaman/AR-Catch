@@ -6,7 +6,9 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -50,7 +52,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-Mi-cA6" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
-                                <rect key="frame" x="87" y="524.5" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="524.5" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.79607843137254897" green="0.094117647058823528" blue="0.090196078431372548" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="TBL-6a-kSP"/>
@@ -140,6 +142,83 @@
             </objects>
             <point key="canvasLocation" x="513" y="-716"/>
         </scene>
+        <!--No Camera Access View Controller-->
+        <scene sceneID="5X2-xF-K5i">
+            <objects>
+                <viewController id="s1x-HR-u5R" customClass="NoCameraAccessViewController" customModule="ARCatch" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="DHz-lg-8zz">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="us0-mY-jPC" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
+                                <rect key="frame" x="87" y="524.5" width="200" height="50"/>
+                                <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="oK0-YM-N94"/>
+                                    <constraint firstAttribute="width" constant="200" id="rLV-3h-2M5"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="30"/>
+                                <state key="normal" title="settings">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="playButtonPressed:" destination="Fle-lQ-Fbp" eventType="touchUpInside" id="2A0-YM-SUO"/>
+                                    <action selector="settingsClicked:" destination="s1x-HR-u5R" eventType="touchUpInside" id="Bxi-rq-Lf0"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="balls &amp; bombs" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="25" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Gh-hk-Ugt">
+                                <rect key="frame" x="20" y="40" width="335" height="62"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                                <color key="shadowColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <size key="shadowOffset" width="0.0" height="2"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="No Camera" translatesAutoresizingMaskIntoConstraints="NO" id="sAh-wB-11w">
+                                <rect key="frame" x="107" y="160" width="161" height="161"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="sAh-wB-11w" secondAttribute="height" multiplier="1:1" id="Ort-HT-KJS"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="requires camera access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jKL-YH-ACO">
+                                <rect key="frame" x="20" y="361" width="335" height="34"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="open settings to enable" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="P4R-hQ-yY6">
+                                <rect key="frame" x="20" y="412.5" width="335" height="34"/>
+                                <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="28"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P4R-hQ-yY6" firstAttribute="leading" secondItem="l7Y-3R-7Qi" secondAttribute="leading" constant="20" id="5Eg-hc-WAZ"/>
+                            <constraint firstItem="jKL-YH-ACO" firstAttribute="leading" secondItem="l7Y-3R-7Qi" secondAttribute="leading" constant="20" id="5G1-Vr-eaY"/>
+                            <constraint firstItem="7Gh-hk-Ugt" firstAttribute="top" secondItem="l7Y-3R-7Qi" secondAttribute="top" constant="20" id="9rG-SZ-M3w"/>
+                            <constraint firstItem="P4R-hQ-yY6" firstAttribute="centerX" secondItem="l7Y-3R-7Qi" secondAttribute="centerX" id="HYn-Vg-W8E"/>
+                            <constraint firstItem="P4R-hQ-yY6" firstAttribute="centerY" secondItem="l7Y-3R-7Qi" secondAttribute="centerY" multiplier="1.25" id="MCd-7v-nv8"/>
+                            <constraint firstItem="us0-mY-jPC" firstAttribute="centerX" secondItem="l7Y-3R-7Qi" secondAttribute="centerX" id="XX3-xI-kr6"/>
+                            <constraint firstItem="jKL-YH-ACO" firstAttribute="trailing" secondItem="l7Y-3R-7Qi" secondAttribute="trailing" constant="-20" id="Zsc-2Y-rO2"/>
+                            <constraint firstItem="jKL-YH-ACO" firstAttribute="centerX" secondItem="l7Y-3R-7Qi" secondAttribute="centerX" id="afD-fd-XvA"/>
+                            <constraint firstItem="7Gh-hk-Ugt" firstAttribute="leading" secondItem="l7Y-3R-7Qi" secondAttribute="leading" constant="20" id="l3d-Ch-lIZ"/>
+                            <constraint firstItem="jKL-YH-ACO" firstAttribute="centerY" secondItem="l7Y-3R-7Qi" secondAttribute="centerY" multiplier="1.1" id="pbq-s8-CdY"/>
+                            <constraint firstItem="sAh-wB-11w" firstAttribute="centerX" secondItem="DHz-lg-8zz" secondAttribute="centerXWithinMargins" id="pli-rf-kTi"/>
+                            <constraint firstItem="us0-mY-jPC" firstAttribute="centerY" secondItem="l7Y-3R-7Qi" secondAttribute="centerY" multiplier="1.6" id="rIY-KW-9Qa"/>
+                            <constraint firstItem="l7Y-3R-7Qi" firstAttribute="trailing" secondItem="7Gh-hk-Ugt" secondAttribute="trailing" constant="20" id="t2C-Yb-st3"/>
+                            <constraint firstItem="sAh-wB-11w" firstAttribute="centerY" secondItem="DHz-lg-8zz" secondAttribute="centerYWithinMargins" multiplier="0.7" id="tNl-33-a6k"/>
+                            <constraint firstItem="l7Y-3R-7Qi" firstAttribute="trailing" secondItem="P4R-hQ-yY6" secondAttribute="trailing" constant="20" id="tqq-VE-QAU"/>
+                            <constraint firstItem="sAh-wB-11w" firstAttribute="width" secondItem="DHz-lg-8zz" secondAttribute="width" multiplier="0.43" id="zuc-vH-bTy"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="l7Y-3R-7Qi"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oCI-Ld-2jL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-485" y="30"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -156,7 +235,7 @@
                                 </connections>
                             </arscnView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gXp-hO-i6q">
-                                <rect key="frame" x="178" y="30" width="188" height="73"/>
+                                <rect key="frame" x="178" y="30" width="187.5" height="73"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -164,7 +243,7 @@
                                 <size key="shadowOffset" width="0.0" height="1"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zaF-ZL-zi8" customClass="MenuButton" customModule="ARCatch" customModuleProvider="target">
-                                <rect key="frame" x="88" y="525" width="200" height="50"/>
+                                <rect key="frame" x="87.5" y="524.5" width="200" height="50"/>
                                 <color key="backgroundColor" red="0.79607843140000001" green="0.094117647060000004" blue="0.090196078430000007" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="NGm-m8-XX2"/>
@@ -253,7 +332,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Group" translatesAutoresizingMaskIntoConstraints="NO" id="u9x-fy-XYA">
-                                        <rect key="frame" x="87" y="241" width="200" height="184"/>
+                                        <rect key="frame" x="87.5" y="241" width="200" height="184"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="u9x-fy-XYA" secondAttribute="height" multiplier="314:289" id="oxm-M8-hTB"/>
                                             <constraint firstAttribute="width" constant="200" id="yt1-RN-dXx"/>
@@ -323,6 +402,7 @@
                         <segue destination="EFR-oC-8jZ" kind="presentation" identifier="GameOverSegue" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Q9q-py-iU0"/>
                         <segue destination="Fle-lQ-Fbp" kind="presentation" identifier="gameToMenuSegueID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="Y46-uF-A6R"/>
                         <segue destination="Lcg-BK-1wK" kind="presentation" identifier="gameToTutorialSegueID" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="wrW-h8-vik"/>
+                        <segue destination="s1x-HR-u5R" kind="presentation" identifier="NoCameraSegueID" modalTransitionStyle="crossDissolve" id="Z0M-Ax-ggX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -351,7 +431,7 @@
                                 <blurEffect style="dark"/>
                             </visualEffectView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="game over" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="19P-ZU-v3U">
-                                <rect key="frame" x="46.5" y="66" width="283" height="74"/>
+                                <rect key="frame" x="46" y="66" width="283" height="74"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="60"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -509,6 +589,7 @@
         <image name="Heart" width="106" height="101"/>
         <image name="Home" width="108" height="108"/>
         <image name="Leaderboard" width="93" height="82"/>
+        <image name="No Camera" width="328" height="328"/>
         <image name="Volume On" width="108" height="100"/>
     </resources>
 </document>

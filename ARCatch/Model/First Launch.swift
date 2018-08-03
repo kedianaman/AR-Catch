@@ -9,7 +9,7 @@
 import Foundation
 
 final class TutorialCompletion {
-    
+
     let userDefaults: UserDefaults = .standard
     let key = "com.ballsAndBombs.FirstLaunch.FinishedTutorial"
     
@@ -22,7 +22,4 @@ final class TutorialCompletion {
     func setTutorialToComplete() {
         userDefaults.set(true, forKey: key)
     }
-    
-    
-    
 }

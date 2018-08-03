@@ -79,13 +79,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         loadingView.alpha = 1
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-//        if (menuOnScreen == true) {
-//            menuShowingSetUp()
-//        }
-    }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -292,13 +285,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         setUpBall.runAction(moveSetUpBall) {
             self.setUpBall.removeFromParentNode()
         }
-        tutorialBomb = nodeGenerator.getBomb()
-        self.sceneView.pointOfView?.addChildNode(tutorialBomb)
-        tutorialBomb.position = SCNVector3(0, 1.15, -1)
-        let moveTutorialBomb = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1.0)
-        let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
-        let rotateForever = SCNAction.repeatForever(rotateBomb)
-        tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
+//        tutorialBomb = nodeGenerator.getBomb()
+//        self.sceneView.pointOfView?.addChildNode(tutorialBomb)
+//        tutorialBomb.position = SCNVector3(0, 1.15, -1)
+//        let moveTutorialBomb = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1.0)
+//        let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
+//        let rotateForever = SCNAction.repeatForever(rotateBomb)
+//        tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
 
         print("replace ball with bomb")
     }
@@ -333,10 +326,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
             case .initializing:
                 print("....initializing")
             default:
-                if (initialLaunch) {
-                    loadingView.alpha = 0
-                    menuShowingSetUp()
-                    initialLaunch = false
+                if AVCaptureDevice.authorizationStatus(for: .video) ==  .authorized {
+                    if (initialLaunch) {
+                        loadingView.alpha = 0
+                        menuShowingSetUp()
+                        initialLaunch = false
+                    }
                 }
             }
         case .notAvailable:
@@ -347,31 +342,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                 menuShowingSetUp()
                 initialLaunch = false
             }
-            print("normal")
         }
-        
-//        switch camera.trackingState {
-//        case .limited(let reason):
-//            switch reason {
-//            case .excessiveMotion:
-//                print( "Limited tracking: excessive motion")
-//            case .insufficientFeatures:
-//                print("Limited tracking: insufficient details")
-//            case .initializing:
-//                print("....initializing")
-//            case .relocalizing:
-//                print( "...relocalizing")
-//            }
-//        case .notAvailable:
-//            print("not available")
-//        case .normal:
-//            if (initialLaunch) {
-//                loadingView.alpha = 0
-//                menuShowingSetUp()
-//                initialLaunch = false
-//            }
-//            print("normal")
-//        }
+    }
+    
+    func session(_ session: ARSession, didFailWithError error: Error) {
+        performSegue(withIdentifier: "NoCameraSegueID", sender: nil)
+        print(error)
     }
     
     //MARK: Physics World Delegate
@@ -397,6 +373,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
                     } else if (contact.nodeB.name == BallConstants.name) {
                         contact.nodeB.removeFromParentNode()
                     }
+                    tutorialBomb = nodeGenerator.getBomb()
+                    self.sceneView.pointOfView?.addChildNode(tutorialBomb)
+                    tutorialBomb.position = SCNVector3(0, 0.75, -1)
+                    let moveTutorialBomb = SCNAction.moveBy(x: 0, y: -0.6, z: 0, duration: 0.5)
+                    let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
+                    let rotateForever = SCNAction.repeatForever(rotateBomb)
+                    tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
                     return
                 }
             }
@@ -608,16 +591,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     // unwind segue from main menu to begin game
     @IBAction func unwindToStartGame(segue:UIStoryboardSegue) {
-//        if (!TutorialCompletion().completedTutorial) {
+        if (!TutorialCompletion().completedTutorial) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
                 self.showTutorial()
             }
-//        } else {
-//            let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
-//            moveBall.timingMode = .easeIn
-//            setUpBall.runAction(moveBall)
-//            self.pregameSetUp()
-//        }
+        } else {
+            let moveBall = SCNAction.move(to: SCNVector3(0, 0, -20), duration: 1.0)
+            moveBall.timingMode = .easeIn
+            setUpBall.runAction(moveBall)
+            self.pregameSetUp()
+        }
     }
     
     // unwind segue from game over screen to go to menu 
