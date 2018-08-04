@@ -30,13 +30,16 @@ class MenuButton: UIButton {
             if (self.transform.isIdentity) {
                 UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { () -> Void in
                     self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                    self.backgroundColor = UIColor.ARCatchHighligtedRedColor()
                 }, completion: nil)
             }
         }
         else {
             if (self.transform.isIdentity == false) {
+                self.backgroundColor = UIColor.ARCatchNormalRedColor()
                 UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { () -> Void in
                     self.transform = CGAffineTransform.identity
+                    self.backgroundColor = UIColor.ARCatchNormalRedColor()
                 }, completion: nil)
             }
         }

@@ -21,7 +21,12 @@ class GameOverViewController: UIViewController {
     //MARK: VC Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        scoreLabel.text = "\(score!)"
+        // because 0 is misaligned in font 
+        if (score == 0) {
+            scoreLabel.text = "O"
+        } else {
+            scoreLabel.text = "\(score!)"
+        }
         let defaults = UserDefaults.standard
         if let topScore = defaults.value(forKey: Identifiers.topScore) as? Int {
             if score > topScore {

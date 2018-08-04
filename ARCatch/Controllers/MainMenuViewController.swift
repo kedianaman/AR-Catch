@@ -103,9 +103,12 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     //MARK: Helper Functions
     func setUpView() {
         if let topScore = UserDefaults.standard.value(forKey: Identifiers.topScore) as? Int {
+            if (topScore == 0) {
+                topScoreLabel.text = "O"
+            }
             topScoreLabel.text = "\(topScore)"
         } else {
-            topScoreLabel.text = "0"
+            topScoreLabel.text = "O"
         }
     }
     

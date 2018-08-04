@@ -24,6 +24,8 @@
 		ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */ = {isa = PBXBuildFile; fileRef = ED28862420B54AB200DECEF1 /* sparkGas.png */; };
 		ED28862720B54AB200DECEF1 /* Gas.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED28862520B54AB200DECEF1 /* Gas.scnp */; };
 		ED28863720B616E200DECEF1 /* MainMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED28863620B616E200DECEF1 /* MainMenuViewController.swift */; };
+		ED45ADF521155E52005F6908 /* ARCatchColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45ADF421155E51005F6908 /* ARCatchColors.swift */; };
+		ED45ADF921159BB2005F6908 /* Varsity-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED45ADF821159BA9005F6908 /* Varsity-Regular.ttf */; };
 		ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */; };
 		ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */; };
 		ED60ADC820CB297300DA65D6 /* MenuButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED60ADC720CB297300DA65D6 /* MenuButton.swift */; };
@@ -54,7 +56,6 @@
 		EDBE288D2113B5AB00EA2B66 /* First Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDBE288C2113B5AB00EA2B66 /* First Launch.swift */; };
 		EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCE182520B73B1900FFE779 /* GameOverViewController.swift */; };
 		EDD68C50210BCEA200AFF746 /* metal_scratches.jpg in Resources */ = {isa = PBXBuildFile; fileRef = EDD68C4F210BCEA100AFF746 /* metal_scratches.jpg */; };
-		EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EDE347B620C76FA900934D62 /* varsity_regular.ttf */; };
 		EDE347BD20C85E7200934D62 /* baseballDiffuse.png in Resources */ = {isa = PBXBuildFile; fileRef = EDE347BC20C85E7200934D62 /* baseballDiffuse.png */; };
 		EDE633EA20C6249E002A1FFE /* FNL_DEMO-KCFonts.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */; };
 		EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE633EB20C64B3F002A1FFE /* GCHelper.swift */; };
@@ -101,6 +102,9 @@
 		ED28862420B54AB200DECEF1 /* sparkGas.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sparkGas.png; path = ../sparkGas.png; sourceTree = "<group>"; };
 		ED28862520B54AB200DECEF1 /* Gas.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = Gas.scnp; sourceTree = "<group>"; };
 		ED28863620B616E200DECEF1 /* MainMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenuViewController.swift; sourceTree = "<group>"; };
+		ED45ADF421155E51005F6908 /* ARCatchColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARCatchColors.swift; sourceTree = "<group>"; };
+		ED45ADF621159B02005F6908 /* varsity_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = varsity_regular.ttf; path = ../../../../Downloads/varsity_regular.ttf; sourceTree = "<group>"; };
+		ED45ADF821159BA9005F6908 /* Varsity-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Varsity-Regular.ttf"; sourceTree = "<group>"; };
 		ED49F4D220BF19FE001B44A5 /* ExplosionSmall.scnp */ = {isa = PBXFileReference; lastKnownFileType = file.scp; path = ExplosionSmall.scnp; sourceTree = "<group>"; };
 		ED4DAB7C20B1F95F003BC5A3 /* Whoosh.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Whoosh.mp3; sourceTree = "<group>"; };
 		ED60ADC720CB297300DA65D6 /* MenuButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuButton.swift; sourceTree = "<group>"; };
@@ -137,7 +141,6 @@
 		EDBE288C2113B5AB00EA2B66 /* First Launch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "First Launch.swift"; sourceTree = "<group>"; };
 		EDCE182520B73B1900FFE779 /* GameOverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverViewController.swift; sourceTree = "<group>"; };
 		EDD68C4F210BCEA100AFF746 /* metal_scratches.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = metal_scratches.jpg; sourceTree = "<group>"; };
-		EDE347B620C76FA900934D62 /* varsity_regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = varsity_regular.ttf; sourceTree = "<group>"; };
 		EDE347BC20C85E7200934D62 /* baseballDiffuse.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = baseballDiffuse.png; sourceTree = "<group>"; };
 		EDE633EB20C64B3F002A1FFE /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
 		EDE633EE20C64CA9002A1FFE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
@@ -200,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				ED60ADC720CB297300DA65D6 /* MenuButton.swift */,
+				ED45ADF421155E51005F6908 /* ARCatchColors.swift */,
 				ED28860520B4D02200DECEF1 /* Constants.swift */,
 				ED2885FF20B49DB300DECEF1 /* LevelsManager.swift */,
 				ED28860320B4A21600DECEF1 /* NodeGenerator.swift */,
@@ -286,7 +290,8 @@
 				ED82B25920BF617A00A61475 /* Sounds */,
 				ED01845A20C32AAB00E4F623 /* MLB Toronto Blue Jays Wilson.otf */,
 				ED11965520C49880005285F2 /* FNL_DEMO-KCFonts.ttf */,
-				EDE347B620C76FA900934D62 /* varsity_regular.ttf */,
+				ED45ADF621159B02005F6908 /* varsity_regular.ttf */,
+				ED45ADF821159BA9005F6908 /* Varsity-Regular.ttf */,
 				ED99602A20AE08320058EC18 /* Assets.xcassets */,
 				ED99602C20AE08320058EC18 /* LaunchScreen.storyboard */,
 				ED99602F20AE08320058EC18 /* Info.plist */,
@@ -437,6 +442,7 @@
 				EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */,
 				ED28860E20B4E9DE00DECEF1 /* Rough.png in Resources */,
 				EDB3ABD42112774500B0FACC /* litfuse.m4a in Resources */,
+				ED45ADF921159BB2005F6908 /* Varsity-Regular.ttf in Resources */,
 				ED99602E20AE08320058EC18 /* LaunchScreen.storyboard in Resources */,
 				ED82B25B20BF629200A61475 /* Jump.mp3 in Resources */,
 				EDB3ABD02112702B00B0FACC /* baseball_catch-5.m4a in Resources */,
@@ -448,7 +454,6 @@
 				ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */,
 				ED28861520B546B200DECEF1 /* spark.png in Resources */,
 				ED28860F20B4E9DE00DECEF1 /* Albedo.png in Resources */,
-				EDE347B720C76FAB00934D62 /* varsity_regular.ttf in Resources */,
 				ED01845B20C32AF900E4F623 /* MLB Toronto Blue Jays Wilson.otf in Resources */,
 				ED16AF6D2114DB1700336F98 /* tap.mp3 in Resources */,
 				EDE9444721128680002191AD /* Pop.mp3 in Resources */,
@@ -502,6 +507,7 @@
 				ED99602420AE08300058EC18 /* AppDelegate.swift in Sources */,
 				ED60ADC820CB297300DA65D6 /* MenuButton.swift in Sources */,
 				EDCE182620B73B1900FFE779 /* GameOverViewController.swift in Sources */,
+				ED45ADF521155E52005F6908 /* ARCatchColors.swift in Sources */,
 				ED28860620B4D02200DECEF1 /* Constants.swift in Sources */,
 				ED6989B02112500A003A0B6D /* SoundManager.swift in Sources */,
 				ED28860020B49DB300DECEF1 /* LevelsManager.swift in Sources */,

@@ -73,7 +73,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-        self.sceneView.showsStatistics = true
+//        self.sceneView.showsStatistics = true
         self.sceneView.delegate = self
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
