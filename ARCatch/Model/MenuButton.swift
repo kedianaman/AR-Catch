@@ -25,5 +25,37 @@ class MenuButton: UIButton {
         view.layer.shadowRadius = 1
     }
     
+    fileprivate func updateScaleForHighlightedState() {
+        if self.isHighlighted {
+            if (self.transform.isIdentity) {
+                UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { () -> Void in
+                    self.transform = CGAffineTransform(scaleX: 0.9, y: 0.9)
+                }, completion: nil)
+            }
+        }
+        else {
+            if (self.transform.isIdentity == false) {
+                UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.0, options: UIViewAnimationOptions.beginFromCurrentState, animations: { () -> Void in
+                    self.transform = CGAffineTransform.identity
+                }, completion: nil)
+            }
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesBegan(touches, with: event)
+        updateScaleForHighlightedState()
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesMoved(touches, with: event)
+        updateScaleForHighlightedState()
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        updateScaleForHighlightedState()
+    }
+    
     
 }

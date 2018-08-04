@@ -114,7 +114,8 @@ class NodeGenerator {
         // plane behind the phone plane which gets hit if phone misses
         let missPlane = SCNNode()
         missPlane.geometry = SCNPlane(width: MissPlaneConstants.width, height: MissPlaneConstants.height)
-        missPlane.position = SCNVector3(0, 0, 0.5)
+//        missPlane.position = SCNVector3(0, 0, 0.5)
+        missPlane.position = SCNVector3(0, 0, 1.0)
         missPlane.geometry?.firstMaterial?.diffuse.contents = UIColor(red: 1.0, green: 0, blue: 0, alpha: 0.5)
         missPlane.name = MissPlaneConstants.name
         let missPlanePhysicsBody = SCNPhysicsBody(

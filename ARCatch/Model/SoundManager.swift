@@ -47,7 +47,6 @@ class SoundManager {
         if (volumeOn) {
             let randomNumber = (arc4random() % 7) + 1
             let soundName = "baseball_catch-\(randomNumber).m4a"
-            print(soundName)
             return SCNAudioSource(named: soundName)!
         } else {
             return nil

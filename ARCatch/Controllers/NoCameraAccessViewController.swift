@@ -21,7 +21,6 @@ class NoCameraAccessViewController: UIViewController {
         }
         if UIApplication.shared.canOpenURL(settingsUrl) {
             UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                print("Settings opened: \(success)") // Prints true
             })
         }
         

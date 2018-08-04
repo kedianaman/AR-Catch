@@ -10,7 +10,7 @@ import UIKit
 import ARKit
 import AudioToolbox.AudioServices
 
-class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSessionDelegate, TutorialViewControllerDelegate {
+class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNViewDelegate, ARSessionDelegate, TutorialViewControllerDelegate {
     
     //MARK: Properties
     let configuration = ARWorldTrackingConfiguration()
@@ -27,7 +27,9 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     var gameBall = SCNNode()
     var setUpBall = SCNNode()
     var tutorialBomb = SCNNode()
+    var missPlane = SCNNode()
     var bullets = [SCNNode]()
+    var lastUpdateTime: TimeInterval = 0
     var score = 0 {
         didSet {
             DispatchQueue.main.async {
@@ -71,7 +73,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-//        self.sceneView.showsStatistics = true
+        self.sceneView.showsStatistics = true
+        self.sceneView.delegate = self
         //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
         //        addObject()
         addPhonePlane()
@@ -140,7 +143,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     // Start the game
     func startGameSetUp() {
         self.sceneView.session.setWorldOrigin(relativeTransform: (self.sceneView.pointOfView?.simdTransform)!)
-        print(setUpBall.worldPosition)
         gameStarted = true
         scoreLabel.alpha = 1
         crossesBackgroundStackView.alpha = 1
@@ -205,7 +207,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         if (duration < 0.01) {
             duration = 0.0
         }
-        print(duration)
         let moveToPosition = SCNAction.move(to: SCNVector3(0, 0.15, -1), duration: TimeInterval(duration))
         let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
         let rotateForever = SCNAction.repeatForever(rotateBall)
@@ -224,7 +225,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         node.physicsBody?.applyForce(force, asImpulse: true)
         let torque = levelsManager.torqueForNode(node: node)
         node.physicsBody?.applyTorque(torque, asImpulse: true)
-        print(node.worldPosition)
     }
     
     func addPhonePlane() {
@@ -235,8 +235,16 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
     
     func addMissPlane() {
         // plane behind the phone plane which gets hit if phone misses
-        let missPlane = nodeGenerator.getMissPlane()
+        missPlane = nodeGenerator.getMissPlane()
         sceneView.pointOfView?.addChildNode(missPlane)
+    }
+    
+    func updateMissPlane(multipler: Double) {
+        if (multipler == 1) {
+            missPlane.position = SCNVector3(0, 0, 0.5)
+        } else {
+            missPlane.position = SCNVector3(0, 0, 1.0)
+        }
     }
     
     func addSetUpBall() {
@@ -286,20 +294,14 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         setUpBall.runAction(moveSetUpBall) {
             self.setUpBall.removeFromParentNode()
         }
-//        tutorialBomb = nodeGenerator.getBomb()
-//        self.sceneView.pointOfView?.addChildNode(tutorialBomb)
-//        tutorialBomb.position = SCNVector3(0, 1.15, -1)
-//        let moveTutorialBomb = SCNAction.moveBy(x: 0, y: -1, z: 0, duration: 1.0)
-//        let rotateBomb = SCNAction.rotateBy(x: 0, y: CGFloat(2 * Double.pi), z: 0, duration: 5.0)
-//        let rotateForever = SCNAction.repeatForever(rotateBomb)
-//        tutorialBomb.runAction(SCNAction.group([moveTutorialBomb, rotateForever]))
-
-        print("replace ball with bomb")
     }
     
     // simply shoots the bomb to explode it
     func removeBomb() {
         shootBullet()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.tutorialBomb.removeFromParentNode()
+        }
     }
     
     //MARK: Helper Calculation Functions
@@ -350,6 +352,26 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSession
         performSegue(withIdentifier: "NoCameraSegueID", sender: nil)
         print(error)
     }
+    
+    //MARK: SCNSceneRendererDelegate
+    
+    func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
+        sceneView.scene.attribute(forKey: SCNScene.Attribute.frameRate.rawValue)
+        let deltaTime = time - lastUpdateTime
+        let currentFPS = 1 / deltaTime
+        print(currentFPS)
+        let frameRate = Int(currentFPS + 1)
+        let multiplier = 60.0 / Double(frameRate)
+        print(multiplier)
+        if (sceneView.scene.physicsWorld.speed != CGFloat(multiplier)) {
+            sceneView.scene.physicsWorld.speed = CGFloat(multiplier)
+            updateMissPlane(multipler: multiplier)
+        }
+        
+        lastUpdateTime = time
+    }
+
+    
     
     //MARK: Physics World Delegate
     func physicsWorld(_ world: SCNPhysicsWorld, didBegin contact: SCNPhysicsContact) {
