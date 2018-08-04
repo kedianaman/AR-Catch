@@ -589,12 +589,12 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
     
     //MARK: Segues
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
-            if (node.name == "ball" || node.name == "bomb") {
-                node.removeFromParentNode()
-            }
-        }
         if (segue.identifier == "GameOverSegue") {
+            sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+                if (node.name == "ball" || node.name == "bomb") {
+                    node.removeFromParentNode()
+                }
+            }
             if let gameOverVC = segue.destination as? GameOverViewController {
                 gameOverVC.score = score
             }

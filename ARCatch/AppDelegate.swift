@@ -23,6 +23,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillResignActive(_ application: UIApplication) {
         if let gameVC = self.window?.rootViewController as? GameViewController {
             if (gameVC.gameStarted == true) {
+               gameVC.sceneView.scene.rootNode.enumerateChildNodes { (node, stop) in
+                    if (node.name == "ball" || node.name == "bomb") {
+                        node.removeFromParentNode()
+                    }
+                }
                 gameVC.performSegue(withIdentifier: "GameOverSegue", sender: nil)
             }
 
