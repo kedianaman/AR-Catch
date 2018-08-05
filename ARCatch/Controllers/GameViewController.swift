@@ -45,8 +45,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
                         cross.alpha = 0
                     }
                 } else {
-                    self.ballMissCrosses[self.numBallMisses - 1].alpha = 1
-                    self.ballMissCrosses[self.numBallMisses - 1].shake()
+                    if (self.numBallMisses <= 3) {
+                        self.ballMissCrosses[self.numBallMisses - 1].alpha = 1
+                        self.ballMissCrosses[self.numBallMisses - 1].shake()
+                    }
                 }
             }
         }
@@ -195,23 +197,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
     func showTutorial() {
         // show tutorial view controller and move ball accordingly
         tutorialInProgress = true
-        let rotation = setUpBall.rotation
-        let position = setUpBall.position
         performSegue(withIdentifier: "gameToTutorialSegueID", sender: nil)
-        setUpBall = nodeGenerator.getBall()
-        setUpBall.rotation = rotation
-        setUpBall.position = position
-        // set timing of this depending on position
-        let timeRatio = -(position.z + 1) / 19.0
-        var duration = 2.0 * timeRatio
-        if (duration < 0.01) {
-            duration = 0.0
-        }
-        let moveToPosition = SCNAction.move(to: SCNVector3(0, 0.15, -1), duration: TimeInterval(duration))
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
-        let rotateForever = SCNAction.repeatForever(rotateBall)
-        setUpBall.runAction(SCNAction.group([rotateForever, moveToPosition]))
-        sceneView.pointOfView?.addChildNode(setUpBall)
     }
     
     //MARK: Scene Kit Node Functions
@@ -237,11 +223,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         // plane behind the phone plane which gets hit if phone misses
         missPlane = nodeGenerator.getMissPlane()
         sceneView.pointOfView?.addChildNode(missPlane)
-    }
-    
-    func addTunnelPlane() {
-        let tunnelPlane = nodeGenerator.getTunnelPlane()
-        sceneView.pointOfView?.addChildNode(tunnelPlane)
     }
     
     func updateMissPlane(multipler: Double) {

@@ -12,6 +12,7 @@ import GameKit
 class GameOverViewController: UIViewController {
     
     //MARK: IB Outlets
+    @IBOutlet weak var scoreTitleLabel: UILabel!
     @IBOutlet weak var scoreLabel: UILabel!
     
     //MARK: Properties
@@ -30,6 +31,7 @@ class GameOverViewController: UIViewController {
         let defaults = UserDefaults.standard
         if let topScore = defaults.value(forKey: Identifiers.topScore) as? Int {
             if score > topScore {
+                scoreTitleLabel.text = "new best"
                 createParticles()
                 defaults.set(score, forKey: Identifiers.topScore)
             }

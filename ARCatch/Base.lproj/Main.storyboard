@@ -438,8 +438,8 @@
                                 <color key="shadowColor" white="0.0" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-59-uR0">
-                                <rect key="frame" x="124" y="189.5" width="127.5" height="61"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="score" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="r2F-59-uR0">
+                                <rect key="frame" x="20" y="189.5" width="335" height="61"/>
                                 <fontDescription key="fontDescription" name="Varsity" family="Varsity" pointSize="50"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -497,17 +497,20 @@
                             <constraint firstItem="fNR-UJ-2N4" firstAttribute="leading" secondItem="Tjv-iP-vz3" secondAttribute="leading" id="OyG-OI-kiw"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" multiplier="1.6" id="Wmm-tY-PBj"/>
                             <constraint firstItem="F6H-su-5ug" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="Xfi-c6-Xva"/>
+                            <constraint firstItem="r2F-59-uR0" firstAttribute="leading" secondItem="Uwh-pb-jjd" secondAttribute="leading" constant="20" id="cF7-Iw-wac"/>
                             <constraint firstAttribute="top" secondItem="fNR-UJ-2N4" secondAttribute="top" id="eco-3q-0aQ"/>
                             <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="TBI-t7-Ulk" secondAttribute="trailing" constant="20" id="eeM-G5-G0w"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="leading" secondItem="Uwh-pb-jjd" secondAttribute="leading" constant="20" id="gHO-yY-htI"/>
                             <constraint firstItem="TBI-t7-Ulk" firstAttribute="centerY" secondItem="Uwh-pb-jjd" secondAttribute="centerY" id="k5X-qM-uNL"/>
                             <constraint firstItem="w7b-Rb-dmw" firstAttribute="centerX" secondItem="Uwh-pb-jjd" secondAttribute="centerX" id="o18-Kh-Y2v"/>
+                            <constraint firstItem="Uwh-pb-jjd" firstAttribute="trailing" secondItem="r2F-59-uR0" secondAttribute="trailing" constant="20" id="uho-rN-fGj"/>
                             <constraint firstAttribute="bottom" secondItem="fNR-UJ-2N4" secondAttribute="bottom" id="xEy-uf-mC1"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Uwh-pb-jjd"/>
                     </view>
                     <connections>
                         <outlet property="scoreLabel" destination="TBI-t7-Ulk" id="K2B-Fl-5Vn"/>
+                        <outlet property="scoreTitleLabel" destination="r2F-59-uR0" id="PkB-JG-YG9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gkZ-It-BzP" userLabel="First Responder" sceneMemberID="firstResponder"/>

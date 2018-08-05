@@ -129,9 +129,4 @@ class NodeGenerator {
         return missPlane
     }
     
-    func getTunnelPlane() -> SCNNode {
-        let scene = SCNScene(named: "capsule.scn")!
-        let tunnelPlane = scene.rootNode.childNode(withName: "cylinder", recursively: true)!
-        return tunnelPlane
-    }
 }
