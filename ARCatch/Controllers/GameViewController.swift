@@ -239,6 +239,11 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         sceneView.pointOfView?.addChildNode(missPlane)
     }
     
+    func addTunnelPlane() {
+        let tunnelPlane = nodeGenerator.getTunnelPlane()
+        sceneView.pointOfView?.addChildNode(tunnelPlane)
+    }
+    
     func updateMissPlane(multipler: Double) {
         if (multipler == 1) {
             missPlane.position = SCNVector3(0, 0, 0.5)

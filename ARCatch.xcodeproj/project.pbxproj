@@ -62,6 +62,8 @@
 		EDE633EC20C64B3F002A1FFE /* GCHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDE633EB20C64B3F002A1FFE /* GCHelper.swift */; };
 		EDE633EF20C64CA9002A1FFE /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EDE633EE20C64CA9002A1FFE /* GameKit.framework */; };
 		EDE9444721128680002191AD /* Pop.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = EDE9444621128680002191AD /* Pop.mp3 */; };
+		EDF0D34B211626D9002A4EDC /* capsule.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF0D34A211626D9002A4EDC /* capsule.scn */; };
+		EDF0D34D21165D19002A4EDC /* diamond.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF0D34C21165D19002A4EDC /* diamond.png */; };
 		EDF5FCE420AFB7B6008FCE67 /* Ball_Normal.png in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */; };
 		EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */ = {isa = PBXBuildFile; fileRef = EDF5FCE220AFB7B6008FCE67 /* Ball.scn */; };
 /* End PBXBuildFile section */
@@ -147,6 +149,8 @@
 		EDE633EB20C64B3F002A1FFE /* GCHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCHelper.swift; sourceTree = "<group>"; };
 		EDE633EE20C64CA9002A1FFE /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		EDE9444621128680002191AD /* Pop.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Pop.mp3; sourceTree = "<group>"; };
+		EDF0D34A211626D9002A4EDC /* capsule.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = capsule.scn; sourceTree = "<group>"; };
+		EDF0D34C21165D19002A4EDC /* diamond.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diamond.png; sourceTree = "<group>"; };
 		EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Ball_Normal.png; sourceTree = "<group>"; };
 		EDF5FCE220AFB7B6008FCE67 /* Ball.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Ball.scn; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -185,6 +189,7 @@
 				ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */,
 				ED28862420B54AB200DECEF1 /* sparkGas.png */,
 				ED28861320B546B200DECEF1 /* spark.png */,
+				EDF0D34C21165D19002A4EDC /* diamond.png */,
 				ED45ADFE21159E6D005F6908 /* confetti.png */,
 			);
 			path = "Particle Systems";
@@ -220,6 +225,7 @@
 		ED689F4C20AFE4F6000BBEE9 /* 3d Models */ = {
 			isa = PBXGroup;
 			children = (
+				EDF0D34A211626D9002A4EDC /* capsule.scn */,
 				EDF5FCE220AFB7B6008FCE67 /* Ball.scn */,
 				EDE347BC20C85E7200934D62 /* baseballDiffuse.png */,
 				EDF5FCE120AFB7B6008FCE67 /* Ball_Normal.png */,
@@ -453,7 +459,9 @@
 				EDB3ABCC2112702400B0FACC /* baseball_catch-1.m4a in Resources */,
 				EDB3ABDC211280F500B0FACC /* blop.mp3 in Resources */,
 				EDB7F48A20BDC6520048C3FB /* metal_scratches_1.jpg in Resources */,
+				EDF0D34B211626D9002A4EDC /* capsule.scn in Resources */,
 				ED779DF620BF549600C9C0C4 /* whitenoise.wav in Resources */,
+				EDF0D34D21165D19002A4EDC /* diamond.png in Resources */,
 				ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */,
 				ED49F4D320BF19FF001B44A5 /* ExplosionSmall.scnp in Resources */,
 				ED28861520B546B200DECEF1 /* spark.png in Resources */,
