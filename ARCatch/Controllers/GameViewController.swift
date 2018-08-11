@@ -66,7 +66,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
     @IBOutlet var backgroundCrosses: [UIImageView]!
     @IBOutlet weak var headerBannerView: UIView!
     @IBOutlet weak var loadingView: UIView!
-    
+    @IBOutlet weak var goHomeButton: UIButton!
+
     //MARK: View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,6 +89,10 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         return .lightContent
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true 
+    }
+    
     //MARK: IB Actions
     @IBAction func hitStartButton(_ sender: UIButton) {
         soundManager.buttonTapped()
@@ -103,25 +108,37 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
             shootBullet()
         }
     }
+    @IBAction func goHomeFromPregame(_ sender: Any) {
+        soundManager.buttonTapped()
+        menuShowingSetUp()
+    }
     
     //MARK: Set Up State Functions
     
     // Set up menu
     func menuShowingSetUp() {
         performSegue(withIdentifier: "gameToMenuSegueID", sender: nil)
-        setUpBall = nodeGenerator.getBall()
-        setUpBall.position = SCNVector3(0, 0.15, -20)
-        let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
-        let rotateForever = SCNAction.repeatForever(rotateBall)
-        let moveBall = SCNAction.moveBy(x: 0, y: 0, z: 19, duration: 2.0)
+        if (setUpBall.name != BallConstants.name) {
+            setUpBall = nodeGenerator.getBall()
+            setUpBall.position = SCNVector3(0, 0, -20)
+            let rotateBall = SCNAction.rotateBy(x: CGFloat(2 * Double.pi), y: 0, z: 0, duration: 5.0)
+            let rotateForever = SCNAction.repeatForever(rotateBall)
+            setUpBall.runAction(rotateForever)
+        }
+        let moveBall = SCNAction.move(to: SCNVector3(0, 0.15, -1), duration: 2.0)
         moveBall.timingMode = .easeOut
-        setUpBall.runAction(SCNAction.group([rotateForever, moveBall]))
+        setUpBall.runAction(moveBall)
         sceneView.pointOfView?.addChildNode(setUpBall)
-        startGameButton.alpha = 0
+        UIView.animate(withDuration: 1.0) {
+            self.startGameButton.alpha = 0
+        }
+//        startGameButton.alpha = 0
         startGameButton.isEnabled = false
         animateStartGameUI(begin: false)
         headerBannerView.alpha = 0
         numBallMisses = 0
+        goHomeButton.alpha = 0
+        goHomeButton.isEnabled = false
     }
     
     // Set up view to let user select ball position
@@ -129,6 +146,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         startGameButton.alpha = 1
         startGameButton.isEnabled = true
         headerBannerView.alpha = 1
+        goHomeButton.alpha = 1
+        goHomeButton.isEnabled = true
         gameStarted = false
         scoreLabel.alpha = 0
         crossesBackgroundStackView.alpha = 0
@@ -151,6 +170,8 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         animateStartGameUI(begin: true)
         startGameButton.alpha = 0
         startGameButton.isEnabled = false
+        goHomeButton.alpha = 0
+         goHomeButton.isEnabled = false
         setUpBall.physicsBody = nil
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.setUpBall.removeFromParentNode()
@@ -343,15 +364,18 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
     
     func renderer(_ renderer: SCNSceneRenderer, updateAtTime time: TimeInterval) {
         sceneView.scene.attribute(forKey: SCNScene.Attribute.frameRate.rawValue)
+        
         let deltaTime = time - lastUpdateTime
         let currentFPS = 1 / deltaTime
-        print(currentFPS)
-        let frameRate = Int(currentFPS + 1)
-        let multiplier = 60.0 / Double(frameRate)
-        print(multiplier)
-        if (sceneView.scene.physicsWorld.speed != CGFloat(multiplier)) {
-            sceneView.scene.physicsWorld.speed = CGFloat(multiplier)
-            updateMissPlane(multipler: multiplier)
+        // to make sure fps is not too small which will result in infinite numbers
+        if (currentFPS > 10) {
+            let frameRate = Int(currentFPS.rounded())
+            let multiplier = 60.0 / Double(frameRate)
+            if (sceneView.scene.physicsWorld.speed != CGFloat(multiplier)) {
+                sceneView.scene.physicsWorld.speed = CGFloat(multiplier)
+                print(multiplier)
+                updateMissPlane(multipler: multiplier)
+            }
         }
         
         lastUpdateTime = time

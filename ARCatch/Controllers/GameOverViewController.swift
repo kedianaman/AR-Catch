@@ -37,8 +37,12 @@ class GameOverViewController: UIViewController {
             }
             addScoreAndSubmit(topScore: score)
         } else {
-            defaults.set(score, forKey: Identifiers.topScore)
-            addScoreAndSubmit(topScore: score)
+            if (score > 0) {
+                scoreTitleLabel.text = "new best"
+                createParticles()
+                defaults.set(score, forKey: Identifiers.topScore)
+                addScoreAndSubmit(topScore: score)
+            }
         }
     }
     
