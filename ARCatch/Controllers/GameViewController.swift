@@ -373,7 +373,6 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
             let multiplier = 60.0 / Double(frameRate)
             if (sceneView.scene.physicsWorld.speed != CGFloat(multiplier)) {
                 sceneView.scene.physicsWorld.speed = CGFloat(multiplier)
-                print(multiplier)
                 updateMissPlane(multipler: multiplier)
             }
         }
