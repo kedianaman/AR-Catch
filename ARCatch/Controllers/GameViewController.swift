@@ -76,13 +76,13 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
         self.sceneView.autoenablesDefaultLighting = true
         self.sceneView.session.delegate = self
         configuration.isAutoFocusEnabled = false
-//        self.sceneView.showsStatistics = true
         self.sceneView.delegate = self
-        //        self.sceneView.debugOptions = [ARSCNDebugOptions.showWorldOrigin]
-        //        addObject()
         addPhonePlane()
         addMissPlane()
         loadingView.alpha = 1
+        if AVCaptureDevice.authorizationStatus(for: .video) == .notDetermined {
+            requestCameraAccess()
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -91,6 +91,20 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
     
     override var prefersStatusBarHidden: Bool {
         return true 
+    }
+    
+    func requestCameraAccess() {
+        AVCaptureDevice.requestAccess(for: AVMediaType.video) { (complete) in
+            if (complete) {
+                DispatchQueue.main.async {
+                    if (self.initialLaunch) {
+                        self.loadingView.alpha = 0
+                        self.menuShowingSetUp()
+                        self.initialLaunch = false
+                    }
+                }
+            }
+        }
     }
     
     //MARK: IB Actions
