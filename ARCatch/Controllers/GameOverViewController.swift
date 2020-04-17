@@ -63,7 +63,7 @@ class GameOverViewController: UIViewController {
         let particleEmitter = CAEmitterLayer()
         
         particleEmitter.emitterPosition = CGPoint(x: view.center.x, y: -96)
-        particleEmitter.emitterShape = kCAEmitterLayerLine
+        particleEmitter.emitterShape = CAEmitterLayerEmitterShape.line
         particleEmitter.emitterSize = CGSize(width: view.frame.size.width, height: 1)
         
         var emitterCells = [CAEmitterCell]()

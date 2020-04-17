@@ -16,7 +16,7 @@ class NoCameraAccessViewController: UIViewController {
 
     @IBAction func settingsClicked(_ sender: Any) {
         SoundManager().buttonTapped()  
-        guard let settingsUrl = URL(string: UIApplicationOpenSettingsURLString) else {
+        guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
             return
         }
         if UIApplication.shared.canOpenURL(settingsUrl) {

@@ -81,7 +81,7 @@ class MainMenuViewController: UIViewController, ARSessionDelegate, GKGameCenterC
     
     // MARK: Game Center
     func authenticateLocalPlayer() {
-        let localPlayer: GKLocalPlayer = GKLocalPlayer.localPlayer()
+        let localPlayer: GKLocalPlayer = GKLocalPlayer.local
         localPlayer.authenticateHandler = {(ViewController, error) -> Void in
             if((ViewController) != nil) {
                 self.present(ViewController!, animated: true, completion: nil)

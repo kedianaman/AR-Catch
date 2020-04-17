@@ -75,7 +75,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     // MARK: Private functions
     
     @objc fileprivate func authenticationChanged() {
-        if GKLocalPlayer.localPlayer().isAuthenticated && !authenticated {
+        if GKLocalPlayer.local.isAuthenticated && !authenticated {
             authenticated = true
         } else {
             authenticated = false
@@ -100,7 +100,7 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             
             for player in players {
                 print("Found player: \(String(describing: player.alias))")
-                self.playersDict[player.playerID!] = player
+                self.playersDict[player.playerID] = player
             }
             
             self.matchStarted = true
@@ -116,8 +116,8 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
     public func authenticateLocalUser() {
         print("Authenticating local user...")
         
-        if GKLocalPlayer.localPlayer().isAuthenticated == false {
-            GKLocalPlayer.localPlayer().authenticateHandler = { (view, error) in
+        if GKLocalPlayer.local.isAuthenticated == false {
+            GKLocalPlayer.local.authenticateHandler = { (view, error) in
                 guard error == nil else {
                     print("Authentication error: \(String(describing: error?.localizedDescription))")
                     return
@@ -194,9 +194,9 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
             }
             
             for achievement in achievements {
-                if let id = achievement.identifier {
-                    self.achievements[id] = achievement
-                }
+                let id = achievement.identifier
+                self.achievements[id] = achievement
+                
             }
             
             completion?()
@@ -303,9 +303,9 @@ public class GCHelper: NSObject, GKMatchmakerViewControllerDelegate, GKGameCente
         }
         
         switch state {
-        case .stateConnected where !matchStarted && theMatch.expectedPlayerCount == 0:
+        case .connected where !matchStarted && theMatch.expectedPlayerCount == 0:
             lookupPlayers()
-        case .stateDisconnected:
+        case .disconnected:
             matchStarted = false
             delegate?.matchEnded()
             match = nil

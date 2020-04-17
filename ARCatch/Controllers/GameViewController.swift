@@ -687,7 +687,7 @@ class GameViewController: UIViewController, SCNPhysicsContactDelegate, ARSCNView
 extension UIView {
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)
         animation.duration = 0.4
         animation.values = [-5.0, 5.0, -4.0, 4.0, -3.0, 3.0, -2, 2.0, 0.0 ]
         layer.add(animation, forKey: "shake")
