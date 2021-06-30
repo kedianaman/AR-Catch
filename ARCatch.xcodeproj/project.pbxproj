@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E8139AB0263A34F9007E5C2B /* football2.scn in Resources */ = {isa = PBXBuildFile; fileRef = E8139AAF263A34F9007E5C2B /* football2.scn */; };
+		E8D77F7D26380305007565CB /* footballDiffuse.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E8D77F7C26380305007565CB /* footballDiffuse.jpg */; };
+		E8D77F812638043C007565CB /* football.scn in Resources */ = {isa = PBXBuildFile; fileRef = E8D77F802638043C007565CB /* football.scn */; };
 		ED16AF6B2114D30E00336F98 /* NoCameraAccessViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED16AF6A2114D30E00336F98 /* NoCameraAccessViewController.swift */; };
 		ED16AF6D2114DB1700336F98 /* tap.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ED16AF6C2114DB1700336F98 /* tap.mp3 */; };
 		ED1EE4FB2110EA12009EFF28 /* BombFire.scnp in Resources */ = {isa = PBXBuildFile; fileRef = ED1EE4FA2110EA12009EFF28 /* BombFire.scnp */; };
@@ -79,6 +82,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E8139AAF263A34F9007E5C2B /* football2.scn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.bplist; path = football2.scn; sourceTree = "<group>"; };
+		E8D77F7C26380305007565CB /* footballDiffuse.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = footballDiffuse.jpg; sourceTree = "<group>"; };
+		E8D77F802638043C007565CB /* football.scn */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = football.scn; sourceTree = "<group>"; };
 		ED12F50421138F340001893D /* quickExplode.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = quickExplode.m4a; sourceTree = "<group>"; };
 		ED16AF6A2114D30E00336F98 /* NoCameraAccessViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoCameraAccessViewController.swift; sourceTree = "<group>"; };
 		ED16AF6C2114DB1700336F98 /* tap.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = tap.mp3; sourceTree = "<group>"; };
@@ -222,6 +228,9 @@
 				EDB7F48820BDC6510048C3FB /* dirt_texture.jpg */,
 				EDD68C4F210BCEA100AFF746 /* metal_scratches.jpg */,
 				EDB7F48720BDC6510048C3FB /* metal_scratches_1.jpg */,
+				E8139AAF263A34F9007E5C2B /* football2.scn */,
+				E8D77F802638043C007565CB /* football.scn */,
+				E8D77F7C26380305007565CB /* footballDiffuse.jpg */,
 			);
 			path = "3d Models";
 			sourceTree = "<group>";
@@ -443,6 +452,7 @@
 				ED99602B20AE08320058EC18 /* Assets.xcassets in Resources */,
 				ED28862620B54AB200DECEF1 /* sparkGas.png in Resources */,
 				ED4DAB7D20B1F95F003BC5A3 /* Whoosh.mp3 in Resources */,
+				E8D77F812638043C007565CB /* football.scn in Resources */,
 				EDE347BD20C85E7200934D62 /* baseballDiffuse.png in Resources */,
 				EDB3ABCD2112702700B0FACC /* baseball_catch-2.m4a in Resources */,
 				EDB2D421211823920032440C /* Varsity-Regular.ttf in Resources */,
@@ -451,10 +461,12 @@
 				EDB7F48D20BDC8790048C3FB /* Bullet.scn in Resources */,
 				ED82B25D20BF655700A61475 /* Grenade.wav in Resources */,
 				ED28860D20B4E9DE00DECEF1 /* Normal.png in Resources */,
+				E8139AB0263A34F9007E5C2B /* football2.scn in Resources */,
 				EDB3ABCE2112702B00B0FACC /* baseball_catch-3.m4a in Resources */,
 				EDF5FCE520AFB7B6008FCE67 /* Ball.scn in Resources */,
 				ED28862720B54AB200DECEF1 /* Gas.scnp in Resources */,
 				ED99602920AE08300058EC18 /* Main.storyboard in Resources */,
+				E8D77F7D26380305007565CB /* footballDiffuse.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

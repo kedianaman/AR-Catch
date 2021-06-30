@@ -36,7 +36,9 @@ class LevelsManager {
     
     func torqueForNode(node: SCNNode) -> SCNVector4 {
         if (node.name == "ball") {
-          return SCNVector4(rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0))
+            return SCNVector4(0.3, 0, 1, 1)
+
+//          return SCNVector4(rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0), rand(0.5, 1.0))
         } else if (node.name == "bomb") {
             return SCNVector4(rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5), rand(0.2, 0.5))
         }
@@ -52,7 +54,7 @@ class LevelsManager {
         }
         let xForce = xForceFor(zForce: zForce)
         let yForce = yForceFor(zForce: zForce)
-        return SCNVector3(xForce, yForce, zForce)
+        return SCNVector3(xForce, yForce, 35)
     }
     
     private func xForceFor(zForce: Double) -> Double {
@@ -67,6 +69,7 @@ class LevelsManager {
 //        return Double(rand(Float(yForce), Float(-yForce)))
         var maxY = Double()
         var minY = Double()
+        return 50
         if (zForce == 30.0) {
             maxY = YForceConstants.max30
             minY = YForceConstants.min30

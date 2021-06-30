@@ -50,7 +50,7 @@ struct BallConstants {
     static let mass: CGFloat = 3.0
     static let physicsRadius: CGFloat = 0.25
     static let damping: CGFloat = 0
-    static let initialPosition = SCNVector3(0, 0, -20)
+    static let initialPosition = SCNVector3(0, 0, -40)
     static let name = "ball"
     static let categoryBitMask = 0x1 << 0
 }

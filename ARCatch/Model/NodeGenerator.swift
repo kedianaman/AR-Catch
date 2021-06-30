@@ -12,8 +12,9 @@ import SceneKit
 class NodeGenerator {
     
     func getBall() -> SCNNode {
-        let scene = SCNScene(named: "Ball.scn")!
-        let ball = scene.rootNode.childNode(withName: "sphere", recursively: true)!
+        let scene = SCNScene(named: "football2.scn")!
+        let ball = scene.rootNode.childNode(withName: "football", recursively: true)!
+        ball.eulerAngles = SCNVector3Make(0, .pi/2, 0)
         ball.position = BallConstants.initialPosition
         ball.physicsBody = getPhysicsBodyForBall()
         ball.name = BallConstants.name
